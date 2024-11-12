@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import {
 	Card,
 	CardTitle,
@@ -6,7 +8,8 @@ import {
 	CardDescription,
 } from '@/components/ui/card'
 import { SignInForm } from './_components/sign-in-form'
-import Link from 'next/link'
+
+import { ROUTES } from '@/constants/routes'
 
 export default function Page() {
 	return (
@@ -22,7 +25,7 @@ export default function Page() {
 					<SignInForm />
 					<p className="text-center">
 						Não possui uma conta?{' '}
-						<Link href="/pt/sign-up" className="underline">
+						<Link href={ROUTES.AUTH.SIGN_UP('pt')} className="underline">
 							Criar agora
 						</Link>
 					</p>
