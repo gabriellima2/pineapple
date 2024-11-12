@@ -14,12 +14,13 @@ import {
 import { Inputs } from '@/components/form/inputs'
 import { Button } from '@/components/ui/button'
 
-import { signInSchema, type SignInFields } from '../_schemas/sign-in.schema'
+import { signUpSchema, type SignUpFields } from '../_schemas/sign-up.schema'
 
-export function SignInForm() {
-	const form = useForm<SignInFields>({
-		resolver: zodResolver(signInSchema),
+export function SignUpForm() {
+	const form = useForm<SignUpFields>({
+		resolver: zodResolver(signUpSchema),
 		defaultValues: {
+			username: '',
 			email: '',
 			password: '',
 		},
@@ -27,6 +28,23 @@ export function SignInForm() {
 	return (
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(console.log)} className="space-y-6">
+				<FormField
+					control={form.control}
+					name="username"
+					render={({ field }) => (
+						<FormItem>
+							<FormLabel htmlFor={field.name}>Usuário</FormLabel>
+							<FormControl>
+								<Inputs.Default
+									id={field.name}
+									placeholder="Joe Doe"
+									{...field}
+								/>
+							</FormControl>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
 				<FormField
 					control={form.control}
 					name="email"
@@ -50,10 +68,7 @@ export function SignInForm() {
 					name="password"
 					render={({ field }) => (
 						<FormItem>
-							<div className="flex items-center justify-between">
-								<FormLabel htmlFor={field.name}>Senha</FormLabel>
-								<p className="text-right">Esqueceu a senha?</p>
-							</div>
+							<FormLabel htmlFor={field.name}>Senha</FormLabel>
 							<FormControl>
 								<Inputs.Password id={field.name} {...field} />
 							</FormControl>
@@ -62,7 +77,7 @@ export function SignInForm() {
 					)}
 				/>
 				<Button type="submit" className="w-full">
-					Entrar
+					Criar
 				</Button>
 			</form>
 		</Form>
