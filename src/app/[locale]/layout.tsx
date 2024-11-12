@@ -1,4 +1,4 @@
-import './globals.css'
+import '../globals.css'
 import type { Metadata } from 'next'
 import { Geist } from 'next/font/google'
 
@@ -13,13 +13,16 @@ const geist = Geist({
 	variable: '--font-primary',
 })
 
-export default function RootLayout({
-	children,
-}: Readonly<{
+type RootLayoutProps = {
 	children: React.ReactNode
-}>) {
+	params: Promise<{ locale: string }>
+}
+
+export default async function RootLayout(props: Readonly<RootLayoutProps>) {
+	const { children, params } = props
+	const locale = (await params).locale
 	return (
-		<html lang="pt-BR">
+		<html lang={locale}>
 			<body className={`${geist.variable} antialiased`}>{children}</body>
 		</html>
 	)
