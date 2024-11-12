@@ -5,6 +5,6 @@ export const ROUTES = {
 	},
 	DASHBOARD: {
 		HOME: (locale: string) => `/${locale}/dashboard`,
-		SERVICES: (locale: string) => `/${locale}/services`,
+		SERVICES: (locale: string) => `/${locale}/dashboard/services`,
 	},
 }
