@@ -21,7 +21,7 @@ import {
 } from '@/components/ui/sidebar'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
-type SidebarUserProps = {
+type UserProps = {
 	user: {
 		name: string
 		email: string
@@ -35,7 +35,7 @@ type SidebarUserProps = {
 	}[][]
 }
 
-export function SidebarUser(props: SidebarUserProps) {
+export function User(props: UserProps) {
 	const { user, actions } = props
 	const { isMobile } = useSidebar()
 	const avatarFallback = user.name[0]

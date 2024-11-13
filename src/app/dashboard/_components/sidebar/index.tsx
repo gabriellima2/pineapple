@@ -20,9 +20,9 @@ import {
 	SidebarHeader,
 	SidebarRail,
 } from '@/components/ui/sidebar'
-import { SidebarNavigation } from '@/components/sidebar-navigation'
-import { SidebarUser } from '@/components/sidebar-user'
+import { Navigation } from './components/navigation'
 import { Logo } from '@/components/ui/logo'
+import { User } from './components/user'
 
 type SidebarProps = React.ComponentProps<typeof BaseSidebar>
 
@@ -39,10 +39,10 @@ export function Sidebar(props: SidebarProps) {
 				</div>
 			</SidebarHeader>
 			<SidebarContent>
-				<SidebarNavigation links={data.navMain} />
+				<Navigation links={data.navMain} />
 			</SidebarContent>
 			<SidebarFooter>
-				<SidebarUser user={data.user} actions={data.actions} />
+				<User user={data.user} actions={data.actions} />
 			</SidebarFooter>
 			<SidebarRail />
 		</BaseSidebar>

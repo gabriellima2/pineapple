@@ -1,6 +1,6 @@
 import { Select, SelectContent, SelectTrigger } from '../ui/select'
-import { SelectPlaceholder } from './components/select-placeholder'
-import { SelectOption } from './components/select-option'
+import { Placeholder } from './components/placeholder'
+import { Option } from './components/option'
 
 import { getLocaleCookie, setLocaleCookie } from '@/actions/cookies.actions'
 
@@ -9,11 +9,11 @@ export async function LocaleSelect() {
 	return (
 		<Select onValueChange={setLocaleCookie} value={locale}>
 			<SelectTrigger className="w-[180px]">
-				<SelectPlaceholder />
+				<Placeholder />
 			</SelectTrigger>
 			<SelectContent>
-				<SelectOption value="en" />
-				<SelectOption value="pt" />
+				<Option value="en" />
+				<Option value="pt" />
 			</SelectContent>
 		</Select>
 	)

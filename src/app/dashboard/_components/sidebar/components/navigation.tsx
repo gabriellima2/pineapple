@@ -18,7 +18,7 @@ import {
 	CollapsibleTrigger,
 } from '@/components/ui/collapsible'
 
-type SidebarNavigationProps = {
+type NavigationProps = {
 	links: {
 		title: string
 		items: {
@@ -34,7 +34,7 @@ type SidebarNavigationProps = {
 	}[]
 }
 
-export function SidebarNavigation(props: SidebarNavigationProps) {
+export function Navigation(props: NavigationProps) {
 	const { links } = props
 	return (
 		<>
