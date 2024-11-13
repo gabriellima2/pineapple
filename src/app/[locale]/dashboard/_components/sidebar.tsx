@@ -22,6 +22,7 @@ import {
 } from '@/components/ui/sidebar'
 import { SidebarNavigation } from '@/components/sidebar-navigation'
 import { SidebarUser } from '@/components/sidebar-user'
+import { Logo } from '@/components/ui/logo'
 
 type SidebarProps = React.ComponentProps<typeof BaseSidebar>
 
@@ -29,10 +30,16 @@ export function Sidebar(props: SidebarProps) {
 	return (
 		<BaseSidebar collapsible="icon" {...props}>
 			<SidebarHeader>
-				<h1>LOGO</h1>
+				<div className="flex gap-2">
+					<Logo />
+					<div className="grid flex-1 text-left text-sm leading-tight">
+						<span className="truncate font-semibold">Pineapple Inc</span>
+						<span className="truncate text-xs">Dashboard</span>
+					</div>
+				</div>
 			</SidebarHeader>
 			<SidebarContent>
-				<SidebarNavigation groups={data.navMain} />
+				<SidebarNavigation links={data.navMain} />
 			</SidebarContent>
 			<SidebarFooter>
 				<SidebarUser user={data.user} actions={data.actions} />

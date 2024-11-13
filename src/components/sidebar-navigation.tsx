@@ -19,7 +19,7 @@ import {
 } from '@/components/ui/collapsible'
 
 type SidebarNavigationProps = {
-	groups: {
+	links: {
 		title: string
 		items: {
 			title: string
@@ -35,14 +35,14 @@ type SidebarNavigationProps = {
 }
 
 export function SidebarNavigation(props: SidebarNavigationProps) {
-	const { groups } = props
+	const { links } = props
 	return (
 		<>
-			{groups.map((group, i) => (
+			{links.map((link, i) => (
 				<SidebarGroup key={i}>
-					<SidebarGroupLabel>{group.title}</SidebarGroupLabel>
+					<SidebarGroupLabel>{link.title}</SidebarGroupLabel>
 					<SidebarMenu>
-						{group.items.map((item) => (
+						{link.items.map((item) => (
 							<Collapsible
 								key={item.title}
 								asChild
