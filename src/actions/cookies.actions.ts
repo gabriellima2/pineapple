@@ -2,8 +2,8 @@
 
 import { cookies } from 'next/headers'
 
-import { AVAILABLE_LOCALES, LOCALES } from '@/constants/general'
 import { COOKIES_KEYS } from '@/constants/keys'
+import { LOCALES } from '@/constants/general'
 
 export async function setLocaleCookie(locale: string) {
 	const cookiesStore = await cookies()
@@ -13,5 +13,6 @@ export async function setLocaleCookie(locale: string) {
 export async function getLocaleCookie() {
 	const cookiesStore = await cookies()
 	const locale = cookiesStore.get(COOKIES_KEYS.LOCALE)?.value?.toLowerCase()
-	return locale && AVAILABLE_LOCALES.includes(locale) ? locale : LOCALES.pt
+	const findedLocale = locale && LOCALES[locale as keyof typeof LOCALES]
+	return findedLocale || LOCALES.pt
 }
