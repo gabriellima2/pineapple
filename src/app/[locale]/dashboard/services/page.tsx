@@ -1,13 +1,6 @@
-import {
-	Breadcrumb,
-	BreadcrumbItem,
-	BreadcrumbLink,
-	BreadcrumbList,
-	BreadcrumbPage,
-	BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb'
 import { SidebarTrigger } from '@/components/ui/sidebar'
 import { Separator } from '@/components/ui/separator'
+import { Breadcumbs } from '@/components/breadcumbs'
 
 export default function Page() {
 	return (
@@ -16,17 +9,7 @@ export default function Page() {
 				<div className="flex items-center gap-2 px-4">
 					<SidebarTrigger className="-ml-1" />
 					<Separator orientation="vertical" className="mr-2 h-4" />
-					<Breadcrumb>
-						<BreadcrumbList>
-							<BreadcrumbItem className="hidden md:block">
-								<BreadcrumbLink href="#">Dashboard</BreadcrumbLink>
-							</BreadcrumbItem>
-							<BreadcrumbSeparator className="hidden md:block" />
-							<BreadcrumbItem>
-								<BreadcrumbPage>Services</BreadcrumbPage>
-							</BreadcrumbItem>
-						</BreadcrumbList>
-					</Breadcrumb>
+					<Breadcumbs breadcumbs={breadcumbs} />
 				</div>
 			</header>
 			<div className="flex flex-1 flex-col gap-4 p-4 pt-0">
@@ -40,3 +23,13 @@ export default function Page() {
 		</>
 	)
 }
+
+const breadcumbs = [
+	{
+		title: 'Dashboard',
+		href: '#',
+	},
+	{
+		title: 'Services',
+	},
+]
