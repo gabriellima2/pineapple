@@ -1,0 +1,16 @@
+{
+  "HomePage": {
+    "title": "Bem-vindo!"
+  },
+	"global": {
+		"selects": {
+			"locale": {
+				"placeholder": "Idioma",
+				"values": {
+					"en": "Inglês",
+					"pt": "Português"
+				}
+			}
+		}
+	}
+}
