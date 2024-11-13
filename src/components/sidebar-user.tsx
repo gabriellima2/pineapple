@@ -1,15 +1,9 @@
 'use client'
 
-import {
-	BadgeCheck,
-	Bell,
-	ChevronsUpDown,
-	CreditCard,
-	LogOut,
-	Sparkles,
-} from 'lucide-react'
+import { Fragment } from 'react'
+import Link from 'next/link'
+import { ChevronsUpDown, LucideIcon } from 'lucide-react'
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -25,18 +19,27 @@ import {
 	SidebarMenuItem,
 	useSidebar,
 } from '@/components/ui/sidebar'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
-export function NavUser({
-	user,
-}: {
+type SidebarUserProps = {
 	user: {
 		name: string
 		email: string
 		avatar: string
 	}
-}) {
-	const { isMobile } = useSidebar()
+	actions: {
+		title: string
+		icon?: LucideIcon
+		href?: string
+		onClick?: () => void
+	}[][]
+}
 
+export function SidebarUser(props: SidebarUserProps) {
+	const { user, actions } = props
+	const { isMobile } = useSidebar()
+	const avatarFallback = user.name[0]
+	const actionsAmount = actions.length - 1
 	return (
 		<SidebarMenu>
 			<SidebarMenuItem>
@@ -48,7 +51,9 @@ export function NavUser({
 						>
 							<Avatar className="h-8 w-8 rounded-lg">
 								<AvatarImage src={user.avatar} alt={user.name} />
-								<AvatarFallback className="rounded-lg">CN</AvatarFallback>
+								<AvatarFallback className="rounded-lg uppercase">
+									{avatarFallback}
+								</AvatarFallback>
 							</Avatar>
 							<div className="grid flex-1 text-left text-sm leading-tight">
 								<span className="truncate font-semibold">{user.name}</span>
@@ -67,7 +72,9 @@ export function NavUser({
 							<div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
 								<Avatar className="h-8 w-8 rounded-lg">
 									<AvatarImage src={user.avatar} alt={user.name} />
-									<AvatarFallback className="rounded-lg">CN</AvatarFallback>
+									<AvatarFallback className="rounded-lg">
+										{avatarFallback}
+									</AvatarFallback>
 								</Avatar>
 								<div className="grid flex-1 text-left text-sm leading-tight">
 									<span className="truncate font-semibold">{user.name}</span>
@@ -76,32 +83,28 @@ export function NavUser({
 							</div>
 						</DropdownMenuLabel>
 						<DropdownMenuSeparator />
-						<DropdownMenuGroup>
-							<DropdownMenuItem>
-								<Sparkles />
-								Upgrade to Pro
-							</DropdownMenuItem>
-						</DropdownMenuGroup>
-						<DropdownMenuSeparator />
-						<DropdownMenuGroup>
-							<DropdownMenuItem>
-								<BadgeCheck />
-								Account
-							</DropdownMenuItem>
-							<DropdownMenuItem>
-								<CreditCard />
-								Billing
-							</DropdownMenuItem>
-							<DropdownMenuItem>
-								<Bell />
-								Notifications
-							</DropdownMenuItem>
-						</DropdownMenuGroup>
-						<DropdownMenuSeparator />
-						<DropdownMenuItem>
-							<LogOut />
-							Log out
-						</DropdownMenuItem>
+						{actions.map((action, i) => (
+							<DropdownMenuGroup key={i}>
+								{action.map((group, j) => (
+									<Fragment key={j}>
+										{group.href ? (
+											<DropdownMenuItem asChild>
+												<Link href={group.href}>
+													{group.icon && <group.icon />}
+													{group.title}
+												</Link>
+											</DropdownMenuItem>
+										) : (
+											<DropdownMenuItem onClick={group.onClick}>
+												{group.icon && <group.icon />}
+												{group.title}
+											</DropdownMenuItem>
+										)}
+									</Fragment>
+								))}
+								{i !== actionsAmount && <DropdownMenuSeparator />}
+							</DropdownMenuGroup>
+						))}
 					</DropdownMenuContent>
 				</DropdownMenu>
 			</SidebarMenuItem>
