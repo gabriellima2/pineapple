@@ -5,7 +5,7 @@ import { useSession } from '@clerk/nextjs'
 
 import { env } from '@/env'
 
-export function useClerkSupabaseClient() {
+export function useSupabaseClient() {
 	const { session } = useSession()
 	function createClerkSupabaseClient() {
 		return createClient(env.SUPABASE_URL, env.SUPABASE_KEY, {

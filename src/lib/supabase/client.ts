@@ -3,7 +3,7 @@ import { auth } from '@clerk/nextjs/server'
 
 import { env } from '@/env'
 
-export async function createClerkSupabaseClient() {
+async function createClerkSupabaseClient() {
 	// The `useAuth()` hook is used to access the `getToken()` method
 	const { getToken } = await auth()
 
@@ -28,3 +28,5 @@ export async function createClerkSupabaseClient() {
 		},
 	})
 }
+
+export const client = await createClerkSupabaseClient()
