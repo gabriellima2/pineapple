@@ -1,15 +1,13 @@
-import { useTranslations } from 'next-intl'
-import { UserButton } from '@clerk/nextjs'
+import { redirect } from 'next/navigation'
+import { SignedIn, SignedOut } from '@clerk/nextjs'
 
-import { LocaleSelect } from '@/components/locale-select'
+import { ROUTES } from '@/constants/routes'
 
 export default function Home() {
-	const t = useTranslations('HomePage')
 	return (
-		<div>
-			<h1>{t('title')}</h1>
-			<LocaleSelect />
-			<UserButton />
-		</div>
+		<>
+			<SignedIn>{redirect(ROUTES.DASHBOARD.SERVICES())}</SignedIn>
+			<SignedOut>{redirect(ROUTES.AUTH.SIGN_IN())}</SignedOut>
+		</>
 	)
 }
