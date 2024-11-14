@@ -2,15 +2,8 @@
   "HomePage": {
     "title": "Hello World!"
   },
-	"global": {
-		"selects": {
-			"locale": {
-				"placeholder": "Language",
-				"values": {
-					"en": "English",
-					"pt": "Portuguese"
-				}
-			}
-		}
+	"locales": {
+		"en": "English",
+		"pt": "Portuguese"
 	}
 }

@@ -1,4 +1,6 @@
 import { useTranslations } from 'next-intl'
+import { UserButton } from '@clerk/nextjs'
+
 import { LocaleSelect } from '@/components/locale-select'
 
 export default function Home() {
@@ -7,6 +9,7 @@ export default function Home() {
 		<div>
 			<h1>{t('title')}</h1>
 			<LocaleSelect />
+			<UserButton />
 		</div>
 	)
 }
