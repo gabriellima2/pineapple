@@ -54,7 +54,13 @@ export function ServicesTable(props: ServicesTableProps) {
 				<div className="flex flex-col items-center gap-4 py-4 sm:flex-row">
 					<DataTable.Search placeholder="Buscar por nome..." />
 					<div className="flex w-full flex-row flex-wrap items-center gap-4 sm:flex-nowrap">
-						<DataTable.ColumnFilters />
+						<DataTable.ColumnFilters<TableData>
+							labels={{
+								name: 'Nome',
+								base_price: 'Preço',
+								description: 'Descrição',
+							}}
+						/>
 						<CreateService />
 					</div>
 				</div>

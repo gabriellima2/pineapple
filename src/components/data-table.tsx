@@ -223,7 +223,12 @@ function EmptyMessage() {
 	)
 }
 
-function ColumnFilters() {
+type ColumnFiltersProps<TData> = {
+	labels: Partial<Record<keyof TData, string>>
+}
+
+function ColumnFilters<TData>(props: ColumnFiltersProps<TData>) {
+	const { labels } = props
 	const { table } = useDataTableContext()
 	return (
 		<DropdownMenu>
@@ -244,7 +249,7 @@ function ColumnFilters() {
 								checked={column.getIsVisible()}
 								onCheckedChange={(value) => column.toggleVisibility(!!value)}
 							>
-								{column.id}
+								{labels[column.id as keyof typeof labels]}
 							</DropdownMenuCheckboxItem>
 						)
 					})}
