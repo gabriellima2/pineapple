@@ -3,10 +3,8 @@ import { auth } from '@clerk/nextjs/server'
 
 import { env } from '@/env'
 
-async function createClerkSupabaseClient() {
-	// The `useAuth()` hook is used to access the `getToken()` method
+export async function createClerkSupabaseClientSsr() {
 	const { getToken } = await auth()
-
 	return createClient(env.SUPABASE_URL, env.SUPABASE_KEY, {
 		global: {
 			// Get the custom Supabase token from Clerk
@@ -28,5 +26,3 @@ async function createClerkSupabaseClient() {
 		},
 	})
 }
-
-export const client = await createClerkSupabaseClient()
