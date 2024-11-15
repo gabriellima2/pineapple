@@ -4,6 +4,7 @@ import { useState } from 'react'
 import {
 	ColumnDef,
 	ColumnFiltersState,
+	PaginationState,
 	SortingState,
 	VisibilityState,
 	getCoreRowModel,
@@ -31,18 +32,24 @@ export function ServicesTable(props: ServicesTableProps) {
 	const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 	const [sorting, setSorting] = useState<SortingState>([])
+	const [pagination, setPagination] = useState<PaginationState>({
+		pageIndex: 0,
+		pageSize: 10,
+	})
 	const table = useReactTable({
 		data: services,
 		columns,
 		onSortingChange: setSorting,
+		onPaginationChange: setPagination,
 		onColumnFiltersChange: setColumnFilters,
+		onColumnVisibilityChange: setColumnVisibility,
 		getCoreRowModel: getCoreRowModel(),
-		getPaginationRowModel: getPaginationRowModel(),
 		getSortedRowModel: getSortedRowModel(),
 		getFilteredRowModel: getFilteredRowModel(),
-		onColumnVisibilityChange: setColumnVisibility,
+		getPaginationRowModel: getPaginationRowModel(),
 		state: {
 			sorting,
+			pagination,
 			columnFilters,
 			columnVisibility,
 		},
