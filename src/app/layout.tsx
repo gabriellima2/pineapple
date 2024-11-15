@@ -5,9 +5,10 @@ import { NextIntlClientProvider } from 'next-intl'
 import { ptBR, enUS } from '@clerk/localizations'
 import { ClerkProvider } from '@clerk/nextjs'
 import { Geist } from 'next/font/google'
-
-import { LOCALES } from '@/constants/general'
 import type { Metadata } from 'next'
+
+import { Toaster } from '@/components/ui/toaster'
+import { LOCALES } from '@/constants/general'
 
 export const metadata: Metadata = {
 	title: 'Create Next App',
@@ -37,6 +38,7 @@ export default async function RootLayout(props: Readonly<RootLayoutProps>) {
 					<NextIntlClientProvider messages={messages}>
 						{children}
 					</NextIntlClientProvider>
+					<Toaster />
 				</body>
 			</html>
 		</ClerkProvider>

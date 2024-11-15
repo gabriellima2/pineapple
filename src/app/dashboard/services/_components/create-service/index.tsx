@@ -26,13 +26,18 @@ import { RequiredIndicator } from '@/components/required-indicator'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
+import { useToast } from '@/hooks/use-toast'
+
+import { createService } from './actions/create-service.action'
 import { currencyMask } from '@/helpers/masks'
+
 import {
 	createServiceSchema,
 	type CreateServiceFields,
 } from './schema/create-service.schema'
 
 export function CreateService() {
+	const { toast } = useToast()
 	const [open, setOpen] = useState(false)
 	const form = useForm<CreateServiceFields>({
 		resolver: zodResolver(createServiceSchema),
@@ -46,7 +51,22 @@ export function CreateService() {
 
 	async function onSubmit(data: CreateServiceFields) {
 		if (isSubmitting) return
-		console.log(data)
+		try {
+			await createService(data)
+			setOpen(false)
+			toast({
+				title: 'Tudo certo!',
+				description: 'O serviço foi adicionado com sucesso.',
+			})
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		} catch (_) {
+			toast({
+				title: 'Algo deu errado...',
+				description:
+					'Ocorreu um erro inesperado ao tentar adicionar o serviço. Por favor, tente novamente.',
+				variant: 'destructive',
+			})
+		}
 	}
 
 	function handleOpenChange(isOpen: boolean) {

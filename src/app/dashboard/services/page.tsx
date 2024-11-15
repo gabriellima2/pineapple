@@ -6,6 +6,7 @@ import { Separator } from '@/components/ui/separator'
 import { Breadcumbs } from '@/components/breadcumbs'
 
 export default function Page() {
+	console.log('revalidated....')
 	return (
 		<>
 			<header className="flex h-16 shrink-0 items-center justify-between gap-2 px-4 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
