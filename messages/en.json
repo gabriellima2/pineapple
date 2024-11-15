@@ -1,9 +1,66 @@
 {
-  "HomePage": {
-    "title": "Hello World!"
-  },
+	"dashboard": {
+		"sidebar": {
+			"home": "Home",
+			"services": "Services"
+		},
+		"services": {
+			"title": "Services",
+			"breadcumbs": {
+				"1": "Services"
+			},
+			"list": {
+				"search-by-name": "Search by name...",
+				"columns": {
+					"name": "Name",
+					"base_price": "Price",
+					"description": "Description"
+				}
+			},
+			"create": {
+				"title": "Add a new service",
+				"fields": {
+					"name": "Name",
+					"base_price": "Price",
+					"description": "Description"
+				},
+				"notification": {
+					"success": {
+						"title": "Everything ok!",
+						"description": "The service has been added successfully."
+					},
+					"error": {
+						"title": "Something went wrong...",
+						"description": "An unexpected error occurred while trying to add the service. Please try again."
+					}
+				}
+			}
+		}
+	},
+	"actions": {
+		"title": "Actions",
+		"create": "Add",
+		"update": "Update",
+		"view": "View",
+		"copy-id": "Copy ID",
+		"sr-only": "Abrir menu"
+	},
 	"locales": {
 		"en": "English",
 		"pt": "Portuguese"
+	},
+	"data-table": {
+		"pagination": {
+			"previous": "Previous",
+			"next": "Next"
+		},
+		"column-filters": {
+			"title": "Columns"
+		},
+		"empty-message": "No results"
+	},
+	"buttons": {
+		"save": "Save",
+		"cancel": "Cancel"
 	}
 }

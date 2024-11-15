@@ -16,7 +16,7 @@ export async function createService(payload: CreateServiceFields) {
 		{
 			name: payload.name,
 			description: payload.description || null,
-			base_price: convertToNumber(payload.basePrice),
+			base_price: convertToNumber(payload.base_price),
 		},
 	])
 	revalidatePath(ROUTES.DASHBOARD.SERVICES())

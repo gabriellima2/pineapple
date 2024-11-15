@@ -1,7 +1,8 @@
 import { createContext, Fragment, PropsWithChildren, useContext } from 'react'
-import Link from 'next/link'
 import { flexRender, type Column, type Table } from '@tanstack/react-table'
 import { ArrowUpDown, ChevronDown, MoreHorizontal } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import Link from 'next/link'
 
 import {
 	DropdownMenu,
@@ -207,6 +208,7 @@ function Search(props: SearchProps) {
 }
 
 function EmptyMessage() {
+	const t = useTranslations()
 	const { table } = useDataTableContext()
 	const headerGroups = table.getHeaderGroups()
 	const lastHeaderGroup = headerGroups[headerGroups.length - 1]
@@ -217,7 +219,7 @@ function EmptyMessage() {
 				colSpan={headersLength}
 				className="h-24 text-center normal-case"
 			>
-				Nenhum resultado encontrado
+				{t('data-table.empty-message')}
 			</TableCell>
 		</TableRow>
 	)
@@ -229,12 +231,13 @@ type ColumnFiltersProps<TData> = {
 
 function ColumnFilters<TData>(props: ColumnFiltersProps<TData>) {
 	const { labels } = props
+	const t = useTranslations()
 	const { table } = useDataTableContext()
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
 				<Button variant="outline" className="ml-auto flex-1 sm:flex-none">
-					Colunas <ChevronDown />
+					{t('data-table.column-filters.title')} <ChevronDown />
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="end">
@@ -269,16 +272,17 @@ type ActionsProps = {
 
 function Actions(props: ActionsProps) {
 	const { actions } = props
+	const t = useTranslations()
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
 				<Button variant="ghost" className="h-8 w-8 p-0">
-					<span className="sr-only">Abrir menu</span>
+					<span className="sr-only">{t('actions.sr-only')}</span>
 					<MoreHorizontal />
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="end">
-				<DropdownMenuLabel>Ações</DropdownMenuLabel>
+				<DropdownMenuLabel>{t('actions.title')}</DropdownMenuLabel>
 				{actions.map((action, i) => (
 					<Fragment key={i}>
 						{action.href ? (
@@ -299,6 +303,7 @@ function Actions(props: ActionsProps) {
 }
 
 function NextPage(props: PaginationButtonDefaultProps) {
+	const t = useTranslations()
 	const { table } = useDataTableContext()
 	return (
 		<Button
@@ -308,12 +313,13 @@ function NextPage(props: PaginationButtonDefaultProps) {
 			disabled={!table.getCanNextPage()}
 			{...props}
 		>
-			Próximo
+			{t('data-table.pagination.next')}
 		</Button>
 	)
 }
 
 function PreviousPage(props: PaginationButtonDefaultProps) {
+	const t = useTranslations()
 	const { table } = useDataTableContext()
 	return (
 		<Button
@@ -323,7 +329,7 @@ function PreviousPage(props: PaginationButtonDefaultProps) {
 			disabled={!table.getCanPreviousPage()}
 			{...props}
 		>
-			Anterior
+			{t('data-table.pagination.previous')}
 		</Button>
 	)
 }

@@ -1,9 +1,10 @@
 import { UserButton } from '@clerk/nextjs'
 
+import { ServicesBreadcumbs } from './_components/services-breadcumbs'
 import { ServicesTable } from './_components/services-table'
+import { LocaleSelect } from '@/components/locale-select'
 import { SidebarTrigger } from '@/components/ui/sidebar'
 import { Separator } from '@/components/ui/separator'
-import { Breadcumbs } from '@/components/breadcumbs'
 
 import { getServices } from './_actions/service-action'
 
@@ -15,9 +16,13 @@ export default async function Page() {
 				<div className="flex items-center gap-2">
 					<SidebarTrigger className="-ml-1" />
 					<Separator orientation="vertical" className="mr-2 h-4" />
-					<Breadcumbs breadcumbs={breadcumbs} />
+					<ServicesBreadcumbs />
 				</div>
-				<UserButton />
+				<div className="flex items-center gap-2">
+					<UserButton />
+					<Separator orientation="vertical" className="mr-2 h-4" />
+					<LocaleSelect />
+				</div>
 			</header>
 			<main className="px-4">
 				<ServicesTable services={services || []} />
@@ -25,9 +30,3 @@ export default async function Page() {
 		</>
 	)
 }
-
-const breadcumbs = [
-	{
-		title: 'Serviços',
-	},
-]

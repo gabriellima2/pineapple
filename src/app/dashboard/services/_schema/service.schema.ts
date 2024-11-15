@@ -5,7 +5,7 @@ export const createServiceSchema = z.object({
 		.string({ required_error: 'Campo obrigatório' })
 		.min(1, { message: 'Campo obrigatório' }),
 	description: z.string().optional(),
-	basePrice: z
+	base_price: z
 		.string({ required_error: 'Campo obrigatório' })
 		.min(1, { message: 'Campo obrigatório' }),
 })

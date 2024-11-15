@@ -1,7 +1,6 @@
 'use client'
 
 import * as React from 'react'
-import { BriefcaseBusiness, LayoutDashboard } from 'lucide-react'
 
 import {
 	Sidebar as BaseSidebar,
@@ -11,7 +10,6 @@ import {
 } from '@/components/ui/sidebar'
 import { Navigation } from './components/navigation'
 import { Brand } from '@/components/ui/brand'
-import { ROUTES } from '@/constants/routes'
 
 type SidebarProps = React.ComponentProps<typeof BaseSidebar>
 
@@ -28,28 +26,9 @@ export function Sidebar(props: SidebarProps) {
 				</div>
 			</SidebarHeader>
 			<SidebarContent>
-				<Navigation links={data.navMain} />
+				<Navigation />
 			</SidebarContent>
 			<SidebarRail />
 		</BaseSidebar>
 	)
-}
-
-const data = {
-	navMain: [
-		{
-			items: [
-				{
-					title: 'Início',
-					url: ROUTES.DASHBOARD.HOME(),
-					icon: LayoutDashboard,
-				},
-				{
-					title: 'Serviços',
-					url: ROUTES.DASHBOARD.SERVICES(),
-					icon: BriefcaseBusiness,
-				},
-			],
-		},
-	],
 }

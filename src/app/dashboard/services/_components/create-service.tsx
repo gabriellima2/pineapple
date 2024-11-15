@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Plus } from 'lucide-react'
 import { useForm } from 'react-hook-form'
+import { useTranslations } from 'next-intl'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import {
@@ -37,6 +38,7 @@ import {
 } from '../_schema/service.schema'
 
 export function CreateService() {
+	const t = useTranslations()
 	const { toast } = useToast()
 	const [open, setOpen] = useState(false)
 	const form = useForm<CreateServiceFields>({
@@ -44,7 +46,7 @@ export function CreateService() {
 		defaultValues: {
 			name: '',
 			description: '',
-			basePrice: '',
+			base_price: '',
 		},
 	})
 	const isSubmitting = form.formState.isSubmitting
@@ -55,15 +57,18 @@ export function CreateService() {
 			await createService(data)
 			setOpen(false)
 			toast({
-				title: 'Tudo certo!',
-				description: 'O serviço foi adicionado com sucesso.',
+				title: t('dashboard.services.create.notification.success.title'),
+				description: t(
+					'dashboard.services.create.notification.success.description'
+				),
 			})
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		} catch (_) {
 			toast({
-				title: 'Algo deu errado...',
-				description:
-					'Ocorreu um erro inesperado ao tentar adicionar o serviço. Por favor, tente novamente.',
+				title: t('dashboard.services.create.notification.error.title'),
+				description: t(
+					'dashboard.services.create.notification.error.description'
+				),
 				variant: 'destructive',
 			})
 		}
@@ -79,7 +84,7 @@ export function CreateService() {
 		<Sheet open={open} onOpenChange={handleOpenChange}>
 			<SheetTrigger asChild>
 				<Button className="flex-1 sm:flex-none">
-					Adicionar <Plus />
+					{t('actions.create')} <Plus />
 				</Button>
 			</SheetTrigger>
 			<SheetContent
@@ -87,7 +92,7 @@ export function CreateService() {
 				className="flex flex-col gap-0"
 			>
 				<SheetHeader>
-					<SheetTitle>Adicionar um novo serviço</SheetTitle>
+					<SheetTitle>{t('dashboard.services.create.title')}</SheetTitle>
 				</SheetHeader>
 				<Form {...form}>
 					<form
@@ -101,7 +106,8 @@ export function CreateService() {
 								render={({ field }) => (
 									<FormItem>
 										<FormLabel>
-											Nome <RequiredIndicator />
+											{t('dashboard.services.create.fields.name')}{' '}
+											<RequiredIndicator />
 										</FormLabel>
 										<FormControl>
 											<Input {...field} />
@@ -112,11 +118,12 @@ export function CreateService() {
 							/>
 							<FormField
 								control={form.control}
-								name="basePrice"
+								name="base_price"
 								render={({ field }) => (
 									<FormItem>
 										<FormLabel>
-											Valor base <RequiredIndicator />
+											{t('dashboard.services.create.fields.base_price')}{' '}
+											<RequiredIndicator />
 										</FormLabel>
 										<FormControl>
 											<Input mask={currencyMask} {...field} />
@@ -130,7 +137,9 @@ export function CreateService() {
 								name="description"
 								render={({ field }) => (
 									<FormItem>
-										<FormLabel>Descrição</FormLabel>
+										<FormLabel>
+											{t('dashboard.services.create.fields.description')}
+										</FormLabel>
 										<FormControl>
 											<Input {...field} />
 										</FormControl>
@@ -147,11 +156,11 @@ export function CreateService() {
 									className="w-full"
 									disabled={isSubmitting}
 								>
-									Cancelar
+									{t('buttons.cancel')}
 								</Button>
 							</SheetClose>
 							<Button type="submit" className="w-full" loading={isSubmitting}>
-								Salvar
+								{t('buttons.save')}
 							</Button>
 						</SheetFooter>
 					</form>

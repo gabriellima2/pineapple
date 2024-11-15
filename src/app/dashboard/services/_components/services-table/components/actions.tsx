@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 
 import { DataTable } from '@/components/data-table'
 import type { TableData } from '../@types/table-data'
+import { useTranslations } from 'next-intl'
 
 type ActionsProps = {
 	service: TableData
@@ -9,18 +10,19 @@ type ActionsProps = {
 
 export function Actions(props: ActionsProps) {
 	const { service } = props
+	const t = useTranslations()
 
 	const actions = useMemo(
 		() => [
 			{
-				label: 'Copiar ID',
+				label: t('actions.copy-id'),
 				separator: true,
 				onClick: () => navigator.clipboard.writeText(service.id),
 			},
-			{ label: 'Visualizar' },
-			{ label: 'Editar' },
+			{ label: t('actions.view') },
+			{ label: t('actions.update') },
 		],
-		[service]
+		[t, service]
 	)
 
 	return <DataTable.Actions actions={actions} />

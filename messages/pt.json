@@ -1,9 +1,66 @@
 {
-  "HomePage": {
-    "title": "Bem-vindo!"
-  },
+	"dashboard": {
+		"sidebar": {
+			"home": "Início",
+			"services": "Serviços"
+		},
+		"services": {
+			"title": "Serviços",
+			"breadcumbs": {
+				"1": "Serviços"
+			},
+			"list": {
+				"search-by-name": "Buscar por nome...",
+				"columns": {
+					"name": "Nome",
+					"base_price": "Preço",
+					"description": "Descrição"
+				}
+			},
+			"create": {
+				"title": "Adicionar um novo serviço",
+				"fields": {
+					"name": "Nome",
+					"base_price": "Preço",
+					"description": "Descrição"
+				},
+				"notification": {
+					"success": {
+						"title": "Tudo certo!",
+						"description": "O serviço foi adicionado com sucesso."
+					},
+					"error": {
+						"title": "Algo deu errado...",
+						"description": "Ocorreu um erro inesperado ao tentar adicionar o serviço. Por favor, tente novamente."
+					}
+				}
+			}
+		}
+	},
+	"actions": {
+		"title": "Ações",
+		"create": "Adicionar",
+		"update": "Editar",
+		"view": "Visualizar",
+		"copy-id": "Copiar ID",
+		"sr-only": "Open menu"
+	},
 	"locales": {
 		"en": "Inglês",
 		"pt": "Português"
+	},
+	"data-table": {
+		"pagination": {
+			"previous": "Anterior",
+			"next": "Próximo"
+		},
+		"column-filters": {
+			"title": "Colunas"
+		},
+		"empty-message": "Nenhum resultado encontrado"
+	},
+	"buttons": {
+		"save": "Salvar",
+		"cancel": "Cancelar"
 	}
 }
