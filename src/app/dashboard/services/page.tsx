@@ -5,8 +5,10 @@ import { SidebarTrigger } from '@/components/ui/sidebar'
 import { Separator } from '@/components/ui/separator'
 import { Breadcumbs } from '@/components/breadcumbs'
 
-export default function Page() {
-	console.log('revalidated....')
+import { getServices } from './_actions/service-action'
+
+export default async function Page() {
+	const services = await getServices()
 	return (
 		<>
 			<header className="flex h-16 shrink-0 items-center justify-between gap-2 px-4 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
@@ -18,7 +20,7 @@ export default function Page() {
 				<UserButton />
 			</header>
 			<main className="px-4">
-				<ServicesTable />
+				<ServicesTable services={services || []} />
 			</main>
 		</>
 	)

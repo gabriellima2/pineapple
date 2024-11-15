@@ -28,13 +28,13 @@ import { Input } from '@/components/ui/input'
 
 import { useToast } from '@/hooks/use-toast'
 
-import { createService } from '../../_actions/service-action'
+import { createService } from '../_actions/service-action'
 import { currencyMask } from '@/helpers/masks'
 
 import {
 	createServiceSchema,
 	type CreateServiceFields,
-} from '../../_schema/service.schema'
+} from '../_schema/service.schema'
 
 export function CreateService() {
 	const { toast } = useToast()

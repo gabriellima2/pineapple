@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import {
 	ColumnDef,
 	ColumnFiltersState,
@@ -15,15 +15,24 @@ import {
 
 import { Table, TableBody } from '@/components/ui/table'
 import { DataTable } from '@/components/data-table'
-import { CreateService } from './create-service'
+import { CreateService } from '../create-service'
 import { Currency } from '@/components/currency'
+import { Actions } from './components/actions'
 
-export function ServicesTable() {
+import type { GetServicesDTO } from '@/dtos/service.dto'
+import type { TableData } from './@types/table-data'
+
+type ServicesTableProps = {
+	services: GetServicesDTO
+}
+
+export function ServicesTable(props: ServicesTableProps) {
+	const { services } = props
 	const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 	const [sorting, setSorting] = useState<SortingState>([])
 	const table = useReactTable({
-		data,
+		data: services,
 		columns,
 		onSortingChange: setSorting,
 		onColumnFiltersChange: setColumnFilters,
@@ -64,62 +73,7 @@ export function ServicesTable() {
 	)
 }
 
-type ActionsProps = {
-	service: Service
-}
-
-function Actions(props: ActionsProps) {
-	const { service } = props
-
-	const actions = useMemo(
-		() => [
-			{
-				label: 'Copiar ID',
-				separator: true,
-				onClick: () => navigator.clipboard.writeText(service.id),
-			},
-			{ label: 'Visualizar' },
-			{ label: 'Editar' },
-		],
-		[service]
-	)
-
-	return <DataTable.Actions actions={actions} />
-}
-
-const data: Service[] = [
-	{
-		id: 'm5gr84i9',
-		basePrice: 316,
-		status: 'paid',
-		name: 'Pintura',
-		description: null,
-	},
-	{
-		id: '3u1reuv4',
-		basePrice: 242,
-		status: 'pending',
-		name: 'Funilária',
-		description: null,
-	},
-]
-
-type ServiceStatus = 'pending' | 'paid'
-
-const SERVICE_STATUS: Record<ServiceStatus, string> = {
-	pending: 'Pendente',
-	paid: 'Pago',
-}
-
-type Service = {
-	id: string
-	basePrice: number
-	status: ServiceStatus
-	name: string
-	description: string | null
-}
-
-const columns: ColumnDef<Service>[] = [
+const columns: ColumnDef<TableData>[] = [
 	{
 		accessorKey: 'name',
 		header: ({ column }) => {
@@ -128,14 +82,14 @@ const columns: ColumnDef<Service>[] = [
 		cell: ({ row }) => row.getValue('name'),
 	},
 	{
-		accessorKey: 'basePrice',
+		accessorKey: 'base_price',
 		header: () => <div>Preço</div>,
-		cell: ({ row }) => <Currency value={row.getValue('basePrice')} />,
+		cell: ({ row }) => <Currency value={row.getValue('base_price')} />,
 	},
 	{
-		accessorKey: 'status',
-		header: 'Status',
-		cell: ({ row }) => SERVICE_STATUS[row.getValue('status') as ServiceStatus],
+		accessorKey: 'description',
+		header: () => <div>Descrição</div>,
+		cell: ({ row }) => row.getValue('description') || 'N/A',
 	},
 	{
 		id: 'actions',
