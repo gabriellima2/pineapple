@@ -23,7 +23,7 @@ import { Actions } from './components/actions'
 
 import type { Translations } from '@/@types/translations'
 import type { GetServicesDTO } from '@/dtos/service.dto'
-import type { TableData } from './@types/table-data'
+import type { TableData } from '../../_@types/table-data'
 
 type ServicesTableProps = {
 	services: GetServicesDTO
