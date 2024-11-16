@@ -34,6 +34,24 @@
 						"description": "Ocorreu um erro inesperado ao tentar adicionar o serviço. Por favor, tente novamente."
 					}
 				}
+			},
+			"update": {
+				"title": "Atualizar serviço",
+				"fields": {
+					"name": "Nome",
+					"base_price": "Preço",
+					"description": "Descrição"
+				},
+				"notification": {
+					"success": {
+						"title": "Tudo certo!",
+						"description": "O serviço foi atualizado com sucesso."
+					},
+					"error": {
+						"title": "Algo deu errado...",
+						"description": "Ocorreu um erro inesperado ao tentar atualizar o serviço. Por favor, tente novamente."
+					}
+				}
 			}
 		}
 	},

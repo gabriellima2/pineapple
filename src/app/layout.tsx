@@ -8,6 +8,8 @@ import { Geist } from 'next/font/google'
 import type { Metadata } from 'next'
 
 import { Toaster } from '@/components/ui/toaster'
+import { Providers } from '@/providers'
+
 import { LOCALES } from '@/constants/general'
 
 export const metadata: Metadata = {
@@ -36,7 +38,7 @@ export default async function RootLayout(props: Readonly<RootLayoutProps>) {
 			<html lang={locale}>
 				<body className={`${geist.variable} antialiased`}>
 					<NextIntlClientProvider messages={messages}>
-						{children}
+						<Providers>{children}</Providers>
 					</NextIntlClientProvider>
 					<Toaster />
 				</body>

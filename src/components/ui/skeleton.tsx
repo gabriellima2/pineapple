@@ -12,4 +12,18 @@ function Skeleton({
 	)
 }
 
-export { Skeleton }
+function InputSkeleton({
+	className,
+	...props
+}: React.HTMLAttributes<HTMLDivElement>) {
+	return <Skeleton className={cn('h-[40px] w-full', className)} {...props} />
+}
+
+function LabelSkeleton({
+	className,
+	...props
+}: React.HTMLAttributes<HTMLDivElement>) {
+	return <Skeleton className={cn('h-[18px] w-[80px]', className)} {...props} />
+}
+
+export { Skeleton, InputSkeleton, LabelSkeleton }

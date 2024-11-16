@@ -34,6 +34,24 @@
 						"description": "An unexpected error occurred while trying to add the service. Please try again."
 					}
 				}
+			},
+			"update": {
+				"title": "Update service",
+				"fields": {
+					"name": "Name",
+					"base_price": "Price",
+					"description": "Description"
+				},
+				"notification": {
+					"success": {
+						"title": "Everything ok!",
+						"description": "The service has been updated successfully."
+					},
+					"error": {
+						"title": "Something went wrong...",
+						"description": "An unexpected error occurred while trying to update the service. Please try again."
+					}
+				}
 			}
 		}
 	},
