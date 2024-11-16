@@ -13,7 +13,7 @@ type ActionsProps = {
 export function Actions(props: ActionsProps) {
 	const { service } = props
 	const t = useTranslations()
-	const { openUpdateService } = useServicesContext()
+	const { openUpdateService, openViewService } = useServicesContext()
 
 	const actions = useMemo(
 		() => [
@@ -22,10 +22,10 @@ export function Actions(props: ActionsProps) {
 				separator: true,
 				onClick: () => navigator.clipboard.writeText(service.id),
 			},
-			{ label: t('actions.view') },
+			{ label: t('actions.view'), onClick: () => openViewService(service) },
 			{ label: t('actions.update'), onClick: () => openUpdateService(service) },
 		],
-		[t, service, openUpdateService]
+		[t, service, openUpdateService, openViewService]
 	)
 
 	return <DataTable.Actions actions={actions} />

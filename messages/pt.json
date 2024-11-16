@@ -52,6 +52,16 @@
 						"description": "Ocorreu um erro inesperado ao tentar atualizar o serviço. Por favor, tente novamente."
 					}
 				}
+			},
+			"view": {
+				"title": "Visualizar serviço",
+				"fields": {
+					"id": "Identificador",
+					"name": "Nome",
+					"base_price": "Preço",
+					"description": "Descrição",
+					"created_at": "Criado em"
+				}
 			}
 		}
 	},

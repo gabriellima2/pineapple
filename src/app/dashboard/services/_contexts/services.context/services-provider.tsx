@@ -3,6 +3,7 @@
 import { useCallback, useState, type PropsWithChildren } from 'react'
 
 import { UpdateService } from '../../_components/update-service'
+import { ViewService } from '../../_components/view-service'
 import { ServicesContext } from './services.context'
 
 import { useBoolean } from '@/hooks/use-boolean'
@@ -57,6 +58,9 @@ export function ServicesProvider(props: PropsWithChildren) {
 		>
 			{isOpenUpdateService && selectedService && (
 				<UpdateService serviceId={selectedService.id} />
+			)}
+			{isOpenViewService && selectedService && (
+				<ViewService serviceId={selectedService.id} />
 			)}
 			{children}
 		</ServicesContext.Provider>

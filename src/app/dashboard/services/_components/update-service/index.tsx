@@ -101,6 +101,7 @@ export function UpdateService(props: UpdateServiceProps) {
 	return (
 		<Sheet open={isOpenUpdateService} onOpenChange={handleOpenChange}>
 			<SheetContent
+				disabled={isSubmitting}
 				aria-describedby={undefined}
 				className="flex flex-col gap-0"
 			>

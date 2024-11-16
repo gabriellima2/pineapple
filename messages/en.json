@@ -52,6 +52,16 @@
 						"description": "An unexpected error occurred while trying to update the service. Please try again."
 					}
 				}
+			},
+			"view": {
+				"title": "View service",
+				"fields": {
+					"id": "Identifier",
+					"name": "Name",
+					"base_price": "Price",
+					"description": "Description",
+					"created_at": "Created at"
+				}
 			}
 		}
 	},

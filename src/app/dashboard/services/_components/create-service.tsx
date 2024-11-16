@@ -88,6 +88,7 @@ export function CreateService() {
 				</Button>
 			</SheetTrigger>
 			<SheetContent
+				disabled={isSubmitting}
 				aria-describedby={undefined}
 				className="flex flex-col gap-0"
 			>
