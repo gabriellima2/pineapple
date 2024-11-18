@@ -46,22 +46,19 @@ export function ServicesProvider(props: PropsWithChildren) {
 	return (
 		<ServicesContext.Provider
 			value={{
-				closeUpdateService,
-				closeViewService,
 				isOpenUpdateService,
-				isOpenViewService,
-				openUpdateService,
-				openViewService,
 				setIsOpenUpdateService,
+				openUpdateService,
+				closeUpdateService,
+
+				isOpenViewService,
 				setIsOpenViewService,
+				openViewService,
+				closeViewService,
 			}}
 		>
-			{isOpenUpdateService && selectedService && (
-				<UpdateService serviceId={selectedService.id} />
-			)}
-			{isOpenViewService && selectedService && (
-				<ViewService serviceId={selectedService.id} />
-			)}
+			{selectedService && <UpdateService serviceId={selectedService.id} />}
+			{selectedService && <ViewService serviceId={selectedService.id} />}
 			{children}
 		</ServicesContext.Provider>
 	)

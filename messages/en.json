@@ -4,6 +4,7 @@
 			"home": "Home",
 			"services": "Services"
 		},
+
 		"services": {
 			"title": "Services",
 			"breadcumbs": {
@@ -65,6 +66,7 @@
 			}
 		}
 	},
+
 	"actions": {
 		"title": "Actions",
 		"create": "Add",
