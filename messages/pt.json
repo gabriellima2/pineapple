@@ -90,5 +90,8 @@
 	"buttons": {
 		"save": "Salvar",
 		"cancel": "Cancelar"
+	},
+	"form-validations": {
+		"required_error": "Campo obrigatório"
 	}
 }

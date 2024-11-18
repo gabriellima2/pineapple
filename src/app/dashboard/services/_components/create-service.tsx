@@ -27,22 +27,22 @@ import { RequiredIndicator } from '@/components/required-indicator'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
+import {
+	useGetCreateServiceIntlSchema,
+	type CreateServiceFields,
+} from '../_hooks/use-get-create-service-intl-schema'
 import { useToast } from '@/hooks/use-toast'
 
 import { createService } from '../_actions/service-action'
 import { currencyMask } from '@/helpers/masks'
 
-import {
-	createServiceSchema,
-	type CreateServiceFields,
-} from '../_schema/service.schema'
-
 export function CreateService() {
 	const t = useTranslations()
 	const { toast } = useToast()
 	const [open, setOpen] = useState(false)
+	const { intlSchema } = useGetCreateServiceIntlSchema()
 	const form = useForm<CreateServiceFields>({
-		resolver: zodResolver(createServiceSchema),
+		resolver: zodResolver(intlSchema),
 		defaultValues: {
 			name: '',
 			description: '',

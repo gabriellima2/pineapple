@@ -34,9 +34,9 @@ import { updateService } from '../../_actions/service-action'
 import { currencyMask } from '@/helpers/masks'
 
 import {
-	updateServiceSchema,
+	useGetUpdateServiceIntlSchema,
 	type UpdateServiceFields,
-} from '../../_schema/service.schema'
+} from '../../_hooks/use-get-update-service-intl-schema'
 
 type UpdateServiceProps = {
 	serviceId: string
@@ -46,11 +46,12 @@ export function UpdateService(props: UpdateServiceProps) {
 	const { serviceId } = props
 	const t = useTranslations()
 	const { toast } = useToast()
+	const { intlSchema } = useGetUpdateServiceIntlSchema()
 	const { service, isLoadingService } = useGetServiceById(serviceId)
 	const { isOpenUpdateService, setIsOpenUpdateService, closeUpdateService } =
 		useServicesContext()
 	const form = useForm<UpdateServiceFields>({
-		resolver: zodResolver(updateServiceSchema),
+		resolver: zodResolver(intlSchema),
 		defaultValues: {
 			name: '',
 			description: '',
@@ -72,7 +73,6 @@ export function UpdateService(props: UpdateServiceProps) {
 			})
 			// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		} catch (_) {
-			console.log(_)
 			toast({
 				title: t('dashboard.services.update.notification.error.title'),
 				description: t(
