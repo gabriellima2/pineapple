@@ -9,6 +9,7 @@ import {
 	SheetTitle,
 } from '@/components/ui/sheet'
 import { Skeleton } from './components/skeleton'
+import { Details } from '@/components/details'
 
 import { useGetServiceById } from '../../_hooks/use-get-service-by-id'
 import { useServicesContext } from '../../_contexts/services.context'
@@ -37,38 +38,32 @@ export function ViewService(props: ViewServiceProps) {
 				<div className="flex-1 p-4">
 					{isLoadingService && !service && <Skeleton />}
 					{!isLoadingService && service && (
-						<ul className="grid grid-cols-4 gap-8">
-							<li className="col-span-full flex flex-col gap-1">
-								<span className="font-medium">
-									{t('dashboard.services.view.fields.id')}:
-								</span>
-								{service.id}
-							</li>
-							<li className="col-span-full flex flex-col gap-1 sm:col-span-2">
-								<span className="font-medium">
-									{t('dashboard.services.view.fields.name')}:
-								</span>
-								{service.name}
-							</li>
-							<li className="col-span-full flex flex-col gap-1 sm:col-span-2">
-								<span className="font-medium">
-									{t('dashboard.services.view.fields.base_price')}:
-								</span>
-								{currencyMask(service.base_price)}
-							</li>
-							<li className="col-span-full flex flex-col gap-1 sm:col-span-2">
-								<span className="font-medium">
-									{t('dashboard.services.view.fields.description')}:
-								</span>
-								{service.description || 'N/A'}
-							</li>
-							<li className="col-span-full flex flex-col gap-1 sm:col-span-2">
-								<span className="font-medium">
-									{t('dashboard.services.view.fields.created_at')}:
-								</span>
-								{showDate(service.created_at)}
-							</li>
-						</ul>
+						<Details.List>
+							<Details.ListItem
+								label={t('dashboard.services.view.fields.id')}
+								value={service.id}
+							/>
+							<Details.ListItem
+								label={t('dashboard.services.view.fields.name')}
+								value={service.name}
+								className="sm:col-span-2"
+							/>
+							<Details.ListItem
+								label={t('dashboard.services.view.fields.base_price')}
+								value={currencyMask(service.base_price)}
+								className="sm:col-span-2"
+							/>
+							<Details.ListItem
+								label={t('dashboard.services.view.fields.description')}
+								value={service.description}
+								className="sm:col-span-2"
+							/>
+							<Details.ListItem
+								label={t('dashboard.services.view.fields.created_at')}
+								value={showDate(service.created_at)}
+								className="sm:col-span-2"
+							/>
+						</Details.List>
 					)}
 				</div>
 			</SheetContent>
