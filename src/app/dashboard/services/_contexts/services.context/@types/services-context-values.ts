@@ -10,4 +10,7 @@ export type ServicesContextValues = {
 	setIsOpenViewService: (open: boolean) => void
 	closeViewService: () => void
 	openViewService: (service: TableData) => void
+
+	isOpenCreateService: boolean
+	setIsOpenCreateService: (open: boolean) => void
 }

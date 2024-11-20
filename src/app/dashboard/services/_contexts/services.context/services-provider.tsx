@@ -16,6 +16,8 @@ export function ServicesProvider(props: PropsWithChildren) {
 		useBoolean(false)
 	const { value: isOpenViewService, setValue: setIsOpenViewService } =
 		useBoolean(false)
+	const { value: isOpenCreateService, setValue: setIsOpenCreateService } =
+		useBoolean(false)
 
 	const openUpdateService = useCallback(
 		(service: TableData) => {
@@ -55,6 +57,9 @@ export function ServicesProvider(props: PropsWithChildren) {
 				setIsOpenViewService,
 				openViewService,
 				closeViewService,
+
+				isOpenCreateService,
+				setIsOpenCreateService,
 			}}
 		>
 			{selectedService && <UpdateService serviceId={selectedService.id} />}

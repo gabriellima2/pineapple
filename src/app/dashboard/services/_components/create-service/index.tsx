@@ -1,10 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { Plus } from 'lucide-react'
-import { useForm } from 'react-hook-form'
 import { useTranslations } from 'next-intl'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { Plus } from 'lucide-react'
 
 import {
 	Sheet,
@@ -27,68 +24,31 @@ import { RequiredIndicator } from '@/components/required-indicator'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
-import {
-	useGetCreateServiceIntlSchema,
-	type CreateServiceFields,
-} from '../_hooks/use-get-create-service-intl-schema'
-import { useToast } from '@/hooks/use-toast'
+import { useCreateServiceForm } from './hooks/use-create-service-form'
+import { useServicesContext } from '../../_contexts/services.context'
 
-import { createService } from '../_actions/service-action'
 import { currencyMask } from '@/helpers/masks'
 
 export function CreateService() {
 	const t = useTranslations()
-	const { toast } = useToast()
-	const [open, setOpen] = useState(false)
-	const { intlSchema } = useGetCreateServiceIntlSchema()
-	const form = useForm<CreateServiceFields>({
-		resolver: zodResolver(intlSchema),
-		defaultValues: {
-			name: '',
-			description: '',
-			base_price: '',
-		},
-	})
-	const isSubmitting = form.formState.isSubmitting
-
-	async function onSubmit(data: CreateServiceFields) {
-		if (isSubmitting) return
-		try {
-			await createService(data)
-			setOpen(false)
-			toast({
-				title: t('dashboard.services.create.notification.success.title'),
-				description: t(
-					'dashboard.services.create.notification.success.description'
-				),
-			})
-			// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		} catch (_) {
-			toast({
-				title: t('dashboard.services.create.notification.error.title'),
-				description: t(
-					'dashboard.services.create.notification.error.description'
-				),
-				variant: 'destructive',
-			})
-		}
-	}
+	const { form, isCreating, handleCreate } = useCreateServiceForm()
+	const { isOpenCreateService, setIsOpenCreateService } = useServicesContext()
 
 	function handleOpenChange(isOpen: boolean) {
-		if (isSubmitting) return
+		if (isCreating) return
 		form.reset()
-		setOpen(isOpen)
+		setIsOpenCreateService(isOpen)
 	}
 
 	return (
-		<Sheet open={open} onOpenChange={handleOpenChange}>
+		<Sheet open={isOpenCreateService} onOpenChange={handleOpenChange}>
 			<SheetTrigger asChild>
 				<Button className="flex-1 sm:flex-none">
 					{t('actions.create')} <Plus />
 				</Button>
 			</SheetTrigger>
 			<SheetContent
-				disabled={isSubmitting}
+				disabled={isCreating}
 				aria-describedby={undefined}
 				className="flex flex-col gap-0"
 			>
@@ -96,10 +56,7 @@ export function CreateService() {
 					<SheetTitle>{t('dashboard.services.create.title')}</SheetTitle>
 				</SheetHeader>
 				<Form {...form}>
-					<form
-						onSubmit={form.handleSubmit(onSubmit)}
-						className="flex flex-1 flex-col"
-					>
+					<form onSubmit={handleCreate} className="flex flex-1 flex-col">
 						<div className="flex-1 space-y-4 p-4">
 							<FormField
 								control={form.control}
@@ -155,12 +112,12 @@ export function CreateService() {
 									type="button"
 									variant="outline"
 									className="w-full"
-									disabled={isSubmitting}
+									disabled={isCreating}
 								>
 									{t('buttons.cancel')}
 								</Button>
 							</SheetClose>
-							<Button type="submit" className="w-full" loading={isSubmitting}>
+							<Button type="submit" className="w-full" loading={isCreating}>
 								{t('buttons.save')}
 							</Button>
 						</SheetFooter>
