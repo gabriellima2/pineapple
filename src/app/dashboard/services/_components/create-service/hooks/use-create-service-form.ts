@@ -17,7 +17,7 @@ import {
 export function useCreateServiceForm() {
 	const t = useTranslations()
 	const { toast } = useToast()
-	const { setIsOpenCreateService } = useServicesContext()
+	const { closeCreateService } = useServicesContext()
 	const { intlSchema } = useGetCreateServiceIntlSchema()
 	const form = useForm<CreateServiceFields>({
 		resolver: zodResolver(intlSchema),
@@ -31,8 +31,8 @@ export function useCreateServiceForm() {
 	const { mutateAsync, isPending } = useMutation({
 		mutationFn: createService,
 		mutationKey: [MUTATION_KEYS.CREATE_SERVICE],
-		onSuccess: async () => {
-			setIsOpenCreateService(false)
+		onSuccess: () => {
+			closeCreateService()
 			toast({
 				title: t('dashboard.services.create.notification.success.title'),
 				description: t(

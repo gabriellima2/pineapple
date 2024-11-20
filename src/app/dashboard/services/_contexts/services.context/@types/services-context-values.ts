@@ -13,4 +13,5 @@ export type ServicesContextValues = {
 
 	isOpenCreateService: boolean
 	setIsOpenCreateService: (open: boolean) => void
+	closeCreateService: () => void
 }

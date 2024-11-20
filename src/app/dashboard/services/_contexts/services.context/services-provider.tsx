@@ -12,12 +12,21 @@ import type { TableData } from '../../_@types/table-data'
 export function ServicesProvider(props: PropsWithChildren) {
 	const { children } = props
 	const [selectedService, setSelectedService] = useState<TableData | null>(null)
-	const { value: isOpenUpdateService, setValue: setIsOpenUpdateService } =
-		useBoolean(false)
-	const { value: isOpenViewService, setValue: setIsOpenViewService } =
-		useBoolean(false)
-	const { value: isOpenCreateService, setValue: setIsOpenCreateService } =
-		useBoolean(false)
+	const {
+		value: isOpenUpdateService,
+		setValue: setIsOpenUpdateService,
+		setFalse: closeUpdateService,
+	} = useBoolean(false)
+	const {
+		value: isOpenViewService,
+		setValue: setIsOpenViewService,
+		setFalse: closeViewService,
+	} = useBoolean(false)
+	const {
+		value: isOpenCreateService,
+		setValue: setIsOpenCreateService,
+		setFalse: closeCreateService,
+	} = useBoolean(false)
 
 	const openUpdateService = useCallback(
 		(service: TableData) => {
@@ -27,11 +36,6 @@ export function ServicesProvider(props: PropsWithChildren) {
 		[setIsOpenUpdateService]
 	)
 
-	const closeUpdateService = useCallback(() => {
-		setSelectedService(null)
-		setIsOpenUpdateService(false)
-	}, [setIsOpenUpdateService])
-
 	const openViewService = useCallback(
 		(service: TableData) => {
 			setSelectedService(service)
@@ -39,11 +43,6 @@ export function ServicesProvider(props: PropsWithChildren) {
 		},
 		[setIsOpenViewService]
 	)
-
-	const closeViewService = useCallback(() => {
-		setSelectedService(null)
-		setIsOpenViewService(false)
-	}, [setIsOpenViewService])
 
 	return (
 		<ServicesContext.Provider
@@ -60,6 +59,7 @@ export function ServicesProvider(props: PropsWithChildren) {
 
 				isOpenCreateService,
 				setIsOpenCreateService,
+				closeCreateService,
 			}}
 		>
 			{selectedService && <UpdateService serviceId={selectedService.id} />}

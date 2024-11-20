@@ -8,4 +8,5 @@ export const QUERY_KEYS = {
 
 export const MUTATION_KEYS = {
 	CREATE_SERVICE: 'create-service',
+	UPDATE_SERVICE: 'update-service',
 }

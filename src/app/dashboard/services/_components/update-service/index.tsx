@@ -1,9 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useForm } from 'react-hook-form'
 import { useTranslations } from 'next-intl'
-import { zodResolver } from '@hookform/resolvers/zod'
 
 import {
 	Sheet,
@@ -26,17 +24,11 @@ import { Skeleton } from './components/skeleton'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
+import { useUpdateServiceForm } from './hooks/use-update-service-form'
 import { useGetServiceById } from '../../_hooks/use-get-service-by-id'
 import { useServicesContext } from '../../_contexts/services.context'
-import { useToast } from '@/hooks/use-toast'
 
-import { updateService } from '../../_actions/service-action'
 import { currencyMask } from '@/helpers/masks'
-
-import {
-	useGetUpdateServiceIntlSchema,
-	type UpdateServiceFields,
-} from '../../_hooks/use-get-update-service-intl-schema'
 
 type UpdateServiceProps = {
 	serviceId: string
@@ -45,46 +37,12 @@ type UpdateServiceProps = {
 export function UpdateService(props: UpdateServiceProps) {
 	const { serviceId } = props
 	const t = useTranslations()
-	const { toast } = useToast()
-	const { intlSchema } = useGetUpdateServiceIntlSchema()
 	const { service, isLoadingService } = useGetServiceById(serviceId)
-	const { isOpenUpdateService, setIsOpenUpdateService, closeUpdateService } =
-		useServicesContext()
-	const form = useForm<UpdateServiceFields>({
-		resolver: zodResolver(intlSchema),
-		defaultValues: {
-			name: '',
-			description: '',
-			base_price: '',
-		},
-	})
-	const isSubmitting = form.formState.isSubmitting
-
-	async function onSubmit(data: UpdateServiceFields) {
-		if (isSubmitting) return
-		try {
-			await updateService(serviceId, data)
-			closeUpdateService()
-			toast({
-				title: t('dashboard.services.update.notification.success.title'),
-				description: t(
-					'dashboard.services.update.notification.success.description'
-				),
-			})
-			// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		} catch (_) {
-			toast({
-				title: t('dashboard.services.update.notification.error.title'),
-				description: t(
-					'dashboard.services.update.notification.error.description'
-				),
-				variant: 'destructive',
-			})
-		}
-	}
+	const { isOpenUpdateService, setIsOpenUpdateService } = useServicesContext()
+	const { form, isUpdating, handleUpdate } = useUpdateServiceForm(serviceId)
 
 	function handleOpenChange(isOpen: boolean) {
-		if (isSubmitting) return
+		if (isUpdating) return
 		form.reset()
 		setIsOpenUpdateService(isOpen)
 	}
@@ -92,16 +50,16 @@ export function UpdateService(props: UpdateServiceProps) {
 	useEffect(() => {
 		if (!service) return
 		form.reset({
-			name: service.name,
-			description: service.description || '',
-			base_price: currencyMask(service.base_price),
+			name: service?.name || '',
+			description: service?.description || '',
+			base_price: service ? currencyMask(service?.base_price) : '',
 		})
 	}, [service, form])
 
 	return (
 		<Sheet open={isOpenUpdateService} onOpenChange={handleOpenChange}>
 			<SheetContent
-				disabled={isSubmitting}
+				disabled={isUpdating}
 				aria-describedby={undefined}
 				className="flex flex-col gap-0"
 			>
@@ -109,10 +67,7 @@ export function UpdateService(props: UpdateServiceProps) {
 					<SheetTitle>{t('dashboard.services.update.title')}</SheetTitle>
 				</SheetHeader>
 				<Form {...form}>
-					<form
-						onSubmit={form.handleSubmit(onSubmit)}
-						className="flex flex-1 flex-col"
-					>
+					<form onSubmit={handleUpdate} className="flex flex-1 flex-col">
 						<div className="flex-1 space-y-4 p-4">
 							{isLoadingService ? (
 								<Skeleton />
@@ -174,12 +129,12 @@ export function UpdateService(props: UpdateServiceProps) {
 									type="button"
 									variant="outline"
 									className="w-full"
-									disabled={isSubmitting}
+									disabled={isUpdating}
 								>
 									{t('buttons.cancel')}
 								</Button>
 							</SheetClose>
-							<Button type="submit" className="w-full" loading={isSubmitting}>
+							<Button type="submit" className="w-full" loading={isUpdating}>
 								{t('buttons.save')}
 							</Button>
 						</SheetFooter>
