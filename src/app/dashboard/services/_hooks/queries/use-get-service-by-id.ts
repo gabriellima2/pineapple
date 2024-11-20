@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 
-import { getServiceById } from '../_actions/service-action'
+import { getServiceById } from '../../_actions/service-action'
 import { QUERY_KEYS } from '@/constants/keys'
 
 export function useGetServiceById(serviceId: string) {

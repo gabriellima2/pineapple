@@ -24,8 +24,8 @@ import { Skeleton } from './components/skeleton'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
+import { useGetServiceById } from '../../_hooks/queries/use-get-service-by-id'
 import { useUpdateServiceForm } from './hooks/use-update-service-form'
-import { useGetServiceById } from '../../_hooks/use-get-service-by-id'
 import { useServicesContext } from '../../_contexts/services.context'
 
 import { currencyMask } from '@/helpers/masks'

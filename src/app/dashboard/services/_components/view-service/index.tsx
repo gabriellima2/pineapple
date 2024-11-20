@@ -11,7 +11,7 @@ import {
 import { Skeleton } from './components/skeleton'
 import { Details } from '@/components/details'
 
-import { useGetServiceById } from '../../_hooks/use-get-service-by-id'
+import { useGetServiceById } from '../../_hooks/queries/use-get-service-by-id'
 import { useServicesContext } from '../../_contexts/services.context'
 
 import { currencyMask } from '@/helpers/masks'
