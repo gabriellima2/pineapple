@@ -262,13 +262,7 @@ function ColumnFilters<TData>(props: ColumnFiltersProps<TData>) {
 }
 
 type ActionsProps = {
-	actions: {
-		label: string
-		onClick?: () => unknown
-		href?: string
-		separator?: boolean
-		className?: string
-	}[]
+	actions: RowAction[]
 }
 
 function Actions(props: ActionsProps) {
@@ -288,14 +282,16 @@ function Actions(props: ActionsProps) {
 					<Fragment key={i}>
 						{action.href ? (
 							<DropdownMenuItem asChild className={action.className}>
-								<Link href={action.href}>{action.label}</Link>
+								<Link href={action.href}>
+									{action.icon} {action.label}
+								</Link>
 							</DropdownMenuItem>
 						) : (
 							<DropdownMenuItem
 								onClick={action.onClick}
 								className={action.className}
 							>
-								{action.label}
+								{action.icon} {action.label}
 							</DropdownMenuItem>
 						)}
 						{action.separator && <DropdownMenuSeparator />}
