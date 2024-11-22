@@ -63,6 +63,14 @@
 					"description": "Description",
 					"created_at": "Created at"
 				}
+			},
+			"delete": {
+				"title": "Are you absolutely sure you want to delete the service?",
+				"description": "This action cannot be undone. This will permanently delete service and remove data from our servers.",
+				"buttons": {
+					"cancel": "Cancel",
+					"confirm": "Yes, I'm sure!"
+				}
 			}
 		}
 	},
@@ -72,6 +80,7 @@
 		"create": "Add",
 		"update": "Update",
 		"view": "View",
+		"delete": "Delete",
 		"copy-id": "Copy ID",
 		"sr-only": "Abrir menu"
 	},

@@ -1,16 +1,14 @@
+import { Suspense } from 'react'
 import { UserButton } from '@clerk/nextjs'
 
 import { ServicesBreadcumbs } from './_components/services-breadcumbs'
 import { ServicesProvider } from './_contexts/services.context'
-import { ServicesTable } from './_components/services-table'
+import { ListingService } from './_components/listing-service'
 import { LocaleSelect } from '@/components/locale-select'
 import { SidebarTrigger } from '@/components/ui/sidebar'
 import { Separator } from '@/components/ui/separator'
 
-import { getServices } from './_actions/service-action'
-
-export default async function Page() {
-	const services = await getServices()
+export default function Page() {
 	return (
 		<ServicesProvider>
 			<header className="flex h-16 shrink-0 items-center justify-between gap-2 px-4 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
@@ -26,7 +24,9 @@ export default async function Page() {
 				</div>
 			</header>
 			<main className="px-4">
-				<ServicesTable services={services || []} />
+				<Suspense fallback={<p>Loading...</p>}>
+					<ListingService />
+				</Suspense>
 			</main>
 		</ServicesProvider>
 	)

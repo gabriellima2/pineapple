@@ -16,14 +16,14 @@ import {
 } from '@tanstack/react-table'
 
 import { Table, TableBody } from '@/components/ui/table'
+import { CreateService } from '../../../create-service'
 import { DataTable } from '@/components/data-table'
-import { CreateService } from '../create-service'
 import { Currency } from '@/components/currency'
 import { Actions } from './components/actions'
 
+import type { TableData } from '../../../../_@types/table-data'
 import type { Translations } from '@/@types/translations'
 import type { GetServicesDTO } from '@/dtos/service.dto'
-import type { TableData } from '../../_@types/table-data'
 
 type ServicesTableProps = {
 	services: GetServicesDTO

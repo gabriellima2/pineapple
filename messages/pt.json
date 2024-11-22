@@ -63,6 +63,14 @@
 					"description": "Descrição",
 					"created_at": "Criado em"
 				}
+			},
+			"delete": {
+				"title": "Você tem certeza absoluta de que deseja excluir o serviço?",
+				"description": "Esta ação não poderá ser desfeita. Isso excluirá permanentemente o serviço e removerá os dados de nossos servidores.",
+				"buttons": {
+					"cancel": "Cancelar",
+					"confirm": "Sim, tenho certeza!"
+				}
 			}
 		}
 	},
@@ -72,6 +80,7 @@
 		"create": "Adicionar",
 		"update": "Editar",
 		"view": "Visualizar",
+		"delete": "Deletar",
 		"copy-id": "Copiar ID",
 		"sr-only": "Open menu"
 	},

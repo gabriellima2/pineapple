@@ -267,6 +267,7 @@ type ActionsProps = {
 		onClick?: () => unknown
 		href?: string
 		separator?: boolean
+		className?: string
 	}[]
 }
 
@@ -286,11 +287,14 @@ function Actions(props: ActionsProps) {
 				{actions.map((action, i) => (
 					<Fragment key={i}>
 						{action.href ? (
-							<DropdownMenuItem asChild>
+							<DropdownMenuItem asChild className={action.className}>
 								<Link href={action.href}>{action.label}</Link>
 							</DropdownMenuItem>
 						) : (
-							<DropdownMenuItem onClick={action.onClick}>
+							<DropdownMenuItem
+								onClick={action.onClick}
+								className={action.className}
+							>
 								{action.label}
 							</DropdownMenuItem>
 						)}

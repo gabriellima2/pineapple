@@ -8,6 +8,7 @@ import { ServicesContext } from './services.context'
 
 import { useBoolean } from '@/hooks/use-boolean'
 import type { TableData } from '../../_@types/table-data'
+import { DeleteService } from '../../_components/delete-service'
 
 export function ServicesProvider(props: PropsWithChildren) {
 	const { children } = props
@@ -27,6 +28,11 @@ export function ServicesProvider(props: PropsWithChildren) {
 		setValue: setIsOpenCreateService,
 		setFalse: closeCreateService,
 	} = useBoolean(false)
+	const {
+		value: isOpenDeleteService,
+		setValue: setIsOpenDeleteService,
+		setFalse: closeDeleteService,
+	} = useBoolean(false)
 
 	const openUpdateService = useCallback(
 		(service: TableData) => {
@@ -44,6 +50,14 @@ export function ServicesProvider(props: PropsWithChildren) {
 		[setIsOpenViewService]
 	)
 
+	const openDeleteService = useCallback(
+		(service: TableData) => {
+			setSelectedService(service)
+			setIsOpenDeleteService(true)
+		},
+		[setIsOpenDeleteService]
+	)
+
 	return (
 		<ServicesContext.Provider
 			value={{
@@ -57,6 +71,11 @@ export function ServicesProvider(props: PropsWithChildren) {
 				openViewService,
 				closeViewService,
 
+				isOpenDeleteService,
+				setIsOpenDeleteService,
+				openDeleteService,
+				closeDeleteService,
+
 				isOpenCreateService,
 				setIsOpenCreateService,
 				closeCreateService,
@@ -64,6 +83,7 @@ export function ServicesProvider(props: PropsWithChildren) {
 		>
 			{selectedService && <UpdateService serviceId={selectedService.id} />}
 			{selectedService && <ViewService serviceId={selectedService.id} />}
+			{selectedService && <DeleteService serviceId={selectedService.id} />}
 			{children}
 		</ServicesContext.Provider>
 	)

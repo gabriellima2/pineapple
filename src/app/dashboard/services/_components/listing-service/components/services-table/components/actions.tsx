@@ -3,8 +3,8 @@ import { useTranslations } from 'next-intl'
 
 import { DataTable } from '@/components/data-table'
 
-import { useServicesContext } from '../../../_contexts/services.context'
-import type { TableData } from '../../../_@types/table-data'
+import { useServicesContext } from '../../../../../_contexts/services.context'
+import type { TableData } from '../../../../../_@types/table-data'
 
 type ActionsProps = {
 	service: TableData
@@ -13,7 +13,8 @@ type ActionsProps = {
 export function Actions(props: ActionsProps) {
 	const { service } = props
 	const t = useTranslations()
-	const { openUpdateService, openViewService } = useServicesContext()
+	const { openUpdateService, openViewService, openDeleteService } =
+		useServicesContext()
 
 	const actions = useMemo(
 		() => [
@@ -24,8 +25,13 @@ export function Actions(props: ActionsProps) {
 			},
 			{ label: t('actions.view'), onClick: () => openViewService(service) },
 			{ label: t('actions.update'), onClick: () => openUpdateService(service) },
+			{
+				label: t('actions.delete'),
+				onClick: () => openDeleteService(service),
+				className: 'text-destructive',
+			},
 		],
-		[t, service, openUpdateService, openViewService]
+		[t, service, openUpdateService, openViewService, openDeleteService]
 	)
 
 	return <DataTable.Actions actions={actions} />
