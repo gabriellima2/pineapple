@@ -20,7 +20,7 @@ import {
 	FormMessage,
 } from '@/components/ui/form'
 import { RequiredIndicator } from '@/components/required-indicator'
-import { Skeleton } from './components/skeleton'
+import { UpdateSkeleton } from '@/components/ui/skeleton'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
@@ -70,7 +70,7 @@ export function UpdateService(props: UpdateServiceProps) {
 					<form onSubmit={handleUpdate} className="flex flex-1 flex-col">
 						<div className="flex-1 space-y-4 p-4">
 							{isLoadingService ? (
-								<Skeleton />
+								<UpdateSkeleton />
 							) : (
 								<>
 									<FormField

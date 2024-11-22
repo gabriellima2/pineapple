@@ -4,6 +4,7 @@ import { UserButton } from '@clerk/nextjs'
 import { ServicesBreadcumbs } from './_components/services-breadcumbs'
 import { ServicesProvider } from './_contexts/services.context'
 import { ListingService } from './_components/listing-service'
+import { ListingSkeleton } from '@/components/ui/skeleton'
 import { LocaleSelect } from '@/components/locale-select'
 import { SidebarTrigger } from '@/components/ui/sidebar'
 import { Separator } from '@/components/ui/separator'
@@ -24,7 +25,7 @@ export default function Page() {
 				</div>
 			</header>
 			<main className="px-4">
-				<Suspense fallback={<p>Loading...</p>}>
+				<Suspense fallback={<ListingSkeleton />}>
 					<ListingService />
 				</Suspense>
 			</main>

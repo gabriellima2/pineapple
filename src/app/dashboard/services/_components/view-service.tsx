@@ -8,11 +8,11 @@ import {
 	SheetHeader,
 	SheetTitle,
 } from '@/components/ui/sheet'
-import { Skeleton } from './components/skeleton'
+import { ViewSkeleton } from '@/components/ui/skeleton'
 import { Details } from '@/components/details'
 
-import { useGetServiceById } from '../../_hooks/queries/use-get-service-by-id'
-import { useServicesContext } from '../../_contexts/services.context'
+import { useGetServiceById } from '../_hooks/queries/use-get-service-by-id'
+import { useServicesContext } from '../_contexts/services.context'
 
 import { currencyMask } from '@/helpers/masks'
 import { showDate } from '@/utils/date'
@@ -36,7 +36,7 @@ export function ViewService(props: ViewServiceProps) {
 					<SheetTitle>{t('dashboard.services.view.title')}</SheetTitle>
 				</SheetHeader>
 				<div className="flex-1 p-4">
-					{isLoadingService && !service && <Skeleton />}
+					{isLoadingService && !service && <ViewSkeleton />}
 					{!isLoadingService && service && (
 						<Details.List>
 							<Details.ListItem
