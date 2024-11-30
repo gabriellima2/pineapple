@@ -14,5 +14,5 @@ export async function getLocaleCookie() {
 	const cookiesStore = await cookies()
 	const locale = cookiesStore.get(COOKIES_KEYS.LOCALE)?.value?.toLowerCase()
 	const findedLocale = locale && LOCALES[locale as keyof typeof LOCALES]
-	return findedLocale || LOCALES.pt
+	return findedLocale || LOCALES.en
 }

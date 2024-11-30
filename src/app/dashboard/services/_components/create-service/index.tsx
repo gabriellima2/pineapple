@@ -21,8 +21,8 @@ import {
 	FormMessage,
 } from '@/components/ui/form'
 import { RequiredIndicator } from '@/components/required-indicator'
+import { Inputs } from '@/components/form/inputs'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 
 import { useCreateServiceForm } from './hooks/use-create-service-form'
 import { useServicesContext } from '../../_contexts/services.context'
@@ -68,7 +68,7 @@ export function CreateService() {
 											<RequiredIndicator />
 										</FormLabel>
 										<FormControl>
-											<Input {...field} />
+											<Inputs.Default {...field} />
 										</FormControl>
 										<FormMessage />
 									</FormItem>
@@ -84,7 +84,7 @@ export function CreateService() {
 											<RequiredIndicator />
 										</FormLabel>
 										<FormControl>
-											<Input mask={currencyMask} {...field} />
+											<Inputs.Default mask={currencyMask} {...field} />
 										</FormControl>
 										<FormMessage />
 									</FormItem>
@@ -99,7 +99,7 @@ export function CreateService() {
 											{t('dashboard.services.create.fields.description')}
 										</FormLabel>
 										<FormControl>
-											<Input {...field} />
+											<Inputs.Default {...field} />
 										</FormControl>
 										<FormMessage />
 									</FormItem>

@@ -19,8 +19,8 @@ export function useCreateCustomerForm() {
 		resolver: zodResolver(intlSchema),
 		defaultValues: {
 			name: '',
-			description: '',
-			base_price: '',
+			email: '',
+			cell_phone: '',
 		},
 	})
 

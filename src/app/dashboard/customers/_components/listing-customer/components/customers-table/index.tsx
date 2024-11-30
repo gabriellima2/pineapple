@@ -15,8 +15,8 @@ import {
 	useReactTable,
 } from '@tanstack/react-table'
 
+import { CreateCustomer } from '../../../create-customer'
 import { Table, TableBody } from '@/components/ui/table'
-import { CreateService } from '../../../create-customer'
 import { DataTable } from '@/components/data-table'
 import { Actions } from './components/actions'
 
@@ -73,10 +73,9 @@ export function CustomersTable(props: CustomersTableProps) {
 								name: t('dashboard.customers.list.columns.name'),
 								email: t('dashboard.customers.list.columns.email'),
 								cell_phone: t('dashboard.customers.list.columns.cell_phone'),
-								phone: t('dashboard.customers.list.columns.phone'),
 							}}
 						/>
-						<CreateService />
+						<CreateCustomer />
 					</div>
 				</div>
 				<Table>
@@ -121,11 +120,6 @@ const getColumns: (t: Translations) => ColumnDef<TableData>[] = (
 				<div>{t('dashboard.customers.list.columns.cell_phone')}</div>
 			),
 			cell: ({ row }) => row.getValue('cell_phone') || EMPTY_SYMBOL,
-		},
-		{
-			accessorKey: 'phone',
-			header: () => <div>{t('dashboard.customers.list.columns.phone')}</div>,
-			cell: ({ row }) => row.getValue('phone') || EMPTY_SYMBOL,
 		},
 		{
 			id: 'actions',

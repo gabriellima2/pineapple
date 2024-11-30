@@ -32,7 +32,7 @@ export default async function RootLayout(props: Readonly<RootLayoutProps>) {
 	const { children } = props
 	const locale = await getLocale()
 	const messages = await getMessages()
-	const clerkLocalization = locale === LOCALES.en ? enUS : ptBR
+	const clerkLocalization = locale === LOCALES.pt ? ptBR : enUS
 	return (
 		<ClerkProvider localization={clerkLocalization}>
 			<html lang={locale}>

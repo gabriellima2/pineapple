@@ -7,7 +7,7 @@ type InputProps = React.ComponentProps<'input'> & {
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-	({ className, type, onChange, mask, ...props }, ref) => {
+	({ className, type = 'text', onChange, mask, ...props }, ref) => {
 		return (
 			<input
 				type={type}

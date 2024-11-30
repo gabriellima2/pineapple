@@ -85,13 +85,16 @@
 				"columns": {
 					"name": "Name",
 					"email": "Email",
-					"cell_phone": "Cell Phone",
-					"phone": "Phone"
+					"cell_phone": "Cell Phone"
 				}
 			},
 			"create": {
 				"title": "Add a new customer",
-				"fields": {},
+				"fields": {
+					"name": "Name",
+					"email": "Email",
+					"cell_phone": "Cell Phone"
+				},
 				"notification": {
 					"success": {
 						"title": "Everything ok!",
@@ -162,6 +165,8 @@
 		"cancel": "Cancel"
 	},
 	"form-validations": {
-		"required_error": "Required field"
+		"required_error": "Required field",
+		"invalid_email": "Please enter a valid email",
+		"invalid_cell_phone": "Please enter a valid cell phone"
 	}
 }

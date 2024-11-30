@@ -4,3 +4,8 @@ export const LOCALES = {
 }
 
 export const EMPTY_SYMBOL = '--'
+
+export const CELL_PHONE_LENGTH = {
+	[LOCALES.pt]: 14,
+	[LOCALES.en]: 13,
+} as const

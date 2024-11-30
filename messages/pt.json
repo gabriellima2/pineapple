@@ -85,13 +85,16 @@
 				"columns": {
 					"name": "Nome",
 					"email": "E-mail",
-					"cell_phone": "Celular",
-					"phone": "Telefone"
+					"cell_phone": "Celular"
 				}
 			},
 			"create": {
 				"title": "Adicionar um novo cliente",
-				"fields": {},
+				"fields": {
+					"name": "Nome",
+					"email": "E-mail",
+					"cell_phone": "Celular"
+				},
 				"notification": {
 					"success": {
 						"title": "Tudo certo!",
@@ -162,6 +165,8 @@
 		"cancel": "Cancelar"
 	},
 	"form-validations": {
-		"required_error": "Campo obrigatório"
+		"required_error": "Campo obrigatório",
+		"invalid_email": "Por favor, digite um e-mail válido",
+		"invalid_cell_phone": "Por favor, digite um número de celular válido"
 	}
 }

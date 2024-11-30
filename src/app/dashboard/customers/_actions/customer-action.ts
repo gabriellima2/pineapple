@@ -11,10 +11,15 @@ import type { CreateCustomerFields } from '../_hooks/schemas/use-get-create-cust
 import type { UpdateCustomerFields } from '../_hooks/schemas/use-get-update-customer-intl-schema'
 import type { GetCustomerDTO, GetCustomersDTO } from '@/dtos/customer.dto'
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function createCustomer(payload: CreateCustomerFields) {
 	const supabaseClient = await createClerkSupabaseClientSsr()
-	const { error } = await supabaseClient.from('customers').insert([{}])
+	const { error } = await supabaseClient.from('customers').insert([
+		{
+			name: payload.name,
+			email: payload.email || null,
+			cell_phone: payload.cell_phone || null,
+		},
+	])
 
 	if (error) throw new InternalServerErrorException()
 	revalidatePath(ROUTES.DASHBOARD.CUSTOMERS())
@@ -39,7 +44,7 @@ export async function getCustomers(): Promise<GetCustomersDTO | null> {
 	const supabaseClient = await createClerkSupabaseClientSsr()
 	const { data, error } = await supabaseClient
 		.from('customers')
-		.select('id')
+		.select('id, name, email, cell_phone')
 		.returns<GetCustomersDTO>()
 
 	if (error) throw new InternalServerErrorException()

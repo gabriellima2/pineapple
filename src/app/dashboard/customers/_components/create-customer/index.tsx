@@ -12,13 +12,22 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from '@/components/ui/sheet'
+import {
+	Form,
+	FormControl,
+	FormField,
+	FormItem,
+	FormLabel,
+	FormMessage,
+} from '@/components/ui/form'
+import { RequiredIndicator } from '@/components/required-indicator'
+import { Inputs } from '@/components/form/inputs'
 import { Button } from '@/components/ui/button'
-import { Form } from '@/components/ui/form'
 
 import { useCreateCustomerForm } from './hooks/use-create-customer-form'
 import { useCustomersContext } from '../../_contexts/customers.context'
 
-export function CreateService() {
+export function CreateCustomer() {
 	const t = useTranslations()
 	const { form, isCreating, handleCreate } = useCreateCustomerForm()
 	const { isOpenCreateCustomer, setIsOpenCreateCustomer } =
@@ -47,7 +56,54 @@ export function CreateService() {
 				</SheetHeader>
 				<Form {...form}>
 					<form onSubmit={handleCreate} className="flex flex-1 flex-col">
-						<div className="flex-1 space-y-4 p-4"></div>
+						<div className="flex-1 space-y-4 p-4">
+							<FormField
+								control={form.control}
+								name="name"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>
+											{t('dashboard.services.create.fields.name')}{' '}
+											<RequiredIndicator />
+										</FormLabel>
+										<FormControl>
+											<Inputs.Default {...field} />
+										</FormControl>
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name="email"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>
+											{t('dashboard.customers.create.fields.email')}
+										</FormLabel>
+										<FormControl>
+											<Inputs.Default type="email" {...field} />
+										</FormControl>
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name="cell_phone"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>
+											{t('dashboard.customers.create.fields.cell_phone')}
+										</FormLabel>
+										<FormControl>
+											<Inputs.CellPhone {...field} />
+										</FormControl>
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+						</div>
 						<SheetFooter>
 							<SheetClose asChild>
 								<Button

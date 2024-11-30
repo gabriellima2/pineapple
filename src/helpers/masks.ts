@@ -70,3 +70,12 @@ export function currencyMask(
 
 	return result
 }
+
+export function usCellPhoneMask(cellPhone: string): string {
+	if (!cellPhone) return ''
+	cellPhone = cellPhone.replace(/\D/g, '')
+	cellPhone = cellPhone.slice(0, 10) // Nos EUA, o número de telefone tem 10 dígitos
+	cellPhone = cellPhone.replace(/^(\d{3})(\d)/, '($1) $2')
+	cellPhone = cellPhone.replace(/(\d{3})(\d{4})$/, '$1-$2')
+	return cellPhone
+}
