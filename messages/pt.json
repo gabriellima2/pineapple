@@ -2,7 +2,8 @@
 	"dashboard": {
 		"sidebar": {
 			"home": "Início",
-			"services": "Serviços"
+			"services": "Serviços",
+			"customers": "Clientes"
 		},
 
 		"services": {
@@ -81,7 +82,12 @@
 			},
 			"list": {
 				"search-by-name": "Buscar por nome...",
-				"columns": {}
+				"columns": {
+					"name": "Nome",
+					"email": "E-mail",
+					"cell_phone": "Celular",
+					"phone": "Telefone"
+				}
 			},
 			"create": {
 				"title": "Adicionar um novo cliente",

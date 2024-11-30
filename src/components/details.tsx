@@ -1,4 +1,6 @@
 import type { HTMLAttributes } from 'react'
+
+import { EMPTY_SYMBOL } from '@/constants/general'
 import { cn } from '@/lib/utils'
 
 type ListProps = HTMLAttributes<HTMLUListElement>
@@ -16,7 +18,7 @@ type ListItemProps = {
 }
 
 function ListItem(props: ListItemProps) {
-	const { label, value, placeholder = 'N/A', className } = props
+	const { label, value, placeholder = EMPTY_SYMBOL, className } = props
 	return (
 		<li className={cn('col-span-full flex flex-col gap-1', className)}>
 			<span className="font-medium">{label}:</span>

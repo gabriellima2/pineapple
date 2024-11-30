@@ -21,6 +21,8 @@ import { DataTable } from '@/components/data-table'
 import { Currency } from '@/components/currency'
 import { Actions } from './components/actions'
 
+import { EMPTY_SYMBOL } from '@/constants/general'
+
 import type { TableData } from '../../../../_@types/table-data'
 import type { Translations } from '@/@types/translations'
 import type { GetServicesDTO } from '@/dtos/service.dto'
@@ -120,7 +122,7 @@ const getColumns: (t: Translations) => ColumnDef<TableData>[] = (
 			header: () => (
 				<div>{t('dashboard.services.list.columns.description')}</div>
 			),
-			cell: ({ row }) => row.getValue('description') || 'N/A',
+			cell: ({ row }) => row.getValue('description') || EMPTY_SYMBOL,
 		},
 		{
 			id: 'actions',

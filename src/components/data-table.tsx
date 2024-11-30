@@ -190,16 +190,18 @@ function SortableHead<TData>(props: SortableHeadProps<TData>) {
 	)
 }
 
-type SearchProps = Omit<Parameters<typeof Input>[0], 'value' | 'onChange'>
+type SearchProps = Omit<Parameters<typeof Input>[0], 'value' | 'onChange'> & {
+	accessorKey?: string
+}
 
 function Search(props: SearchProps) {
-	const { className, ...rest } = props
+	const { className, accessorKey = 'name', ...rest } = props
 	const { table } = useDataTableContext()
 	return (
 		<Input
-			value={(table.getColumn('name')?.getFilterValue() as string) ?? ''}
+			value={(table.getColumn(accessorKey)?.getFilterValue() as string) ?? ''}
 			onChange={(event) =>
-				table.getColumn('name')?.setFilterValue(event.target.value)
+				table.getColumn(accessorKey)?.setFilterValue(event.target.value)
 			}
 			className={cn('sm:max-w-sm', className)}
 			{...rest}

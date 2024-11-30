@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { usePathname } from 'next/navigation'
-import { BriefcaseBusiness, LayoutDashboard } from 'lucide-react'
+import { BriefcaseBusiness, LayoutDashboard, User2 } from 'lucide-react'
 
 import {
 	SidebarGroup,
@@ -19,16 +19,22 @@ export function Navigation() {
 	return (
 		<SidebarGroup>
 			<SidebarMenu>
-				<SidebarMenuButton asChild active={routes.home === pathname}>
+				<SidebarMenuButton asChild active={pathname === routes.home}>
 					<Link href={routes.home}>
 						<LayoutDashboard />
 						<span>{t('dashboard.sidebar.home')}</span>
 					</Link>
 				</SidebarMenuButton>
-				<SidebarMenuButton asChild active={routes.services === pathname}>
+				<SidebarMenuButton asChild active={pathname === routes.services}>
 					<Link href={routes.services}>
 						<BriefcaseBusiness />
 						<span>{t('dashboard.sidebar.services')}</span>
+					</Link>
+				</SidebarMenuButton>
+				<SidebarMenuButton asChild active={pathname === routes.customers}>
+					<Link href={routes.customers}>
+						<User2 />
+						<span>{t('dashboard.sidebar.customers')}</span>
 					</Link>
 				</SidebarMenuButton>
 			</SidebarMenu>
@@ -39,4 +45,5 @@ export function Navigation() {
 const routes = {
 	home: ROUTES.DASHBOARD.HOME(),
 	services: ROUTES.DASHBOARD.SERVICES(),
+	customers: ROUTES.DASHBOARD.CUSTOMERS(),
 }

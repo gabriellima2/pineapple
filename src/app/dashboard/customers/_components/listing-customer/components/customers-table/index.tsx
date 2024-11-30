@@ -20,6 +20,8 @@ import { CreateService } from '../../../create-customer'
 import { DataTable } from '@/components/data-table'
 import { Actions } from './components/actions'
 
+import { EMPTY_SYMBOL } from '@/constants/general'
+
 import type { TableData } from '../../../../_@types/table-data'
 import type { GetCustomersDTO } from '@/dtos/customer.dto'
 import type { Translations } from '@/@types/translations'
@@ -66,7 +68,14 @@ export function CustomersTable(props: CustomersTableProps) {
 						placeholder={t('dashboard.customers.list.search-by-name')}
 					/>
 					<div className="flex w-full flex-row flex-wrap items-center gap-4 sm:flex-nowrap">
-						<DataTable.ColumnFilters<TableData> labels={{}} />
+						<DataTable.ColumnFilters<TableData>
+							labels={{
+								name: t('dashboard.customers.list.columns.name'),
+								email: t('dashboard.customers.list.columns.email'),
+								cell_phone: t('dashboard.customers.list.columns.cell_phone'),
+								phone: t('dashboard.customers.list.columns.phone'),
+							}}
+						/>
 						<CreateService />
 					</div>
 				</div>
@@ -86,10 +95,38 @@ export function CustomersTable(props: CustomersTableProps) {
 }
 
 const getColumns: (t: Translations) => ColumnDef<TableData>[] = (
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	t: Translations
 ) => {
 	return [
+		{
+			accessorKey: 'name',
+			header: ({ column }) => {
+				return (
+					<DataTable.SortableHead
+						label={t('dashboard.customers.list.columns.name')}
+						column={column}
+					/>
+				)
+			},
+			cell: ({ row }) => row.getValue('name'),
+		},
+		{
+			accessorKey: 'email',
+			header: () => <div>{t('dashboard.customers.list.columns.email')}</div>,
+			cell: ({ row }) => row.getValue('email') || EMPTY_SYMBOL,
+		},
+		{
+			accessorKey: 'cell_phone',
+			header: () => (
+				<div>{t('dashboard.customers.list.columns.cell_phone')}</div>
+			),
+			cell: ({ row }) => row.getValue('cell_phone') || EMPTY_SYMBOL,
+		},
+		{
+			accessorKey: 'phone',
+			header: () => <div>{t('dashboard.customers.list.columns.phone')}</div>,
+			cell: ({ row }) => row.getValue('phone') || EMPTY_SYMBOL,
+		},
 		{
 			id: 'actions',
 			enableHiding: false,
