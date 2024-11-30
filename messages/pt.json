@@ -72,6 +72,59 @@
 					"confirm": "Sim, tenho certeza!"
 				}
 			}
+		},
+
+		"customers": {
+			"title": "Clientes",
+			"breadcumbs": {
+				"1": "Clientes"
+			},
+			"list": {
+				"search-by-name": "Buscar por nome...",
+				"columns": {}
+			},
+			"create": {
+				"title": "Adicionar um novo cliente",
+				"fields": {},
+				"notification": {
+					"success": {
+						"title": "Tudo certo!",
+						"description": "O cliente foi adicionado com sucesso."
+					},
+					"error": {
+						"title": "Algo deu errado...",
+						"description": "Ocorreu um erro inesperado ao tentar adicionar o cliente. Por favor, tente novamente."
+					}
+				}
+			},
+			"update": {
+				"title": "Atualizar cliente",
+				"fields": {},
+				"notification": {
+					"success": {
+						"title": "Tudo certo!",
+						"description": "O cliente foi atualizado com sucesso."
+					},
+					"error": {
+						"title": "Algo deu errado...",
+						"description": "Ocorreu um erro inesperado ao tentar atualizar o cliente. Por favor, tente novamente."
+					}
+				}
+			},
+			"view": {
+				"title": "Visualizar cliente",
+				"fields": {
+					"id": "Identificador"
+				}
+			},
+			"delete": {
+				"title": "Você tem certeza absoluta de que deseja excluir o cliente?",
+				"description": "Esta ação não poderá ser desfeita. Isso excluirá permanentemente o cliente e removerá os dados de nossos servidores.",
+				"buttons": {
+					"cancel": "Cancelar",
+					"confirm": "Sim, tenho certeza!"
+				}
+			}
 		}
 	},
 

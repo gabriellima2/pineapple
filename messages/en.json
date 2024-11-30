@@ -72,6 +72,59 @@
 					"confirm": "Yes, I'm sure!"
 				}
 			}
+		},
+
+		"customers": {
+			"title": "Customers",
+			"breadcumbs": {
+				"1": "Customers"
+			},
+			"list": {
+				"search-by-name": "Search by name...",
+				"columns": {}
+			},
+			"create": {
+				"title": "Add a new customer",
+				"fields": {},
+				"notification": {
+					"success": {
+						"title": "Everything ok!",
+						"description": "The customer has been added successfully."
+					},
+					"error": {
+						"title": "Something went wrong...",
+						"description": "An unexpected error occurred while trying to add the customer. Please try again."
+					}
+				}
+			},
+			"update": {
+				"title": "Update customer",
+				"fields": {},
+				"notification": {
+					"success": {
+						"title": "Everything ok!",
+						"description": "The customer has been updated successfully."
+					},
+					"error": {
+						"title": "Something went wrong...",
+						"description": "An unexpected error occurred while trying to update the customer. Please try again."
+					}
+				}
+			},
+			"view": {
+				"title": "View customer",
+				"fields": {
+					"id": "Identifier"
+				}
+			},
+			"delete": {
+				"title": "Are you absolutely sure you want to delete the customer?",
+				"description": "This action cannot be undone. This will permanently delete customer and remove data from our servers.",
+				"buttons": {
+					"cancel": "Cancel",
+					"confirm": "Yes, I'm sure!"
+				}
+			}
 		}
 	},
 

@@ -2,13 +2,13 @@
 
 import { useCallback, useState, type PropsWithChildren } from 'react'
 
+import { DeleteService } from '../../_components/delete-service'
 import { UpdateService } from '../../_components/update-service'
 import { ViewService } from '../../_components/view-service'
 import { ServicesContext } from './services.context'
 
 import { useBoolean } from '@/hooks/use-boolean'
 import type { TableData } from '../../_@types/table-data'
-import { DeleteService } from '../../_components/delete-service'
 
 export function ServicesProvider(props: PropsWithChildren) {
 	const { children } = props
