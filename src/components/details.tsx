@@ -20,7 +20,12 @@ type ListItemProps = {
 function ListItem(props: ListItemProps) {
 	const { label, value, placeholder = EMPTY_SYMBOL, className } = props
 	return (
-		<li className={cn('col-span-full flex flex-col gap-1', className)}>
+		<li
+			className={cn(
+				'col-span-full flex flex-col gap-1 overflow-x-auto',
+				className
+			)}
+		>
 			<span className="font-medium">{label}:</span>
 			{value?.toString() || placeholder}
 		</li>

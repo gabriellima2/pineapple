@@ -137,7 +137,11 @@
 			"view": {
 				"title": "Visualizar cliente",
 				"fields": {
-					"id": "Identificador"
+					"id": "Identificador",
+					"name": "Nome",
+					"email": "E-mail",
+					"cell_phone": "Celular",
+					"created_at": "Criado em"
 				}
 			},
 			"delete": {

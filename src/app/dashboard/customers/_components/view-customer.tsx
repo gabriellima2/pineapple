@@ -13,6 +13,7 @@ import { Details } from '@/components/details'
 
 import { useGetCustomerById } from '../_hooks/queries/use-get-customer-by-id'
 import { useCustomersContext } from '../_contexts/customers.context'
+import { showDate } from '@/utils/date'
 
 type ViewCustomerProps = {
 	customerId: string
@@ -39,6 +40,26 @@ export function ViewCustomer(props: ViewCustomerProps) {
 							<Details.ListItem
 								label={t('dashboard.customers.view.fields.id')}
 								value={customer.id}
+							/>
+							<Details.ListItem
+								label={t('dashboard.customers.view.fields.name')}
+								value={customer.name}
+								className="sm:col-span-2"
+							/>
+							<Details.ListItem
+								label={t('dashboard.customers.view.fields.email')}
+								value={customer.email}
+								className="sm:col-span-2"
+							/>
+							<Details.ListItem
+								label={t('dashboard.customers.view.fields.cell_phone')}
+								value={customer.cell_phone}
+								className="sm:col-span-2"
+							/>
+							<Details.ListItem
+								label={t('dashboard.customers.view.fields.created_at')}
+								value={showDate(customer.created_at)}
+								className="sm:col-span-2"
 							/>
 						</Details.List>
 					)}

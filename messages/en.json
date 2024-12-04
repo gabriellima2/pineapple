@@ -137,7 +137,11 @@
 			"view": {
 				"title": "View customer",
 				"fields": {
-					"id": "Identifier"
+					"id": "Identifier",
+					"name": "Name",
+					"email": "Email",
+					"cell_phone": "Cell Phone",
+					"created_at": "Created at"
 				}
 			},
 			"delete": {
