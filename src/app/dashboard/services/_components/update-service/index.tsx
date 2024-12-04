@@ -43,7 +43,6 @@ export function UpdateService(props: UpdateServiceProps) {
 
 	function handleOpenChange(isOpen: boolean) {
 		if (isUpdating) return
-		form.reset()
 		setIsOpenUpdateService(isOpen)
 	}
 

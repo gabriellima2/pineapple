@@ -42,7 +42,6 @@ export function UpdateCustomer(props: UpdateCustomerProps) {
 
 	function handleOpenChange(isOpen: boolean) {
 		if (isUpdating) return
-		form.reset()
 		setIsOpenUpdateCustomer(isOpen)
 	}
 
