@@ -1,4 +1,10 @@
-import { createContext, Fragment, PropsWithChildren, useContext } from 'react'
+import {
+	createContext,
+	Fragment,
+	memo,
+	PropsWithChildren,
+	useContext,
+} from 'react'
 import { flexRender, type Column, type Table } from '@tanstack/react-table'
 import { ArrowUpDown, ChevronDown, MoreHorizontal } from 'lucide-react'
 import { useTranslations } from 'next-intl'
@@ -167,16 +173,17 @@ function Footer() {
 	)
 }
 
-type SortableHeadProps<TData> = Omit<
+type SortableHeadProps = Omit<
 	Parameters<typeof Button>[0],
 	'variant' | 'onClick' | 'children'
 > & {
-	column: Column<TData>
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	column: Column<any>
 	label: string
 	className?: string
 }
 
-function SortableHead<TData>(props: SortableHeadProps<TData>) {
+const SortableHead = memo((props: SortableHeadProps) => {
 	const { label, column, ...rest } = props
 	return (
 		<Button
@@ -188,7 +195,9 @@ function SortableHead<TData>(props: SortableHeadProps<TData>) {
 			<ArrowUpDown />
 		</Button>
 	)
-}
+})
+
+SortableHead.displayName = 'SortableHead'
 
 type SearchProps = Omit<Parameters<typeof Input>[0], 'value' | 'onChange'> & {
 	accessorKey?: string
@@ -304,7 +313,7 @@ function Actions(props: ActionsProps) {
 	)
 }
 
-function NextPage(props: PaginationButtonDefaultProps) {
+const NextPage = memo((props: PaginationButtonDefaultProps) => {
 	const t = useTranslations()
 	const { table } = useDataTableContext()
 	return (
@@ -318,9 +327,11 @@ function NextPage(props: PaginationButtonDefaultProps) {
 			{t('data-table.pagination.next')}
 		</Button>
 	)
-}
+})
 
-function PreviousPage(props: PaginationButtonDefaultProps) {
+NextPage.displayName = 'NextPage'
+
+const PreviousPage = memo((props: PaginationButtonDefaultProps) => {
 	const t = useTranslations()
 	const { table } = useDataTableContext()
 	return (
@@ -334,7 +345,9 @@ function PreviousPage(props: PaginationButtonDefaultProps) {
 			{t('data-table.pagination.previous')}
 		</Button>
 	)
-}
+})
+
+PreviousPage.displayName = 'PreviousPage'
 
 export const DataTable = {
 	Root,

@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import { useTranslations } from 'next-intl'
 
 import { DataTable } from '@/components/data-table'
@@ -11,7 +11,7 @@ type ActionsProps = {
 	service: TableData
 }
 
-export function Actions(props: ActionsProps) {
+export const Actions = memo((props: ActionsProps) => {
 	const { service } = props
 	const t = useTranslations()
 	const { openUpdateService, openViewService, openDeleteService } =
@@ -46,4 +46,6 @@ export function Actions(props: ActionsProps) {
 	)
 
 	return <DataTable.Actions actions={actions} />
-}
+})
+
+Actions.displayName = 'Actions'

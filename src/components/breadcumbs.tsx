@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, memo } from 'react'
 
 import {
 	Breadcrumb,
@@ -15,7 +15,7 @@ type BreadcumbsProps = {
 	}[]
 }
 
-export function Breadcumbs(props: BreadcumbsProps) {
+export const Breadcumbs = memo((props: BreadcumbsProps) => {
 	const { breadcumbs } = props
 	const breadcumbsAmount = breadcumbs.length - 1
 	return (
@@ -36,4 +36,6 @@ export function Breadcumbs(props: BreadcumbsProps) {
 			</BreadcrumbList>
 		</Breadcrumb>
 	)
-}
+})
+
+Breadcumbs.displayName = 'Breadcumbs'
