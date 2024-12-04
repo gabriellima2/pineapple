@@ -118,7 +118,11 @@
 			},
 			"update": {
 				"title": "Atualizar cliente",
-				"fields": {},
+				"fields": {
+					"name": "Nome",
+					"email": "E-mail",
+					"cell_phone": "Celular"
+				},
 				"notification": {
 					"success": {
 						"title": "Tudo certo!",

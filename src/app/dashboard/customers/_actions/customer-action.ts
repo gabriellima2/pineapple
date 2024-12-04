@@ -27,13 +27,16 @@ export async function createCustomer(payload: CreateCustomerFields) {
 
 export async function updateCustomer(
 	customerId: string,
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	payload: UpdateCustomerFields
 ) {
 	const supabaseClient = await createClerkSupabaseClientSsr()
 	const { error } = await supabaseClient
 		.from('customers')
-		.update({})
+		.update({
+			name: payload.name,
+			email: payload.email || null,
+			cell_phone: payload.cell_phone || null,
+		})
 		.eq('id', customerId)
 
 	if (error) throw new InternalServerErrorException()
@@ -57,7 +60,7 @@ export async function getCustomerById(
 	const supabaseClient = await createClerkSupabaseClientSsr()
 	const { data, error } = await supabaseClient
 		.from('customers')
-		.select('id')
+		.select('id, name, email, cell_phone, created_at')
 		.eq('id', customerId)
 		.returns<GetCustomerDTO[]>()
 

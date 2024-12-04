@@ -1,26 +1,44 @@
 import { useMemo } from 'react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { z } from 'zod'
 
-export type UpdateCustomerFields = {
-	name: string
-	base_price: string
-	description?: string | undefined
-}
+import { CELL_PHONE_LENGTH } from '@/constants/general'
+
+export type UpdateCustomerFields = z.infer<
+	Pick<
+		ReturnType<typeof useGetUpdateCustomerIntlSchema>,
+		'intlSchema'
+	>['intlSchema']
+>
 
 export function useGetUpdateCustomerIntlSchema() {
 	const t = useTranslations('form-validations')
+	const locale = useLocale()
+
+	const cellPhoneLength = CELL_PHONE_LENGTH[locale]
+
 	const intlSchema = useMemo(() => {
 		return z.object({
 			name: z
 				.string({ required_error: t('required_error') })
 				.min(1, { message: t('required_error') }),
-			description: z.string().optional(),
-			base_price: z
-				.string({ required_error: t('required_error') })
-				.min(1, { message: t('required_error') }),
+			email: z
+				.string()
+				.optional()
+				.refine(
+					(value) => !value || z.string().email().safeParse(value).success,
+					{ message: t('invalid_email') }
+				),
+			cell_phone: z
+				.string()
+				.optional()
+				.refine(
+					(value) =>
+						!value || value.replaceAll(' ', '').length === cellPhoneLength,
+					{ message: t('invalid_cell_phone') }
+				),
 		})
-	}, [t])
+	}, [t, cellPhoneLength])
 
 	return { intlSchema }
 }

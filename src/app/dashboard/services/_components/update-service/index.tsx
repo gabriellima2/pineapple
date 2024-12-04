@@ -50,9 +50,9 @@ export function UpdateService(props: UpdateServiceProps) {
 	useEffect(() => {
 		if (!service) return
 		form.reset({
-			name: service?.name || '',
-			description: service?.description || '',
-			base_price: service ? currencyMask(service?.base_price) : '',
+			name: service.name,
+			description: service.description || '',
+			base_price: currencyMask(service.base_price),
 		})
 	}, [service, form])
 

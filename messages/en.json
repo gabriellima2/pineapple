@@ -118,7 +118,11 @@
 			},
 			"update": {
 				"title": "Update customer",
-				"fields": {},
+				"fields": {
+					"name": "Name",
+					"email": "Email",
+					"cell_phone": "Cell Phone"
+				},
 				"notification": {
 					"success": {
 						"title": "Everything ok!",
