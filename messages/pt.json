@@ -71,6 +71,16 @@
 				"buttons": {
 					"cancel": "Cancelar",
 					"confirm": "Sim, tenho certeza!"
+				},
+				"notification": {
+					"success": {
+						"title": "Tudo certo!",
+						"description": "O serviço foi deletado com sucesso."
+					},
+					"error": {
+						"title": "Algo deu errado...",
+						"description": "Ocorreu um erro inesperado ao tentar deletar o serviço. Por favor, tente novamente."
+					}
 				}
 			}
 		},
@@ -132,6 +142,16 @@
 				"buttons": {
 					"cancel": "Cancelar",
 					"confirm": "Sim, tenho certeza!"
+				},
+				"notification": {
+					"success": {
+						"title": "Tudo certo!",
+						"description": "O cliente foi deletado com sucesso."
+					},
+					"error": {
+						"title": "Algo deu errado...",
+						"description": "Ocorreu um erro inesperado ao tentar deletar o cliente. Por favor, tente novamente."
+					}
 				}
 			}
 		}

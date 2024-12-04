@@ -71,6 +71,16 @@
 				"buttons": {
 					"cancel": "Cancel",
 					"confirm": "Yes, I'm sure!"
+				},
+				"notification": {
+					"success": {
+						"title": "Everything ok!",
+						"description": "The service has been deleted successfully."
+					},
+					"error": {
+						"title": "Something went wrong...",
+						"description": "An unexpected error occurred while trying to delete the service. Please try again."
+					}
 				}
 			}
 		},
@@ -132,6 +142,16 @@
 				"buttons": {
 					"cancel": "Cancel",
 					"confirm": "Yes, I'm sure!"
+				},
+				"notification": {
+					"success": {
+						"title": "Everything ok!",
+						"description": "The customer has been deleted successfully."
+					},
+					"error": {
+						"title": "Something went wrong...",
+						"description": "An unexpected error occurred while trying to delete the customer. Please try again."
+					}
 				}
 			}
 		}
