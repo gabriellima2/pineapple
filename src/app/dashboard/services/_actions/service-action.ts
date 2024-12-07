@@ -10,7 +10,7 @@ import { ROUTES } from '@/constants/routes'
 
 import type { CreateServiceFields } from '../_hooks/schemas/use-get-create-service-intl-schema'
 import type { UpdateServiceFields } from '../_hooks/schemas/use-get-update-service-intl-schema'
-import type { GetServiceDTO, GetServicesDTO } from '@/dtos/service.dto'
+import type { GetServiceByIdDTO, GetAllServicesDTO } from '@/dtos/service.dto'
 
 export async function createService(payload: CreateServiceFields) {
 	const supabaseClient = await createClerkSupabaseClientSsr()
@@ -44,12 +44,12 @@ export async function updateService(
 	revalidatePath(ROUTES.DASHBOARD.SERVICES())
 }
 
-export async function getServices(): Promise<GetServicesDTO | null> {
+export async function getAllServices(): Promise<GetAllServicesDTO | null> {
 	const supabaseClient = await createClerkSupabaseClientSsr()
 	const { data, error } = await supabaseClient
 		.from('services')
 		.select('id, name, description, base_price')
-		.returns<GetServicesDTO>()
+		.returns<GetAllServicesDTO>()
 
 	if (error) throw new InternalServerErrorException()
 	return data
@@ -57,13 +57,13 @@ export async function getServices(): Promise<GetServicesDTO | null> {
 
 export async function getServiceById(
 	serviceId: string
-): Promise<GetServiceDTO | null> {
+): Promise<GetServiceByIdDTO | null> {
 	const supabaseClient = await createClerkSupabaseClientSsr()
 	const { data, error } = await supabaseClient
 		.from('services')
 		.select('id, name, description, base_price, created_at')
 		.eq('id', serviceId)
-		.returns<GetServiceDTO[]>()
+		.returns<GetServiceByIdDTO[]>()
 
 	if (error) throw new InternalServerErrorException()
 	return data?.[0] || null

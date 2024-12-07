@@ -4,11 +4,12 @@ import { z } from 'zod'
 
 import { CELL_PHONE_LENGTH } from '@/constants/general'
 
-export type CreateCustomerFields = {
-	name: string
-	email?: string | undefined
-	cell_phone?: string | undefined
-}
+export type CreateCustomerFields = z.infer<
+	Pick<
+		ReturnType<typeof useGetCreateCustomerIntlSchema>,
+		'intlSchema'
+	>['intlSchema']
+>
 
 export function useGetCreateCustomerIntlSchema() {
 	const t = useTranslations('form-validations')

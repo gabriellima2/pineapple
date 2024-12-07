@@ -24,11 +24,11 @@ import { Actions } from './components/actions'
 import { EMPTY_SYMBOL } from '@/constants/general'
 
 import type { TableData } from '../../../../_@types/table-data'
+import type { GetAllServicesDTO } from '@/dtos/service.dto'
 import type { Translations } from '@/@types/translations'
-import type { GetServicesDTO } from '@/dtos/service.dto'
 
 type ServicesTableProps = {
-	services: GetServicesDTO
+	services: GetAllServicesDTO
 }
 
 export function ServicesTable(props: ServicesTableProps) {

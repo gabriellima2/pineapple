@@ -1,3 +1,3 @@
-import type { GetCustomersDTO } from '@/dtos/customer.dto'
+import type { GetAllCustomersDTO } from '@/dtos/customer.dto'
 
-export type TableData = GetCustomersDTO[0]
+export type TableData = GetAllCustomersDTO[0]

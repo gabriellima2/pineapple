@@ -23,11 +23,11 @@ import { Actions } from './components/actions'
 import { EMPTY_SYMBOL } from '@/constants/general'
 
 import type { TableData } from '../../../../_@types/table-data'
-import type { GetCustomersDTO } from '@/dtos/customer.dto'
+import type { GetAllCustomersDTO } from '@/dtos/customer.dto'
 import type { Translations } from '@/@types/translations'
 
 type CustomersTableProps = {
-	customers: GetCustomersDTO
+	customers: GetAllCustomersDTO
 }
 
 export function CustomersTable(props: CustomersTableProps) {

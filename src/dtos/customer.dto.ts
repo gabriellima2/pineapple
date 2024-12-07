@@ -1,11 +1,11 @@
-export type GetCustomersDTO = {
+export type GetAllCustomersDTO = {
 	id: string
 	name: string
 	email: string | null
 	cell_phone: string | null
 }[]
 
-export type GetCustomerDTO = {
+export type GetCustomerByIdDTO = {
 	id: string
 	name: string
 	email: string | null

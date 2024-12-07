@@ -1,7 +1,7 @@
 import { CustomersTable } from './components/customers-table'
-import { getCustomers } from '../../_actions/customer-action'
+import { getAllCustomers } from '../../_actions/customer-action'
 
 export async function ListingCustomer() {
-	const customers = await getCustomers()
+	const customers = await getAllCustomers()
 	return <CustomersTable customers={customers || []} />
 }

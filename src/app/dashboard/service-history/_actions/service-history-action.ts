@@ -9,10 +9,10 @@ import { InternalServerErrorException } from '@/exceptions/interval-server-error
 import { ROUTES } from '@/constants/routes'
 
 import type {
-	GetServiceHistoryDTO,
+	GetServiceHistoryByIdDTO,
 	GetAllServiceHistoryDTO,
 	GetAllServiceHistoryWithStatusDTO,
-	GetServiceHistoryWithStatusDTO,
+	GetServiceHistoryWithStatusByIdDTO,
 } from '@/dtos/service-history.dto'
 import type { CreateServiceHistoryFields } from '../_hooks/schemas/use-get-create-service-history-intl-schema'
 import type { UpdateServiceHistoryFields } from '../_hooks/schemas/use-get-update-service-history-intl-schema'
@@ -65,13 +65,13 @@ export async function getAllServiceHistoryWithStatus(): Promise<GetAllServiceHis
 
 export async function getServiceHistoryById(
 	serviceHistoryId: string
-): Promise<GetServiceHistoryDTO | null> {
+): Promise<GetServiceHistoryByIdDTO | null> {
 	const supabaseClient = await createClerkSupabaseClientSsr()
 	const { data, error } = await supabaseClient
 		.from('service_history')
 		.select('id, created_at')
 		.eq('id', serviceHistoryId)
-		.returns<GetServiceHistoryDTO[]>()
+		.returns<GetServiceHistoryByIdDTO[]>()
 
 	if (error) throw new InternalServerErrorException()
 	return data?.[0] || null
@@ -79,13 +79,13 @@ export async function getServiceHistoryById(
 
 export async function getServiceHistoryWithStatusById(
 	serviceHistoryId: string
-): Promise<GetServiceHistoryWithStatusDTO | null> {
+): Promise<GetServiceHistoryWithStatusByIdDTO | null> {
 	const supabaseClient = await createClerkSupabaseClientSsr()
 	const { data, error } = await supabaseClient
 		.from('service_history_with_status')
 		.select('id, created_at')
 		.eq('id', serviceHistoryId)
-		.returns<GetServiceHistoryDTO[]>()
+		.returns<GetServiceHistoryByIdDTO[]>()
 
 	if (error) throw new InternalServerErrorException()
 	return data?.[0] || null

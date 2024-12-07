@@ -2,11 +2,12 @@ import { useMemo } from 'react'
 import { useTranslations } from 'next-intl'
 import { z } from 'zod'
 
-export type UpdateServiceFields = {
-	name: string
-	base_price: string
-	description?: string | undefined
-}
+export type UpdateServiceFields = z.infer<
+	Pick<
+		ReturnType<typeof useGetUpdateServiceIntlSchema>,
+		'intlSchema'
+	>['intlSchema']
+>
 
 export function useGetUpdateServiceIntlSchema() {
 	const t = useTranslations('form-validations')

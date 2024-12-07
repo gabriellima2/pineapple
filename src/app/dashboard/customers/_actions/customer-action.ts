@@ -7,9 +7,12 @@ import { createClerkSupabaseClientSsr } from '@/lib/supabase/create-clerk-supaba
 import { InternalServerErrorException } from '@/exceptions/interval-server-error.exception'
 import { ROUTES } from '@/constants/routes'
 
+import type {
+	GetCustomerByIdDTO,
+	GetAllCustomersDTO,
+} from '@/dtos/customer.dto'
 import type { CreateCustomerFields } from '../_hooks/schemas/use-get-create-customer-intl-schema'
 import type { UpdateCustomerFields } from '../_hooks/schemas/use-get-update-customer-intl-schema'
-import type { GetCustomerDTO, GetCustomersDTO } from '@/dtos/customer.dto'
 
 export async function createCustomer(payload: CreateCustomerFields) {
 	const supabaseClient = await createClerkSupabaseClientSsr()
@@ -43,12 +46,12 @@ export async function updateCustomer(
 	revalidatePath(ROUTES.DASHBOARD.CUSTOMERS())
 }
 
-export async function getCustomers(): Promise<GetCustomersDTO | null> {
+export async function getAllCustomers(): Promise<GetAllCustomersDTO | null> {
 	const supabaseClient = await createClerkSupabaseClientSsr()
 	const { data, error } = await supabaseClient
 		.from('customers')
 		.select('id, name, email, cell_phone')
-		.returns<GetCustomersDTO>()
+		.returns<GetAllCustomersDTO>()
 
 	if (error) throw new InternalServerErrorException()
 	return data
@@ -56,13 +59,13 @@ export async function getCustomers(): Promise<GetCustomersDTO | null> {
 
 export async function getCustomerById(
 	customerId: string
-): Promise<GetCustomerDTO | null> {
+): Promise<GetCustomerByIdDTO | null> {
 	const supabaseClient = await createClerkSupabaseClientSsr()
 	const { data, error } = await supabaseClient
 		.from('customers')
 		.select('id, name, email, cell_phone, created_at')
 		.eq('id', customerId)
-		.returns<GetCustomerDTO[]>()
+		.returns<GetCustomerByIdDTO[]>()
 
 	if (error) throw new InternalServerErrorException()
 	return data?.[0] || null

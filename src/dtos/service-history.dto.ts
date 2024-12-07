@@ -2,7 +2,7 @@ export type GetAllServiceHistoryDTO = {
 	id: string
 }[]
 
-export type GetServiceHistoryDTO = {
+export type GetServiceHistoryByIdDTO = {
 	id: string
 	created_at: string
 }
@@ -11,7 +11,7 @@ export type GetAllServiceHistoryWithStatusDTO = {
 	id: string
 }[]
 
-export type GetServiceHistoryWithStatusDTO = {
+export type GetServiceHistoryWithStatusByIdDTO = {
 	id: string
 	created_at: string
 }

@@ -1,11 +1,11 @@
-export type GetServicesDTO = {
+export type GetAllServicesDTO = {
 	id: string
 	name: string
 	description: string | null
 	base_price: number
 }[]
 
-export type GetServiceDTO = {
+export type GetServiceByIdDTO = {
 	id: string
 	name: string
 	description: string | null
