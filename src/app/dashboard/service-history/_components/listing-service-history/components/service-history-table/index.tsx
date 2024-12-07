@@ -24,12 +24,12 @@ import { Actions } from './components/actions'
 
 import { EMPTY_SYMBOL } from '@/constants/general'
 
-import type { GetAllServiceHistoryDTO } from '@/dtos/service-history.dto'
+import type { GetAllServiceHistoryWithStatusDTO } from '@/dtos/service-history.dto'
 import type { TableData } from '../../../../_@types/table-data'
 import type { Translations } from '@/@types/translations'
 
 type ServiceHistoryTableProps = {
-	serviceHistory: GetAllServiceHistoryDTO
+	serviceHistory: GetAllServiceHistoryWithStatusDTO
 }
 
 export function ServiceHistoryTable(props: ServiceHistoryTableProps) {

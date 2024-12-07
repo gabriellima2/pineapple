@@ -1,3 +1,3 @@
-import type { GetAllServiceHistoryDTO } from '@/dtos/service-history.dto'
+import type { GetAllServiceHistoryWithStatusDTO } from '@/dtos/service-history.dto'
 
-export type TableData = GetAllServiceHistoryDTO[0]
+export type TableData = GetAllServiceHistoryWithStatusDTO[0]
