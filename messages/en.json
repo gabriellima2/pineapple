@@ -3,7 +3,8 @@
 		"sidebar": {
 			"home": "Home",
 			"services": "Services",
-			"customers": "Clientes"
+			"customers": "Customers",
+			"service-history": "Service History"
 		},
 
 		"services": {
@@ -159,6 +160,75 @@
 					"error": {
 						"title": "Something went wrong...",
 						"description": "An unexpected error occurred while trying to delete the customer. Please try again."
+					}
+				}
+			}
+		},
+
+		"service-history": {
+			"title": "Service History",
+			"breadcumbs": {
+				"1": "Service History"
+			},
+			"list": {
+				"search-by-name": "Search by name...",
+				"columns": {
+
+				}
+			},
+			"create": {
+				"title": "Add a new service history",
+				"fields": {
+
+				},
+				"notification": {
+					"success": {
+						"title": "Everything ok!",
+						"description": "The service history has been added successfully."
+					},
+					"error": {
+						"title": "Something went wrong...",
+						"description": "An unexpected error occurred while trying to add the service history. Please try again."
+					}
+				}
+			},
+			"update": {
+				"title": "Update service history",
+				"fields": {
+
+				},
+				"notification": {
+					"success": {
+						"title": "Everything ok!",
+						"description": "The service history has been updated successfully."
+					},
+					"error": {
+						"title": "Something went wrong...",
+						"description": "An unexpected error occurred while trying to update the service history. Please try again."
+					}
+				}
+			},
+			"view": {
+				"title": "View service history",
+				"fields": {
+
+				}
+			},
+			"delete": {
+				"title": "Are you absolutely sure you want to delete the service history?",
+				"description": "This action cannot be undone. This will permanently delete service history and remove data from our servers.",
+				"buttons": {
+					"cancel": "Cancel",
+					"confirm": "Yes, I'm sure!"
+				},
+				"notification": {
+					"success": {
+						"title": "Everything ok!",
+						"description": "The service history has been deleted successfully."
+					},
+					"error": {
+						"title": "Something went wrong...",
+						"description": "An unexpected error occurred while trying to delete the service history. Please try again."
 					}
 				}
 			}

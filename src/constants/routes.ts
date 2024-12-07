@@ -7,5 +7,6 @@ export const ROUTES = {
 		HOME: () => '/dashboard',
 		SERVICES: () => '/dashboard/services',
 		CUSTOMERS: () => '/dashboard/customers',
+		SERVICE_HISTORY: () => '/dashboard/service-history',
 	},
 }

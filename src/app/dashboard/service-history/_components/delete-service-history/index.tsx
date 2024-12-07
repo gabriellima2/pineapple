@@ -11,26 +11,32 @@ import {
 	AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
 
-import { useServicesContext } from '../../_contexts/services.context'
-import { useDeleteService } from './hooks/use-delete-service'
+import { useServiceHistoryContext } from '../../_contexts/service-history.context'
+import { useDeleteServiceHistory } from './hooks/use-delete-service-history'
 
-type DeleteServiceProps = {
-	serviceId: string
+type DeleteServiceHistoryProps = {
+	serviceHistoryId: string
 }
 
-export function DeleteService(props: DeleteServiceProps) {
-	const { serviceId } = props
-	const t = useTranslations('dashboard.services.delete')
-	const { isOpenDeleteService, setIsOpenDeleteService } = useServicesContext()
-	const { isDeleting, handleDelete } = useDeleteService({ serviceId })
+export function DeleteServiceHistory(props: DeleteServiceHistoryProps) {
+	const { serviceHistoryId } = props
+	const t = useTranslations('dashboard.service-history.delete')
+	const { isOpenDeleteServiceHistory, setIsOpenDeleteServiceHistory } =
+		useServiceHistoryContext()
+	const { isDeleting, handleDelete } = useDeleteServiceHistory({
+		serviceHistoryId,
+	})
 
 	function handleOpenChange(isOpen: boolean) {
 		if (isDeleting) return
-		setIsOpenDeleteService(isOpen)
+		setIsOpenDeleteServiceHistory(isOpen)
 	}
 
 	return (
-		<AlertDialog open={isOpenDeleteService} onOpenChange={handleOpenChange}>
+		<AlertDialog
+			open={isOpenDeleteServiceHistory}
+			onOpenChange={handleOpenChange}
+		>
 			<AlertDialogContent>
 				<AlertDialogHeader>
 					<AlertDialogTitle>{t('title')}</AlertDialogTitle>

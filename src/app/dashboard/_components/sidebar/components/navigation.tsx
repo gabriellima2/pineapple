@@ -37,6 +37,12 @@ export function Navigation() {
 						<span>{t('dashboard.sidebar.customers')}</span>
 					</Link>
 				</SidebarMenuButton>
+				<SidebarMenuButton asChild active={pathname === routes.serviceHistory}>
+					<Link href={routes.serviceHistory}>
+						<User2 />
+						<span>{t('dashboard.sidebar.service-history')}</span>
+					</Link>
+				</SidebarMenuButton>
 			</SidebarMenu>
 		</SidebarGroup>
 	)
@@ -46,4 +52,5 @@ const routes = {
 	home: ROUTES.DASHBOARD.HOME(),
 	services: ROUTES.DASHBOARD.SERVICES(),
 	customers: ROUTES.DASHBOARD.CUSTOMERS(),
+	serviceHistory: ROUTES.DASHBOARD.SERVICE_HISTORY(),
 }

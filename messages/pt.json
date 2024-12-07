@@ -3,7 +3,8 @@
 		"sidebar": {
 			"home": "Início",
 			"services": "Serviços",
-			"customers": "Clientes"
+			"customers": "Clientes",
+			"service-history": "Histórico de Serviços"
 		},
 
 		"services": {
@@ -159,6 +160,75 @@
 					"error": {
 						"title": "Algo deu errado...",
 						"description": "Ocorreu um erro inesperado ao tentar deletar o cliente. Por favor, tente novamente."
+					}
+				}
+			}
+		},
+
+		"service-history": {
+			"title": "Histórico de Serviços",
+			"breadcumbs": {
+				"1": "Histórico de Serviços"
+			},
+			"list": {
+				"search-by-name": "Buscar por nome...",
+				"columns": {
+
+				}
+			},
+			"create": {
+				"title": "Adicionar um novo histórico de serviço",
+				"fields": {
+
+				},
+				"notification": {
+					"success": {
+						"title": "Tudo certo!",
+						"description": "O histórico de serviço foi adicionado com sucesso."
+					},
+					"error": {
+						"title": "Algo deu errado...",
+						"description": "Ocorreu um erro inesperado ao tentar adicionar o histórico de serviço. Por favor, tente novamente."
+					}
+				}
+			},
+			"update": {
+				"title": "Atualizar histórico de serviço",
+				"fields": {
+
+				},
+				"notification": {
+					"success": {
+						"title": "Tudo certo!",
+						"description": "O histórico de serviço foi atualizado com sucesso."
+					},
+					"error": {
+						"title": "Algo deu errado...",
+						"description": "Ocorreu um erro inesperado ao tentar atualizar o histórico de serviço. Por favor, tente novamente."
+					}
+				}
+			},
+			"view": {
+				"title": "Visualizar histórico de serviço",
+				"fields": {
+
+				}
+			},
+			"delete": {
+				"title": "Você tem certeza absoluta de que deseja excluir o histórico de serviço?",
+				"description": "Esta ação não poderá ser desfeita. Isso excluirá permanentemente o histórico de serviço e removerá os dados de nossos servidores.",
+				"buttons": {
+					"cancel": "Cancelar",
+					"confirm": "Sim, tenho certeza!"
+				},
+				"notification": {
+					"success": {
+						"title": "Tudo certo!",
+						"description": "O histórico de serviço foi deletado com sucesso."
+					},
+					"error": {
+						"title": "Algo deu errado...",
+						"description": "Ocorreu um erro inesperado ao tentar deletar o histórico de serviço. Por favor, tente novamente."
 					}
 				}
 			}
