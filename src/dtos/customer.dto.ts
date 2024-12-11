@@ -12,3 +12,8 @@ export type GetCustomerByIdDTO = {
 	cell_phone: string | null
 	created_at: string
 }
+
+export type GetCustomerOptionsDTO = {
+	id: string
+	name: string
+}[]

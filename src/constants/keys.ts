@@ -4,7 +4,9 @@ export const COOKIES_KEYS = {
 
 export const QUERY_KEYS = {
 	GET_SERVICE: 'service',
+	GET_SERVICE_SELECT_OPTIONS: 'service-select-options',
 	GET_CUSTOMER: 'customer',
+	GET_CUSTOMER_SELECT_OPTIONS: 'customer-select-options',
 	GET_SERVICE_HISTORY: 'service-history',
 }
 

@@ -8,6 +8,7 @@ import { InternalServerErrorException } from '@/exceptions/interval-server-error
 import { ROUTES } from '@/constants/routes'
 
 import type {
+	GetCustomerOptionsDTO,
 	GetCustomerByIdDTO,
 	GetAllCustomersDTO,
 } from '@/dtos/customer.dto'
@@ -80,4 +81,15 @@ export async function deleteCustomer(customerId: string) {
 
 	if (error) throw new InternalServerErrorException()
 	revalidatePath(ROUTES.DASHBOARD.CUSTOMERS())
+}
+
+export async function getCustomerOptions(): Promise<GetCustomerOptionsDTO | null> {
+	const supabaseClient = await createClerkSupabaseClientSsr()
+	const { data, error } = await supabaseClient
+		.from('customers')
+		.select('id, name')
+		.returns<GetCustomerOptionsDTO>()
+
+	if (error) throw new InternalServerErrorException()
+	return data
 }

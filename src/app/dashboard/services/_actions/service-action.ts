@@ -8,9 +8,13 @@ import { InternalServerErrorException } from '@/exceptions/interval-server-error
 import { convertToNumber } from '@/helpers/currency'
 import { ROUTES } from '@/constants/routes'
 
+import type {
+	GetServiceOptionsDTO,
+	GetServiceByIdDTO,
+	GetAllServicesDTO,
+} from '@/dtos/service.dto'
 import type { CreateServiceFields } from '../_hooks/schemas/use-get-create-service-intl-schema'
 import type { UpdateServiceFields } from '../_hooks/schemas/use-get-update-service-intl-schema'
-import type { GetServiceByIdDTO, GetAllServicesDTO } from '@/dtos/service.dto'
 
 export async function createService(payload: CreateServiceFields) {
 	const supabaseClient = await createClerkSupabaseClientSsr()
@@ -78,4 +82,15 @@ export async function deleteService(serviceId: string) {
 
 	if (error) throw new InternalServerErrorException()
 	revalidatePath(ROUTES.DASHBOARD.SERVICES())
+}
+
+export async function getServiceOptions(): Promise<GetServiceOptionsDTO | null> {
+	const supabaseClient = await createClerkSupabaseClientSsr()
+	const { data, error } = await supabaseClient
+		.from('services')
+		.select('id, name')
+		.returns<GetServiceOptionsDTO>()
+
+	if (error) throw new InternalServerErrorException()
+	return data
 }

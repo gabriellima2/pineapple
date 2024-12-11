@@ -12,3 +12,8 @@ export type GetServiceByIdDTO = {
 	base_price: number
 	created_at: string
 }
+
+export type GetServiceOptionsDTO = {
+	id: string
+	name: string
+}[]

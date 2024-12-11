@@ -179,7 +179,11 @@
 			"create": {
 				"title": "Add a new service history",
 				"fields": {
-
+					"charged_amount": "Charged amount",
+					"received_amount": "Received amount",
+					"done_at": "Done at",
+					"customer_id": "Customer",
+					"service_id": "Service"
 				},
 				"notification": {
 					"success": {
@@ -266,5 +270,8 @@
 		"required_error": "Required field",
 		"invalid_email": "Please enter a valid email",
 		"invalid_cell_phone": "Please enter a valid cell phone"
+	},
+	"general": {
+		"multi-select-empty-options": "No results found"
 	}
 }

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client'
 
 import { useTranslations } from 'next-intl'
@@ -21,12 +20,17 @@ import {
 	FormLabel,
 	FormMessage,
 } from '@/components/ui/form'
+import { CustomersSearchableSelect } from '@/app/dashboard/_components/customers-searchable-select'
+import { ServicesMultiSelect } from '@/app/dashboard/_components/services-multi-select'
 import { RequiredIndicator } from '@/components/required-indicator'
+import { DatePickers } from '@/components/form/date-pickers'
 import { Inputs } from '@/components/form/inputs'
 import { Button } from '@/components/ui/button'
 
 import { useCreateServiceHistoryForm } from './hooks/use-create-service-history-form'
 import { useServiceHistoryContext } from '../../_contexts/service-history.context'
+
+import { currencyMask } from '@/helpers/masks'
 
 export function CreateService() {
 	const t = useTranslations()
@@ -57,7 +61,95 @@ export function CreateService() {
 				</SheetHeader>
 				<Form {...form}>
 					<form onSubmit={handleCreate} className="flex flex-1 flex-col">
-						<div className="flex-1 space-y-4 p-4"></div>
+						<div className="flex-1 space-y-4 p-4">
+							<FormField
+								control={form.control}
+								name="charged_amount"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>
+											{t(
+												'dashboard.service-history.create.fields.charged_amount'
+											)}{' '}
+											<RequiredIndicator />
+										</FormLabel>
+										<FormControl>
+											<Inputs.Default {...field} mask={currencyMask} />
+										</FormControl>
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name="received_amount"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>
+											{t(
+												'dashboard.service-history.create.fields.received_amount'
+											)}{' '}
+										</FormLabel>
+										<FormControl>
+											<Inputs.Default {...field} mask={currencyMask} />
+										</FormControl>
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name="done_at"
+								render={({ field }) => (
+									<FormItem className="flex flex-col">
+										<FormLabel>
+											{t('dashboard.service-history.create.fields.done_at')}{' '}
+											<RequiredIndicator />
+										</FormLabel>
+										<DatePickers.Default {...field} />
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name="service_id"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel htmlFor={field.name}>
+											{t('dashboard.service-history.create.fields.service_id')}{' '}
+											<RequiredIndicator />
+										</FormLabel>
+										<FormControl>
+											<ServicesMultiSelect
+												value={field.value}
+												onChange={field.onChange}
+											/>
+										</FormControl>
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name="customer_id"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>
+											{t('dashboard.service-history.create.fields.customer_id')}{' '}
+											<RequiredIndicator />
+										</FormLabel>
+										<FormControl>
+											<CustomersSearchableSelect
+												value={field.value}
+												onChange={field.onChange}
+											/>
+										</FormControl>
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+						</div>
 						<SheetFooter>
 							<SheetClose asChild>
 								<Button
