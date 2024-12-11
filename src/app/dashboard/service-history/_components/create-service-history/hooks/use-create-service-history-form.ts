@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 
@@ -22,8 +21,7 @@ export function useCreateServiceHistoryForm() {
 	})
 
 	async function onSubmit(data: CreateServiceHistoryFields) {
-		console.log(data)
-		// await createServiceHistory(data)
+		await createServiceHistory(data)
 	}
 
 	return {

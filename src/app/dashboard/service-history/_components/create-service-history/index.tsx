@@ -101,7 +101,7 @@ export function CreateService() {
 								control={form.control}
 								name="done_at"
 								render={({ field }) => (
-									<FormItem className="flex flex-col">
+									<FormItem>
 										<FormLabel>
 											{t('dashboard.service-history.create.fields.done_at')}{' '}
 											<RequiredIndicator />

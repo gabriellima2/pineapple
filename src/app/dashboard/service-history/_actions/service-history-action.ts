@@ -6,6 +6,7 @@ import { revalidatePath } from 'next/cache'
 import { createClerkSupabaseClientSsr } from '@/lib/supabase/create-clerk-supabase-client-ssr'
 
 import { InternalServerErrorException } from '@/exceptions/interval-server-error.exception'
+import { convertToNumber } from '@/helpers/currency'
 import { ROUTES } from '@/constants/routes'
 
 import type {
@@ -21,7 +22,17 @@ export async function createServiceHistory(
 	payload: CreateServiceHistoryFields
 ) {
 	const supabaseClient = await createClerkSupabaseClientSsr()
-	const { error } = await supabaseClient.from('service_history').insert([{}])
+	const { error } = await supabaseClient.from('service_history').insert([
+		{
+			charged_amount: convertToNumber(payload.charged_amount),
+			received_amount: payload.received_amount
+				? convertToNumber(payload.received_amount)
+				: null,
+			done_at: payload.done_at,
+			customer_id: payload.customer_id[0].value,
+			service_ids: payload.service_id.map((service) => service.value),
+		},
+	])
 
 	if (error) throw new InternalServerErrorException()
 	revalidatePath(ROUTES.DASHBOARD.SERVICE_HISTORY())
@@ -45,7 +56,9 @@ export async function getAllServiceHistory(): Promise<GetAllServiceHistoryDTO | 
 	const supabaseClient = await createClerkSupabaseClientSsr()
 	const { data, error } = await supabaseClient
 		.from('service_history')
-		.select('id')
+		.select(
+			'id, charged_amount, received_amount, done_at, customer_id, service_ids'
+		)
 		.returns<GetAllServiceHistoryDTO>()
 
 	if (error) throw new InternalServerErrorException()
@@ -56,8 +69,10 @@ export async function getAllServiceHistoryWithStatus(): Promise<GetAllServiceHis
 	const supabaseClient = await createClerkSupabaseClientSsr()
 	const { data, error } = await supabaseClient
 		.from('service_history_with_status')
-		.select('id, status')
-		.returns<GetAllServiceHistoryDTO>()
+		.select(
+			'id, charged_amount, received_amount, done_at, customer_id, service_ids, status'
+		)
+		.returns<GetAllServiceHistoryWithStatusDTO>()
 
 	if (error) throw new InternalServerErrorException()
 	return data
@@ -69,7 +84,9 @@ export async function getServiceHistoryById(
 	const supabaseClient = await createClerkSupabaseClientSsr()
 	const { data, error } = await supabaseClient
 		.from('service_history')
-		.select('id, created_at')
+		.select(
+			'id, charged_amount, received_amount, done_at, customer_id, service_ids, created_at'
+		)
 		.eq('id', serviceHistoryId)
 		.returns<GetServiceHistoryByIdDTO[]>()
 
@@ -83,9 +100,11 @@ export async function getServiceHistoryWithStatusById(
 	const supabaseClient = await createClerkSupabaseClientSsr()
 	const { data, error } = await supabaseClient
 		.from('service_history_with_status')
-		.select('id, created_at')
+		.select(
+			'id, charged_amount, received_amount, done_at, customer_id, service_ids, status, created_at'
+		)
 		.eq('id', serviceHistoryId)
-		.returns<GetServiceHistoryByIdDTO[]>()
+		.returns<GetServiceHistoryWithStatusByIdDTO[]>()
 
 	if (error) throw new InternalServerErrorException()
 	return data?.[0] || null
