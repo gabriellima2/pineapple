@@ -17,7 +17,17 @@ export function useCreateServiceHistoryForm() {
 	})
 	const form = useForm<CreateServiceHistoryFields>({
 		resolver: zodResolver(intlSchema),
-		defaultValues: {},
+		defaultValues: {
+			services: [
+				{
+					charged_amount: '',
+					done_at: '',
+					was_paid: '',
+					customer_id: [],
+					service_id: [],
+				},
+			],
+		},
 	})
 
 	async function onSubmit(data: CreateServiceHistoryFields) {

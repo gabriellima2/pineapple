@@ -12,8 +12,6 @@ import { ROUTES } from '@/constants/routes'
 import type {
 	GetServiceHistoryByIdDTO,
 	GetAllServiceHistoryDTO,
-	GetAllServiceHistoryWithStatusDTO,
-	GetServiceHistoryWithStatusByIdDTO,
 } from '@/dtos/service-history.dto'
 import type { CreateServiceHistoryFields } from '../_hooks/schemas/use-get-create-service-history-intl-schema'
 import type { UpdateServiceHistoryFields } from '../_hooks/schemas/use-get-update-service-history-intl-schema'
@@ -22,17 +20,14 @@ export async function createServiceHistory(
 	payload: CreateServiceHistoryFields
 ) {
 	const supabaseClient = await createClerkSupabaseClientSsr()
-	const { error } = await supabaseClient.from('service_history').insert([
-		{
-			charged_amount: convertToNumber(payload.charged_amount),
-			received_amount: payload.received_amount
-				? convertToNumber(payload.received_amount)
-				: null,
-			done_at: payload.done_at,
-			customer_id: payload.customer_id[0].value,
-			service_ids: payload.service_id.map((service) => service.value),
-		},
-	])
+	const raw = payload.services.map((service) => ({
+		charged_amount: convertToNumber(service.charged_amount),
+		done_at: service.done_at,
+		was_paid: service.was_paid === 'true',
+		customer_id: service.customer_id[0].value,
+		service_id: service.service_id[0].value,
+	}))
+	const { error } = await supabaseClient.from('service_history').insert(raw)
 
 	if (error) throw new InternalServerErrorException()
 	revalidatePath(ROUTES.DASHBOARD.SERVICE_HISTORY())
@@ -57,22 +52,15 @@ export async function getAllServiceHistory(): Promise<GetAllServiceHistoryDTO | 
 	const { data, error } = await supabaseClient
 		.from('service_history')
 		.select(
-			'id, charged_amount, received_amount, done_at, customer_id, service_ids'
+			`id,
+			charged_amount,
+			was_paid,
+			done_at,
+			customer_id,
+			service:service_id (id, name, base_price),
+			customer:customer_id (id, name, email, cell_phone)`
 		)
 		.returns<GetAllServiceHistoryDTO>()
-
-	if (error) throw new InternalServerErrorException()
-	return data
-}
-
-export async function getAllServiceHistoryWithStatus(): Promise<GetAllServiceHistoryWithStatusDTO | null> {
-	const supabaseClient = await createClerkSupabaseClientSsr()
-	const { data, error } = await supabaseClient
-		.from('service_history_with_status')
-		.select(
-			'id, charged_amount, received_amount, done_at, customer_id, service_ids, status'
-		)
-		.returns<GetAllServiceHistoryWithStatusDTO>()
 
 	if (error) throw new InternalServerErrorException()
 	return data
@@ -89,22 +77,6 @@ export async function getServiceHistoryById(
 		)
 		.eq('id', serviceHistoryId)
 		.returns<GetServiceHistoryByIdDTO[]>()
-
-	if (error) throw new InternalServerErrorException()
-	return data?.[0] || null
-}
-
-export async function getServiceHistoryWithStatusById(
-	serviceHistoryId: string
-): Promise<GetServiceHistoryWithStatusByIdDTO | null> {
-	const supabaseClient = await createClerkSupabaseClientSsr()
-	const { data, error } = await supabaseClient
-		.from('service_history_with_status')
-		.select(
-			'id, charged_amount, received_amount, done_at, customer_id, service_ids, status, created_at'
-		)
-		.eq('id', serviceHistoryId)
-		.returns<GetServiceHistoryWithStatusByIdDTO[]>()
 
 	if (error) throw new InternalServerErrorException()
 	return data?.[0] || null
