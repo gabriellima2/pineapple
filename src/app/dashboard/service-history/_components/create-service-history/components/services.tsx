@@ -24,6 +24,7 @@ import {
 	SelectValue,
 } from '@/components/ui/select'
 import { CustomersSearchableSelect } from '@/app/dashboard/_components/customers-searchable-select'
+import { ServicesSearchableSelect } from '@/app/dashboard/_components/services-searchable-select'
 import { RequiredIndicator } from '@/components/required-indicator'
 import { DatePickers } from '@/components/form/date-pickers'
 import { Inputs } from '@/components/form/inputs'
@@ -31,7 +32,6 @@ import { Button } from '@/components/ui/button'
 
 import { currencyMask } from '@/helpers/masks'
 import type { CreateServiceHistoryFields } from '../../../_hooks/schemas/use-get-create-service-history-intl-schema'
-import { ServicesSearchableSelect } from '@/app/dashboard/_components/services-searchable-select'
 
 export function Services() {
 	const { control } = useFormContext<CreateServiceHistoryFields>()
@@ -55,7 +55,7 @@ export function Services() {
 	}
 
 	return (
-		<>
+		<div className="mb-4 flex flex-col items-end gap-4">
 			<Table>
 				<TableHeader>
 					<TableRow>
@@ -75,8 +75,8 @@ export function Services() {
 									control={control}
 									name={`services.${index}.customer_id`}
 									render={({ field }) => (
-										<FormItem>
-											<FormLabel>
+										<FormItem className="w-full min-w-[200px]">
+											<FormLabel className="text-nowrap">
 												Customer
 												<RequiredIndicator />
 											</FormLabel>
@@ -96,8 +96,8 @@ export function Services() {
 									control={control}
 									name={`services.${index}.service_id`}
 									render={({ field }) => (
-										<FormItem>
-											<FormLabel>
+										<FormItem className="w-full min-w-[200px]">
+											<FormLabel className="text-nowrap">
 												Service
 												<RequiredIndicator />
 											</FormLabel>
@@ -117,8 +117,8 @@ export function Services() {
 									control={control}
 									name={`services.${index}.done_at`}
 									render={({ field }) => (
-										<FormItem>
-											<FormLabel>
+										<FormItem className="w-full min-w-[200px]">
+											<FormLabel className="text-nowrap">
 												Done At
 												<RequiredIndicator />
 											</FormLabel>
@@ -133,8 +133,8 @@ export function Services() {
 									control={control}
 									name={`services.${index}.was_paid`}
 									render={({ field }) => (
-										<FormItem>
-											<FormLabel>
+										<FormItem className="w-full min-w-[200px]">
+											<FormLabel className="text-nowrap">
 												Was paid?
 												<RequiredIndicator />
 											</FormLabel>
@@ -160,8 +160,8 @@ export function Services() {
 									control={control}
 									name={`services.${index}.charged_amount`}
 									render={({ field }) => (
-										<FormItem>
-											<FormLabel>
+										<FormItem className="w-full min-w-[200px]">
+											<FormLabel className="text-nowrap">
 												Charged Amount
 												<RequiredIndicator />
 											</FormLabel>
@@ -176,6 +176,7 @@ export function Services() {
 							<TableCell>
 								<Button
 									type="button"
+									title="Delete row"
 									variant="ghost"
 									size="icon"
 									onClick={(e) => {
@@ -183,16 +184,16 @@ export function Services() {
 										remove(index)
 									}}
 								>
-									<Trash2 />
+									<Trash2 className="text-destructive" />
 								</Button>
 							</TableCell>
 						</TableRow>
 					))}
 				</TableBody>
 			</Table>
-
 			<Button
 				type="button"
+				variant="outline"
 				onClick={(e) => {
 					e.preventDefault()
 					handleAppendService()
@@ -200,6 +201,6 @@ export function Services() {
 			>
 				Append
 			</Button>
-		</>
+		</div>
 	)
 }

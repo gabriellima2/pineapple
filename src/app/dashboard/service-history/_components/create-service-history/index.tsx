@@ -40,7 +40,7 @@ export function CreateService() {
 			</DialogTrigger>
 			<DialogContent
 				aria-describedby={undefined}
-				className="flex max-w-6xl flex-col gap-0"
+				className="flex max-h-[80%] max-w-[70%] flex-col gap-0 overflow-y-auto pb-0"
 			>
 				<DialogHeader>
 					<DialogTitle>
@@ -49,10 +49,10 @@ export function CreateService() {
 				</DialogHeader>
 				<Form {...form}>
 					<form onSubmit={handleCreate} className="flex flex-1 flex-col">
-						<div className="flex-1 space-y-4 p-4">
+						<div className="flex-1 space-y-4 pt-8">
 							<Services />
 						</div>
-						<DialogFooter>
+						<DialogFooter className="sticky bottom-0 bg-white/60 pb-8 pt-4 backdrop-blur-sm">
 							<DialogClose asChild>
 								<Button
 									type="button"
