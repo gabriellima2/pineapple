@@ -11,7 +11,7 @@ import { ROUTES } from '@/constants/routes'
 
 import type {
 	GetServiceHistoryByIdDTO,
-	GetAllServiceHistoryDTO,
+	GetAllServiceHistoryWithDetailsDTO,
 } from '@/dtos/service-history.dto'
 import type { CreateServiceHistoryFields } from '../_hooks/schemas/use-get-create-service-history-intl-schema'
 import type { UpdateServiceHistoryFields } from '../_hooks/schemas/use-get-update-service-history-intl-schema'
@@ -47,7 +47,7 @@ export async function updateServiceHistory(
 	revalidatePath(ROUTES.DASHBOARD.SERVICE_HISTORY())
 }
 
-export async function getAllServiceHistory(): Promise<GetAllServiceHistoryDTO | null> {
+export async function getAllServiceHistoryWithDetails(): Promise<GetAllServiceHistoryWithDetailsDTO | null> {
 	const supabaseClient = await createClerkSupabaseClientSsr()
 	const { data, error } = await supabaseClient
 		.from('service_history')
@@ -60,8 +60,9 @@ export async function getAllServiceHistory(): Promise<GetAllServiceHistoryDTO | 
 			service:service_id (id, name, base_price),
 			customer:customer_id (id, name, email, cell_phone)`
 		)
-		.returns<GetAllServiceHistoryDTO>()
+		.returns<GetAllServiceHistoryWithDetailsDTO>()
 
+	console.log(data)
 	if (error) throw new InternalServerErrorException()
 	return data
 }

@@ -171,9 +171,13 @@
 				"1": "Service History"
 			},
 			"list": {
-				"search-by-name": "Search by name...",
+				"search-by-customer": "Search by customer...",
 				"columns": {
-
+					"service_name": "Service",
+					"customer_name": "Customer",
+					"done_at": "Done at",
+					"charged_amount": "Charged amount",
+					"was_paid": "Was paid?"
 				}
 			},
 			"create": {
@@ -271,7 +275,8 @@
 		"invalid_email": "Please enter a valid email",
 		"invalid_cell_phone": "Please enter a valid cell phone"
 	},
-	"general": {
-		"multi-select-empty-options": "No results found"
+	"boolean-answer": {
+		"true": "Yes",
+		"false": "No"
 	}
 }

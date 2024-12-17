@@ -171,9 +171,13 @@
 				"1": "Histórico de Serviços"
 			},
 			"list": {
-				"search-by-name": "Buscar por nome...",
+				"search-by-customer": "Buscar por cliente...",
 				"columns": {
-
+					"service_name": "Serviço",
+					"customer_name": "Cliente",
+					"done_at": "Feito em",
+					"charged_amount": "Valor recebido",
+					"was_paid": "Foi pago?"
 				}
 			},
 			"create": {
@@ -266,5 +270,9 @@
 		"required_error": "Campo obrigatório",
 		"invalid_email": "Por favor, digite um e-mail válido",
 		"invalid_cell_phone": "Por favor, digite um número de celular válido"
+	},
+	"boolean-answer": {
+		"true": "Yes",
+		"false": "No"
 	}
 }

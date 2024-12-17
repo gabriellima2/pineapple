@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client'
 
 import { useMemo, useState } from 'react'
@@ -16,20 +15,19 @@ import {
 	useReactTable,
 } from '@tanstack/react-table'
 
-import { Table, TableBody } from '@/components/ui/table'
 import { CreateService } from '../../../create-service-history'
+import { Table, TableBody } from '@/components/ui/table'
 import { DataTable } from '@/components/data-table'
+import { ShowDate } from '@/components/show-date'
 import { Currency } from '@/components/currency'
 import { Actions } from './components/actions'
 
-import { EMPTY_SYMBOL } from '@/constants/general'
-
-import type { GetAllServiceHistoryWithStatusDTO } from '@/dtos/service-history.dto'
+import type { GetAllServiceHistoryWithDetailsDTO } from '@/dtos/service-history.dto'
 import type { TableData } from '../../../../_@types/table-data'
 import type { Translations } from '@/@types/translations'
 
 type ServiceHistoryTableProps = {
-	serviceHistory: GetAllServiceHistoryWithStatusDTO
+	serviceHistory: GetAllServiceHistoryWithDetailsDTO
 }
 
 export function ServiceHistoryTable(props: ServiceHistoryTableProps) {
@@ -67,10 +65,25 @@ export function ServiceHistoryTable(props: ServiceHistoryTableProps) {
 			<div className="w-full">
 				<div className="flex flex-col items-center gap-4 py-4 sm:flex-row">
 					<DataTable.Search
-						placeholder={t('dashboard.services.list.search-by-name')}
+						accessorKey="customer.name"
+						placeholder={t('dashboard.service-history.list.search-by-customer')}
 					/>
 					<div className="flex w-full flex-row flex-wrap items-center gap-4 sm:flex-nowrap">
-						<DataTable.ColumnFilters<TableData> labels={{}} />
+						<DataTable.ColumnFilters
+							labels={{
+								'service.name': t(
+									'dashboard.service-history.list.columns.service_name'
+								),
+								'customer.name': t(
+									'dashboard.service-history.list.columns.customer_name'
+								),
+								was_paid: t('dashboard.service-history.list.columns.was_paid'),
+								charged_amount: t(
+									'dashboard.service-history.list.columns.charged_amount'
+								),
+								done_at: t('dashboard.service-history.list.columns.done_at'),
+							}}
+						/>
 						<CreateService />
 					</div>
 				</div>
@@ -93,6 +106,46 @@ const getColumns: (t: Translations) => ColumnDef<TableData>[] = (
 	t: Translations
 ) => {
 	return [
+		{
+			id: 'service.name',
+			accessorKey: 'service.name',
+			header: () => (
+				<div>{t('dashboard.service-history.list.columns.service_name')}</div>
+			),
+			cell: ({ row }) => row.getValue('service.name'),
+		},
+		{
+			id: 'customer.name',
+			accessorKey: 'customer.name',
+			header: () => (
+				<div>{t('dashboard.service-history.list.columns.customer_name')}</div>
+			),
+			cell: ({ row }) => row.getValue('customer.name'),
+		},
+		{
+			accessorKey: 'was_paid',
+			header: () => (
+				<div>{t('dashboard.service-history.list.columns.was_paid')}</div>
+			),
+			cell: ({ row }) => {
+				const wasPaid = row.getValue('was_paid') as boolean
+				return wasPaid ? t('boolean-answer.true') : t('boolean-answer.false')
+			},
+		},
+		{
+			accessorKey: 'charged_amount',
+			header: () => (
+				<div>{t('dashboard.service-history.list.columns.charged_amount')}</div>
+			),
+			cell: ({ row }) => <Currency value={row.getValue('charged_amount')} />,
+		},
+		{
+			accessorKey: 'done_at',
+			header: () => (
+				<div>{t('dashboard.service-history.list.columns.done_at')}</div>
+			),
+			cell: ({ row }) => <ShowDate date={row.getValue('done_at')} />,
+		},
 		{
 			id: 'actions',
 			enableHiding: false,
