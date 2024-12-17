@@ -23,8 +23,8 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select'
-import { CustomersSearchableSelect } from '@/app/dashboard/_components/customers-searchable-select'
-import { ServicesSearchableSelect } from '@/app/dashboard/_components/services-searchable-select'
+import { CustomersSelect } from '@/app/dashboard/_components/customers-select'
+import { ServicesSelect } from '@/app/dashboard/_components/services-select'
 import { RequiredIndicator } from '@/components/required-indicator'
 import { DatePickers } from '@/components/form/date-pickers'
 import { Inputs } from '@/components/form/inputs'
@@ -49,8 +49,8 @@ export function Services() {
 			charged_amount: '',
 			done_at: '',
 			was_paid: '',
-			customer_id: [],
-			service_id: [],
+			customer_id: '',
+			service_id: '',
 		})
 	}
 
@@ -81,9 +81,9 @@ export function Services() {
 												<RequiredIndicator />
 											</FormLabel>
 											<FormControl>
-												<CustomersSearchableSelect
+												<CustomersSelect
 													value={field.value}
-													onChange={field.onChange}
+													onValueChange={field.onChange}
 												/>
 											</FormControl>
 											<FormMessage />
@@ -102,9 +102,9 @@ export function Services() {
 												<RequiredIndicator />
 											</FormLabel>
 											<FormControl>
-												<ServicesSearchableSelect
+												<ServicesSelect
 													value={field.value}
-													onChange={field.onChange}
+													onValueChange={field.onChange}
 												/>
 											</FormControl>
 											<FormMessage />

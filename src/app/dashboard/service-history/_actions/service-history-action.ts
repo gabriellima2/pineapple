@@ -24,8 +24,8 @@ export async function createServiceHistory(
 		charged_amount: convertToNumber(service.charged_amount),
 		done_at: service.done_at,
 		was_paid: service.was_paid === 'true',
-		customer_id: service.customer_id[0].value,
-		service_id: service.service_id[0].value,
+		customer_id: service.customer_id,
+		service_id: service.service_id,
 	}))
 	const { error } = await supabaseClient.from('service_history').insert(raw)
 

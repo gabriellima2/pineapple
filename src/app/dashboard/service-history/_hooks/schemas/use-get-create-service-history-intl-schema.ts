@@ -25,17 +25,11 @@ export function useGetCreateServiceHistoryIntlSchema() {
 						.string({ required_error: t('required_error') })
 						.min(1, { message: t('required_error') }),
 					service_id: z
-						.object({ label: z.string(), value: z.string() })
-						.array()
-						.refine((options) => !!options?.length, {
-							message: t('required_error'),
-						}),
+						.string({ required_error: t('required_error') })
+						.min(1, { message: t('required_error') }),
 					customer_id: z
-						.object({ label: z.string(), value: z.string() })
-						.array()
-						.refine((options) => !!options?.length, {
-							message: t('required_error'),
-						}),
+						.string({ required_error: t('required_error') })
+						.min(1, { message: t('required_error') }),
 				})
 				.array(),
 		})

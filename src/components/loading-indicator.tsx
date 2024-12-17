@@ -5,5 +5,5 @@ export type LoadingIndicatorProps = LucideProps
 
 export function LoadingIndicator(props: LoadingIndicatorProps) {
 	const { className, ...rest } = props
-	return <Loader2 className={cn(className, 'h-6 w-6 animate-spin')} {...rest} />
+	return <Loader2 className={cn('h-6 w-6 animate-spin', className)} {...rest} />
 }
