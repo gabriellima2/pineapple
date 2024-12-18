@@ -25,7 +25,7 @@ import { UpdateSkeleton } from '@/components/ui/skeleton'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
-import { useGetServiceHistoryById } from '../../_hooks/queries/use-get-service-history-by-id'
+import { useGetServiceHistoryWithDetailsById } from '../../_hooks/queries/use-get-service-history-with-details-by-id'
 import { useServiceHistoryContext } from '../../_contexts/service-history.context'
 import { useUpdateServiceHistoryForm } from './hooks/use-update-service-history-form'
 
@@ -36,8 +36,8 @@ type UpdateServiceHistoryProps = {
 export function UpdateServiceHistory(props: UpdateServiceHistoryProps) {
 	const { serviceHistoryId } = props
 	const t = useTranslations()
-	const { service, isLoadingService } =
-		useGetServiceHistoryById(serviceHistoryId)
+	const { serviceHistory, isLoadingServiceHistory } =
+		useGetServiceHistoryWithDetailsById(serviceHistoryId)
 	const { isOpenUpdateServiceHistory, setIsOpenUpdateServiceHistory } =
 		useServiceHistoryContext()
 	const { form, isUpdating, handleUpdate } =
@@ -49,9 +49,9 @@ export function UpdateServiceHistory(props: UpdateServiceHistoryProps) {
 	}
 
 	useEffect(() => {
-		if (!service) return
+		if (!serviceHistory) return
 		form.reset({})
-	}, [service, form])
+	}, [serviceHistory, form])
 
 	return (
 		<Sheet open={isOpenUpdateServiceHistory} onOpenChange={handleOpenChange}>
@@ -66,7 +66,7 @@ export function UpdateServiceHistory(props: UpdateServiceHistoryProps) {
 				<Form {...form}>
 					<form onSubmit={handleUpdate} className="flex flex-1 flex-col">
 						<div className="flex-1 space-y-4 p-4">
-							{isLoadingService ? <UpdateSkeleton /> : <></>}
+							{isLoadingServiceHistory ? <UpdateSkeleton /> : <></>}
 						</div>
 						<SheetFooter>
 							<SheetClose asChild>

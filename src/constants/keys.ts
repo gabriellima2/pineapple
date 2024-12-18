@@ -8,6 +8,7 @@ export const QUERY_KEYS = {
 	GET_CUSTOMER: 'customer',
 	GET_CUSTOMER_SELECT_OPTIONS: 'customer-select-options',
 	GET_SERVICE_HISTORY: 'service-history',
+	GET_SERVICE_HISTORY_WITH_DETAILS: 'service-history-with-details',
 }
 
 export const MUTATION_KEYS = {

@@ -10,7 +10,7 @@ import { convertToNumber } from '@/helpers/currency'
 import { ROUTES } from '@/constants/routes'
 
 import type {
-	GetServiceHistoryByIdDTO,
+	GetServiceHistoryWithDetailsByIdDTO,
 	GetAllServiceHistoryWithDetailsDTO,
 } from '@/dtos/service-history.dto'
 import type { CreateServiceHistoryFields } from '../_hooks/schemas/use-get-create-service-history-intl-schema'
@@ -67,17 +67,24 @@ export async function getAllServiceHistoryWithDetails(): Promise<GetAllServiceHi
 	return data
 }
 
-export async function getServiceHistoryById(
+export async function getServiceHistoryWithDetailsById(
 	serviceHistoryId: string
-): Promise<GetServiceHistoryByIdDTO | null> {
+): Promise<GetServiceHistoryWithDetailsByIdDTO | null> {
 	const supabaseClient = await createClerkSupabaseClientSsr()
 	const { data, error } = await supabaseClient
 		.from('service_history')
 		.select(
-			'id, charged_amount, received_amount, done_at, customer_id, service_ids, created_at'
+			`id,
+			charged_amount,
+			was_paid,
+			done_at,
+			customer_id,
+			created_at,
+			service:service_id (id, name, base_price),
+			customer:customer_id (id, name, email, cell_phone)`
 		)
 		.eq('id', serviceHistoryId)
-		.returns<GetServiceHistoryByIdDTO[]>()
+		.returns<GetServiceHistoryWithDetailsByIdDTO[]>()
 
 	if (error) throw new InternalServerErrorException()
 	return data?.[0] || null

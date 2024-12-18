@@ -219,7 +219,24 @@
 			"view": {
 				"title": "View service history",
 				"fields": {
-
+					"id": "Identifier",
+					"done_at": "Done at",
+					"charged_amount": "Charged amount",
+					"was_paid": "Was paid?",
+					"created_at": "Created at",
+					"service-section": {
+						"title": "Service",
+						"id": "Identifier",
+						"name": "Name",
+						"base_price": "Price"
+					},
+					"customer-section": {
+						"title": "Customer",
+						"id": "Identifier",
+						"name": "Name",
+						"email": "Email",
+						"cell_phone": "Cell Phone"
+					}
 				}
 			},
 			"delete": {

@@ -11,7 +11,7 @@ import {
 import { ViewSkeleton } from '@/components/ui/skeleton'
 import { Details } from '@/components/details'
 
-import { useGetServiceHistoryById } from '../_hooks/queries/use-get-service-history-by-id'
+import { useGetServiceHistoryWithDetailsById } from '../_hooks/queries/use-get-service-history-with-details-by-id'
 import { useServiceHistoryContext } from '../_contexts/service-history.context'
 
 type ViewServiceHistoryProps = {
@@ -21,8 +21,8 @@ type ViewServiceHistoryProps = {
 export function ViewServiceHistory(props: ViewServiceHistoryProps) {
 	const { serviceHistoryId } = props
 	const t = useTranslations()
-	const { service, isLoadingService } =
-		useGetServiceHistoryById(serviceHistoryId)
+	const { serviceHistory, isLoadingServiceHistory } =
+		useGetServiceHistoryWithDetailsById(serviceHistoryId)
 	const { isOpenViewServiceHistory, setIsOpenViewServiceHistory } =
 		useServiceHistoryContext()
 	return (
@@ -38,8 +38,107 @@ export function ViewServiceHistory(props: ViewServiceHistoryProps) {
 					<SheetTitle>{t('dashboard.services.view.title')}</SheetTitle>
 				</SheetHeader>
 				<div className="flex-1 p-4">
-					{isLoadingService && !service && <ViewSkeleton />}
-					{!isLoadingService && service && <Details.List></Details.List>}
+					{isLoadingServiceHistory && !serviceHistory && <ViewSkeleton />}
+					{!isLoadingServiceHistory && serviceHistory && (
+						<article className="space-y-8">
+							<Details.List>
+								<Details.ListItem
+									label={t('dashboard.service-history.view.fields.id')}
+									value={serviceHistory.id}
+								/>
+								<Details.ListItem
+									label={t('dashboard.service-history.view.fields.done_at')}
+									value={serviceHistory.done_at}
+									className="sm:col-span-2"
+								/>
+								<Details.ListItem
+									label={t(
+										'dashboard.service-history.view.fields.charged_amount'
+									)}
+									value={serviceHistory.charged_amount}
+									className="sm:col-span-2"
+								/>
+								<Details.ListItem
+									label={t('dashboard.service-history.view.fields.was_paid')}
+									value={
+										serviceHistory.was_paid
+											? t('boolean-answer.true')
+											: t('boolean-answer.false')
+									}
+									className="sm:col-span-2"
+								/>
+								<Details.ListItem
+									label={t('dashboard.service-history.view.fields.created_at')}
+									value={serviceHistory.created_at}
+									className="sm:col-span-2"
+								/>
+							</Details.List>
+							<section className="border-t">
+								<h2 className="mb-4 mt-8 text-base font-semibold text-foreground">
+									{t(
+										'dashboard.service-history.view.fields.service-section.title'
+									)}
+								</h2>
+								<Details.List>
+									<Details.ListItem
+										label={t(
+											'dashboard.service-history.view.fields.service-section.id'
+										)}
+										value={serviceHistory.service.id}
+									/>
+									<Details.ListItem
+										label={t(
+											'dashboard.service-history.view.fields.service-section.name'
+										)}
+										value={serviceHistory.service.name}
+									/>
+									<Details.ListItem
+										label={t(
+											'dashboard.service-history.view.fields.service-section.base_price'
+										)}
+										value={serviceHistory.service.base_price}
+										className="sm:col-span-2"
+									/>
+								</Details.List>
+							</section>
+							<section className="border-t">
+								<h2 className="mb-4 mt-8 text-base font-semibold text-foreground">
+									{t(
+										'dashboard.service-history.view.fields.customer-section.title'
+									)}
+								</h2>
+								<Details.List>
+									<Details.ListItem
+										label={t(
+											'dashboard.service-history.view.fields.customer-section.id'
+										)}
+										value={serviceHistory.customer.id}
+									/>
+									<Details.ListItem
+										label={t(
+											'dashboard.service-history.view.fields.customer-section.name'
+										)}
+										value={serviceHistory.customer.name}
+										className="sm:col-span-2"
+									/>
+									<Details.ListItem
+										label={t(
+											'dashboard.service-history.view.fields.customer-section.email'
+										)}
+										value={serviceHistory.customer.email}
+										className="sm:col-span-2"
+									/>
+									<Details.ListItem
+										label={t(
+											'dashboard.service-history.view.fields.customer-section.cell_phone'
+										)}
+										value={serviceHistory.customer.cell_phone}
+										className="sm:col-span-2"
+									/>
+								</Details.List>
+							</section>
+						</article>
+					)}
 				</div>
 			</SheetContent>
 		</Sheet>

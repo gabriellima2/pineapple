@@ -215,7 +215,24 @@
 			"view": {
 				"title": "Visualizar histórico de serviço",
 				"fields": {
-
+					"id": "Identificador",
+					"done_at": "Feito em",
+					"charged_amount": "Valor recebido",
+					"was_paid": "Foi pago?",
+					"created_at": "Criado em",
+					"service-section": {
+						"title": "Serviço",
+						"id": "Identificador",
+						"name": "Nome",
+						"base_price": "Preço"
+					},
+					"customer-section": {
+						"title": "Cliente",
+						"id": "Identificador",
+						"name": "Nome",
+						"email": "E-mail",
+						"cell_phone": "Celular"
+					}
 				}
 			},
 			"delete": {
