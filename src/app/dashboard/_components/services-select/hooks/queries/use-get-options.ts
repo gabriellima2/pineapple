@@ -16,8 +16,6 @@ export function useGetOptions() {
 		queryKey: [QUERY_KEYS.GET_SERVICE_SELECT_OPTIONS],
 		throwOnError: true,
 		refetchOnWindowFocus: false,
-		gcTime: 0,
-		staleTime: 0,
 	})
 	return { options, isLoadingOptions }
 }
