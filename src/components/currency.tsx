@@ -1,7 +1,5 @@
 import { useMemo } from 'react'
-import { useLocale } from 'next-intl'
-
-import { formatCurrency } from '@/utils/intl'
+import { useIntlFormatter } from '@/hooks/use-intl-formatter'
 
 type CurrencyProps = {
 	value: number | string
@@ -9,11 +7,11 @@ type CurrencyProps = {
 
 export function Currency(props: CurrencyProps) {
 	const { value } = props
-	const locale = useLocale()
+	const { formatCurrency } = useIntlFormatter()
 
 	const formattedCurrency = useMemo(
-		() => formatCurrency(value, { locale }),
-		[value, locale]
+		() => formatCurrency(value),
+		[value, formatCurrency]
 	)
 
 	return formattedCurrency

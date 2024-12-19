@@ -29,6 +29,7 @@ export type GetServiceHistoryWithDetailsByIdDTO = {
 		id: string
 		name: string
 		base_price: number
+		description: string | null
 	}
 	customer: {
 		id: string

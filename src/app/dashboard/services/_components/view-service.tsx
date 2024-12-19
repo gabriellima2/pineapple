@@ -13,9 +13,7 @@ import { Details } from '@/components/details'
 
 import { useGetServiceById } from '../_hooks/queries/use-get-service-by-id'
 import { useServicesContext } from '../_contexts/services.context'
-
-import { currencyMask } from '@/helpers/masks'
-import { showDate } from '@/utils/date'
+import { useIntlFormatter } from '@/hooks/use-intl-formatter'
 
 type ViewServiceProps = {
 	serviceId: string
@@ -24,6 +22,7 @@ type ViewServiceProps = {
 export function ViewService(props: ViewServiceProps) {
 	const { serviceId } = props
 	const t = useTranslations()
+	const { formatCurrency, formatDate } = useIntlFormatter()
 	const { service, isLoadingService } = useGetServiceById(serviceId)
 	const { isOpenViewService, setIsOpenViewService } = useServicesContext()
 	return (
@@ -50,7 +49,7 @@ export function ViewService(props: ViewServiceProps) {
 							/>
 							<Details.ListItem
 								label={t('dashboard.services.view.fields.base_price')}
-								value={currencyMask(service.base_price)}
+								value={formatCurrency(service.base_price)}
 								className="sm:col-span-2"
 							/>
 							<Details.ListItem
@@ -60,7 +59,7 @@ export function ViewService(props: ViewServiceProps) {
 							/>
 							<Details.ListItem
 								label={t('dashboard.services.view.fields.created_at')}
-								value={showDate(service.created_at)}
+								value={formatDate(service.created_at)}
 								className="sm:col-span-2"
 							/>
 						</Details.List>

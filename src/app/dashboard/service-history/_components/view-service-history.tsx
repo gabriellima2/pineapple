@@ -13,6 +13,7 @@ import { Details } from '@/components/details'
 
 import { useGetServiceHistoryWithDetailsById } from '../_hooks/queries/use-get-service-history-with-details-by-id'
 import { useServiceHistoryContext } from '../_contexts/service-history.context'
+import { useIntlFormatter } from '@/hooks/use-intl-formatter'
 
 type ViewServiceHistoryProps = {
 	serviceHistoryId: string
@@ -20,6 +21,7 @@ type ViewServiceHistoryProps = {
 
 export function ViewServiceHistory(props: ViewServiceHistoryProps) {
 	const { serviceHistoryId } = props
+	const { formatCurrency, formatDate } = useIntlFormatter()
 	const t = useTranslations()
 	const { serviceHistory, isLoadingServiceHistory } =
 		useGetServiceHistoryWithDetailsById(serviceHistoryId)
@@ -48,14 +50,14 @@ export function ViewServiceHistory(props: ViewServiceHistoryProps) {
 								/>
 								<Details.ListItem
 									label={t('dashboard.service-history.view.fields.done_at')}
-									value={serviceHistory.done_at}
+									value={formatDate(serviceHistory.done_at)}
 									className="sm:col-span-2"
 								/>
 								<Details.ListItem
 									label={t(
 										'dashboard.service-history.view.fields.charged_amount'
 									)}
-									value={serviceHistory.charged_amount}
+									value={formatCurrency(serviceHistory.charged_amount)}
 									className="sm:col-span-2"
 								/>
 								<Details.ListItem
@@ -69,7 +71,7 @@ export function ViewServiceHistory(props: ViewServiceHistoryProps) {
 								/>
 								<Details.ListItem
 									label={t('dashboard.service-history.view.fields.created_at')}
-									value={serviceHistory.created_at}
+									value={formatDate(serviceHistory.created_at)}
 									className="sm:col-span-2"
 								/>
 							</Details.List>
@@ -91,13 +93,18 @@ export function ViewServiceHistory(props: ViewServiceHistoryProps) {
 											'dashboard.service-history.view.fields.service-section.name'
 										)}
 										value={serviceHistory.service.name}
+										className="sm:col-span-2"
 									/>
 									<Details.ListItem
 										label={t(
 											'dashboard.service-history.view.fields.service-section.base_price'
 										)}
-										value={serviceHistory.service.base_price}
+										value={formatCurrency(serviceHistory.service.base_price)}
 										className="sm:col-span-2"
+									/>
+									<Details.ListItem
+										label={t('dashboard.services.view.fields.description')}
+										value={serviceHistory.service.description}
 									/>
 								</Details.List>
 							</section>

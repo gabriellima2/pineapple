@@ -62,7 +62,6 @@ export async function getAllServiceHistoryWithDetails(): Promise<GetAllServiceHi
 		)
 		.returns<GetAllServiceHistoryWithDetailsDTO>()
 
-	console.log(data)
 	if (error) throw new InternalServerErrorException()
 	return data
 }
@@ -80,7 +79,7 @@ export async function getServiceHistoryWithDetailsById(
 			done_at,
 			customer_id,
 			created_at,
-			service:service_id (id, name, base_price),
+			service:service_id (id, name, base_price, description),
 			customer:customer_id (id, name, email, cell_phone)`
 		)
 		.eq('id', serviceHistoryId)

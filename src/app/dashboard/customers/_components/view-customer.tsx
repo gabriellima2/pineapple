@@ -13,7 +13,7 @@ import { Details } from '@/components/details'
 
 import { useGetCustomerById } from '../_hooks/queries/use-get-customer-by-id'
 import { useCustomersContext } from '../_contexts/customers.context'
-import { showDate } from '@/utils/date'
+import { useIntlFormatter } from '@/hooks/use-intl-formatter'
 
 type ViewCustomerProps = {
 	customerId: string
@@ -22,6 +22,7 @@ type ViewCustomerProps = {
 export function ViewCustomer(props: ViewCustomerProps) {
 	const { customerId } = props
 	const t = useTranslations()
+	const { formatDate } = useIntlFormatter()
 	const { customer, isLoadingCustomer } = useGetCustomerById(customerId)
 	const { isOpenViewCustomer, setIsOpenViewCustomer } = useCustomersContext()
 	return (
@@ -58,7 +59,7 @@ export function ViewCustomer(props: ViewCustomerProps) {
 							/>
 							<Details.ListItem
 								label={t('dashboard.customers.view.fields.created_at')}
-								value={showDate(customer.created_at)}
+								value={formatDate(customer.created_at)}
 								className="sm:col-span-2"
 							/>
 						</Details.List>
