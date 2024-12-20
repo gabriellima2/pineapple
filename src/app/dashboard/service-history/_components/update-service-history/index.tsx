@@ -94,7 +94,10 @@ export function UpdateServiceHistory(props: UpdateServiceHistoryProps) {
 										control={form.control}
 										name="customer_id"
 										render={({ field }) => (
-											<FormItem className="w-full min-w-[200px]">
+											<FormItem
+												key={field.value}
+												className="w-full min-w-[200px]"
+											>
 												<FormLabel className="text-nowrap">
 													{t(
 														'dashboard.service-history.update.fields.customer_id'
@@ -115,7 +118,10 @@ export function UpdateServiceHistory(props: UpdateServiceHistoryProps) {
 										control={form.control}
 										name="service_id"
 										render={({ field }) => (
-											<FormItem className="w-full min-w-[200px]">
+											<FormItem
+												key={field.value}
+												className="w-full min-w-[200px]"
+											>
 												<FormLabel className="text-nowrap">
 													{t(
 														'dashboard.service-history.update.fields.service_id'
@@ -150,7 +156,10 @@ export function UpdateServiceHistory(props: UpdateServiceHistoryProps) {
 										control={form.control}
 										name="was_paid"
 										render={({ field }) => (
-											<FormItem className="w-full min-w-[200px]">
+											<FormItem
+												key={field.value}
+												className="w-full min-w-[200px]"
+											>
 												<FormLabel className="text-nowrap">
 													{t(
 														'dashboard.service-history.update.fields.was_paid'
