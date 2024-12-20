@@ -173,17 +173,21 @@
 			"list": {
 				"search-by-customer": "Buscar por cliente...",
 				"columns": {
-					"service_name": "Serviço",
-					"customer_name": "Cliente",
+					"service_id": "Serviço",
+					"customer_id": "Cliente",
 					"done_at": "Feito em",
-					"charged_amount": "Valor recebido",
+					"charged_amount": "Valor cobrado",
 					"was_paid": "Foi pago?"
 				}
 			},
 			"create": {
 				"title": "Adicionar um novo histórico de serviço",
 				"fields": {
-
+					"service_id": "Serviço",
+					"customer_id": "Cliente",
+					"done_at": "Feito em",
+					"charged_amount": "Valor cobrado",
+					"was_paid": "Foi pago?"
 				},
 				"notification": {
 					"success": {
@@ -199,7 +203,11 @@
 			"update": {
 				"title": "Atualizar histórico de serviço",
 				"fields": {
-
+					"service_id": "Serviço",
+					"customer_id": "Cliente",
+					"done_at": "Feito em",
+					"charged_amount": "Valor cobrado",
+					"was_paid": "Foi pago?"
 				},
 				"notification": {
 					"success": {
@@ -217,7 +225,7 @@
 				"fields": {
 					"id": "Identificador",
 					"done_at": "Feito em",
-					"charged_amount": "Valor recebido",
+					"charged_amount": "Valor cobrado",
 					"was_paid": "Foi pago?",
 					"created_at": "Criado em",
 					"service-section": {
@@ -263,7 +271,9 @@
 		"view": "Visualizar",
 		"delete": "Deletar",
 		"copy-id": "Copiar ID",
-		"sr-only": "Open menu"
+		"sr-only": "Open menu",
+		"delete-row": "Deletar linha",
+		"append-row": "Adicionar linha"
 	},
 	"locales": {
 		"en": "Inglês",
@@ -289,7 +299,7 @@
 		"invalid_cell_phone": "Por favor, digite um número de celular válido"
 	},
 	"boolean-answer": {
-		"true": "Yes",
-		"false": "No"
+		"true": "Sim",
+		"false": "Não"
 	}
 }

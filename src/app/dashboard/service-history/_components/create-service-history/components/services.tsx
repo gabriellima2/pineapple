@@ -1,4 +1,5 @@
 import { useFieldArray, useFormContext } from 'react-hook-form'
+import { useTranslations } from 'next-intl'
 import { Trash2 } from 'lucide-react'
 
 import {
@@ -13,7 +14,6 @@ import {
 	FormControl,
 	FormField,
 	FormItem,
-	FormLabel,
 	FormMessage,
 } from '@/components/ui/form'
 import {
@@ -25,7 +25,6 @@ import {
 } from '@/components/ui/select'
 import { CustomersSelect } from '@/app/dashboard/_components/customers-select'
 import { ServicesSelect } from '@/app/dashboard/_components/services-select'
-import { RequiredIndicator } from '@/components/required-indicator'
 import { DatePickers } from '@/components/form/date-pickers'
 import { Inputs } from '@/components/form/inputs'
 import { Button } from '@/components/ui/button'
@@ -34,6 +33,7 @@ import { currencyMask } from '@/helpers/masks'
 import type { CreateServiceHistoryFields } from '../../../_hooks/schemas/use-get-create-service-history-intl-schema'
 
 export function Services() {
+	const t = useTranslations()
 	const { control } = useFormContext<CreateServiceHistoryFields>()
 	const {
 		fields: services,
@@ -59,12 +59,22 @@ export function Services() {
 			<Table>
 				<TableHeader>
 					<TableRow>
-						<TableHead>Customer</TableHead>
-						<TableHead>Service</TableHead>
-						<TableHead>Done At</TableHead>
-						<TableHead>Was Paid</TableHead>
-						<TableHead>Charged Amount</TableHead>
-						<TableHead hidden>Actions</TableHead>
+						<TableHead>
+							{t('dashboard.service-history.create.fields.customer_id')}
+						</TableHead>
+						<TableHead>
+							{t('dashboard.service-history.create.fields.service_id')}
+						</TableHead>
+						<TableHead>
+							{t('dashboard.service-history.create.fields.done_at')}
+						</TableHead>
+						<TableHead>
+							{t('dashboard.service-history.create.fields.was_paid')}
+						</TableHead>
+						<TableHead>
+							{t('dashboard.service-history.create.fields.charged_amount')}
+						</TableHead>
+						<TableHead hidden>{t('actions.title')}</TableHead>
 					</TableRow>
 				</TableHeader>
 				<TableBody>
@@ -76,10 +86,6 @@ export function Services() {
 									name={`services.${index}.customer_id`}
 									render={({ field }) => (
 										<FormItem className="w-full min-w-[200px]">
-											<FormLabel className="text-nowrap">
-												Customer
-												<RequiredIndicator />
-											</FormLabel>
 											<FormControl>
 												<CustomersSelect
 													value={field.value}
@@ -97,10 +103,6 @@ export function Services() {
 									name={`services.${index}.service_id`}
 									render={({ field }) => (
 										<FormItem className="w-full min-w-[200px]">
-											<FormLabel className="text-nowrap">
-												Service
-												<RequiredIndicator />
-											</FormLabel>
 											<FormControl>
 												<ServicesSelect
 													value={field.value}
@@ -118,10 +120,6 @@ export function Services() {
 									name={`services.${index}.done_at`}
 									render={({ field }) => (
 										<FormItem className="w-full min-w-[200px]">
-											<FormLabel className="text-nowrap">
-												Done At
-												<RequiredIndicator />
-											</FormLabel>
 											<DatePickers.Default {...field} />
 											<FormMessage />
 										</FormItem>
@@ -134,10 +132,6 @@ export function Services() {
 									name={`services.${index}.was_paid`}
 									render={({ field }) => (
 										<FormItem className="w-full min-w-[200px]">
-											<FormLabel className="text-nowrap">
-												Was paid?
-												<RequiredIndicator />
-											</FormLabel>
 											<Select
 												onValueChange={field.onChange}
 												defaultValue={field.value}
@@ -146,8 +140,12 @@ export function Services() {
 													<SelectValue />
 												</SelectTrigger>
 												<SelectContent>
-													<SelectItem value="true">Yes</SelectItem>
-													<SelectItem value="false">No</SelectItem>
+													<SelectItem value="true">
+														{t('boolean-answer.true')}
+													</SelectItem>
+													<SelectItem value="false">
+														{t('boolean-answer.false')}
+													</SelectItem>
 												</SelectContent>
 											</Select>
 											<FormMessage />
@@ -161,10 +159,6 @@ export function Services() {
 									name={`services.${index}.charged_amount`}
 									render={({ field }) => (
 										<FormItem className="w-full min-w-[200px]">
-											<FormLabel className="text-nowrap">
-												Charged Amount
-												<RequiredIndicator />
-											</FormLabel>
 											<FormControl>
 												<Inputs.Default {...field} mask={currencyMask} />
 											</FormControl>
@@ -176,7 +170,7 @@ export function Services() {
 							<TableCell>
 								<Button
 									type="button"
-									title="Delete row"
+									title={t('actions.delete-row')}
 									variant="ghost"
 									size="icon"
 									onClick={(e) => {
@@ -199,7 +193,7 @@ export function Services() {
 					handleAppendService()
 				}}
 			>
-				Append
+				{t('actions.append-row')}
 			</Button>
 		</div>
 	)

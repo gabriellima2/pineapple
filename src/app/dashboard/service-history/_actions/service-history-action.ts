@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 'use server'
 
 import { revalidatePath } from 'next/cache'
@@ -12,6 +11,7 @@ import { ROUTES } from '@/constants/routes'
 import type {
 	GetServiceHistoryWithDetailsByIdDTO,
 	GetAllServiceHistoryWithDetailsDTO,
+	GetServiceHistoryByIdDTO,
 } from '@/dtos/service-history.dto'
 import type { CreateServiceHistoryFields } from '../_hooks/schemas/use-get-create-service-history-intl-schema'
 import type { UpdateServiceHistoryFields } from '../_hooks/schemas/use-get-update-service-history-intl-schema'
@@ -78,12 +78,35 @@ export async function getServiceHistoryWithDetailsById(
 			was_paid,
 			done_at,
 			customer_id,
+			service_id,
 			created_at,
 			service:service_id (id, name, base_price, description),
 			customer:customer_id (id, name, email, cell_phone)`
 		)
 		.eq('id', serviceHistoryId)
 		.returns<GetServiceHistoryWithDetailsByIdDTO[]>()
+
+	if (error) throw new InternalServerErrorException()
+	return data?.[0] || null
+}
+
+export async function getServiceHistoryById(
+	serviceHistoryId: string
+): Promise<GetServiceHistoryByIdDTO | null> {
+	const supabaseClient = await createClerkSupabaseClientSsr()
+	const { data, error } = await supabaseClient
+		.from('service_history')
+		.select(
+			`id,
+			charged_amount,
+			was_paid,
+			done_at,
+			customer_id,
+			service_id,
+			created_at`
+		)
+		.eq('id', serviceHistoryId)
+		.returns<GetServiceHistoryByIdDTO[]>()
 
 	if (error) throw new InternalServerErrorException()
 	return data?.[0] || null

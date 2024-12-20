@@ -72,10 +72,10 @@ export function ServiceHistoryTable(props: ServiceHistoryTableProps) {
 						<DataTable.ColumnFilters
 							labels={{
 								'service.name': t(
-									'dashboard.service-history.list.columns.service_name'
+									'dashboard.service-history.list.columns.service_id'
 								),
 								'customer.name': t(
-									'dashboard.service-history.list.columns.customer_name'
+									'dashboard.service-history.list.columns.customer_id'
 								),
 								was_paid: t('dashboard.service-history.list.columns.was_paid'),
 								charged_amount: t(
@@ -110,7 +110,7 @@ const getColumns: (t: Translations) => ColumnDef<TableData>[] = (
 			id: 'service.name',
 			accessorKey: 'service.name',
 			header: () => (
-				<div>{t('dashboard.service-history.list.columns.service_name')}</div>
+				<div>{t('dashboard.service-history.list.columns.service_id')}</div>
 			),
 			cell: ({ row }) => row.getValue('service.name'),
 		},
@@ -118,7 +118,7 @@ const getColumns: (t: Translations) => ColumnDef<TableData>[] = (
 			id: 'customer.name',
 			accessorKey: 'customer.name',
 			header: () => (
-				<div>{t('dashboard.service-history.list.columns.customer_name')}</div>
+				<div>{t('dashboard.service-history.list.columns.customer_id')}</div>
 			),
 			cell: ({ row }) => row.getValue('customer.name'),
 		},

@@ -14,8 +14,8 @@ export function useIntlFormatter() {
 	)
 
 	const handleFormatDate = useCallback(
-		(date: string | Date) => {
-			return formatDate(date, { locale })
+		(date: string | Date, formatStr?: string) => {
+			return formatDate(date, { locale, formatStr })
 		},
 		[locale]
 	)

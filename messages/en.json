@@ -173,8 +173,8 @@
 			"list": {
 				"search-by-customer": "Search by customer...",
 				"columns": {
-					"service_name": "Service",
-					"customer_name": "Customer",
+					"service_id": "Service",
+					"customer_id": "Customer",
 					"done_at": "Done at",
 					"charged_amount": "Charged amount",
 					"was_paid": "Was paid?"
@@ -183,11 +183,11 @@
 			"create": {
 				"title": "Add a new service history",
 				"fields": {
-					"charged_amount": "Charged amount",
-					"received_amount": "Received amount",
-					"done_at": "Done at",
+					"service_id": "Service",
 					"customer_id": "Customer",
-					"service_id": "Service"
+					"done_at": "Done at",
+					"charged_amount": "Charged amount",
+					"was_paid": "Was paid?"
 				},
 				"notification": {
 					"success": {
@@ -203,7 +203,11 @@
 			"update": {
 				"title": "Update service history",
 				"fields": {
-
+					"service_id": "Service",
+					"customer_id": "Customer",
+					"done_at": "Done at",
+					"charged_amount": "Charged amount",
+					"was_paid": "Was paid?"
 				},
 				"notification": {
 					"success": {
@@ -267,7 +271,9 @@
 		"view": "View",
 		"delete": "Delete",
 		"copy-id": "Copy ID",
-		"sr-only": "Abrir menu"
+		"sr-only": "Abrir menu",
+		"delete-row": "Delete row",
+		"append-row": "Append row"
 	},
 	"locales": {
 		"en": "English",
