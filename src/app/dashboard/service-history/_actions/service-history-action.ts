@@ -40,7 +40,13 @@ export async function updateServiceHistory(
 	const supabaseClient = await createClerkSupabaseClientSsr()
 	const { error } = await supabaseClient
 		.from('service_history')
-		.update({})
+		.update({
+			charged_amount: convertToNumber(payload.charged_amount),
+			done_at: payload.done_at,
+			was_paid: payload.was_paid === 'true',
+			customer_id: payload.customer_id,
+			service_id: payload.service_id,
+		})
 		.eq('id', serviceHistoryId)
 
 	if (error) throw new InternalServerErrorException()
