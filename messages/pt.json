@@ -189,6 +189,9 @@
 					"charged_amount": "Valor cobrado",
 					"was_paid": "Foi pago?"
 				},
+				"validations": {
+					"min_services_length": "Insira pelo menos um serviço para ser adicionado ao histórico"
+				},
 				"notification": {
 					"success": {
 						"title": "Tudo certo!",

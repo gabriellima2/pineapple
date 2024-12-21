@@ -189,6 +189,9 @@
 					"charged_amount": "Charged amount",
 					"was_paid": "Was paid?"
 				},
+				"validations": {
+					"min_services_length": "Enter at least one service to be added to the history"
+				},
 				"notification": {
 					"success": {
 						"title": "Everything ok!",
