@@ -21,14 +21,13 @@ import {
 } from '@/components/ui/form'
 import { RequiredIndicator } from '@/components/required-indicator'
 import { UpdateSkeleton } from '@/components/ui/skeleton'
+import { Inputs } from '@/components/form/inputs'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 
 import { useGetServiceById } from '../../_hooks/queries/use-get-service-by-id'
 import { useUpdateServiceForm } from './hooks/use-update-service-form'
 import { useServicesContext } from '../../_contexts/services.context'
-
-import { currencyMask } from '@/helpers/masks'
+import { useIntlFormatter } from '@/hooks/use-intl-formatter'
 
 type UpdateServiceProps = {
 	serviceId: string
@@ -37,6 +36,7 @@ type UpdateServiceProps = {
 export function UpdateService(props: UpdateServiceProps) {
 	const { serviceId } = props
 	const t = useTranslations()
+	const { applyCurrencyMask } = useIntlFormatter()
 	const { service, isLoadingService } = useGetServiceById(serviceId)
 	const { isOpenUpdateService, setIsOpenUpdateService } = useServicesContext()
 	const { form, isUpdating, handleUpdate } = useUpdateServiceForm(serviceId)
@@ -51,9 +51,9 @@ export function UpdateService(props: UpdateServiceProps) {
 		form.reset({
 			name: service.name,
 			description: service.description || '',
-			base_price: currencyMask(service.base_price),
+			base_price: applyCurrencyMask(service.base_price),
 		})
-	}, [service, form])
+	}, [service, form, applyCurrencyMask])
 
 	return (
 		<Sheet open={isOpenUpdateService} onOpenChange={handleOpenChange}>
@@ -82,7 +82,7 @@ export function UpdateService(props: UpdateServiceProps) {
 													<RequiredIndicator />
 												</FormLabel>
 												<FormControl>
-													<Input {...field} />
+													<Inputs.Default {...field} />
 												</FormControl>
 												<FormMessage />
 											</FormItem>
@@ -98,7 +98,7 @@ export function UpdateService(props: UpdateServiceProps) {
 													<RequiredIndicator />
 												</FormLabel>
 												<FormControl>
-													<Input mask={currencyMask} {...field} />
+													<Inputs.Currency {...field} />
 												</FormControl>
 												<FormMessage />
 											</FormItem>
@@ -113,7 +113,7 @@ export function UpdateService(props: UpdateServiceProps) {
 													{t('dashboard.services.update.fields.description')}
 												</FormLabel>
 												<FormControl>
-													<Input {...field} />
+													<Inputs.Default {...field} />
 												</FormControl>
 												<FormMessage />
 											</FormItem>

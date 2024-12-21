@@ -27,8 +27,6 @@ import { Button } from '@/components/ui/button'
 import { useCreateServiceForm } from './hooks/use-create-service-form'
 import { useServicesContext } from '../../_contexts/services.context'
 
-import { currencyMask } from '@/helpers/masks'
-
 export function CreateService() {
 	const t = useTranslations()
 	const { form, isCreating, handleCreate } = useCreateServiceForm()
@@ -84,7 +82,7 @@ export function CreateService() {
 											<RequiredIndicator />
 										</FormLabel>
 										<FormControl>
-											<Inputs.Default mask={currencyMask} {...field} />
+											<Inputs.Currency {...field} />
 										</FormControl>
 										<FormMessage />
 									</FormItem>

@@ -37,8 +37,7 @@ import { Button } from '@/components/ui/button'
 import { useGetServiceHistoryById } from '../../_hooks/queries/use-get-service-history-by-id'
 import { useUpdateServiceHistoryForm } from './hooks/use-update-service-history-form'
 import { useServiceHistoryContext } from '../../_contexts/service-history.context'
-
-import { currencyMask } from '@/helpers/masks'
+import { useIntlFormatter } from '@/hooks/use-intl-formatter'
 
 type UpdateServiceHistoryProps = {
 	serviceHistoryId: string
@@ -47,6 +46,7 @@ type UpdateServiceHistoryProps = {
 export function UpdateServiceHistory(props: UpdateServiceHistoryProps) {
 	const { serviceHistoryId } = props
 	const t = useTranslations()
+	const { applyCurrencyMask } = useIntlFormatter()
 	const { serviceHistory, isLoadingServiceHistory } =
 		useGetServiceHistoryById(serviceHistoryId)
 	const { form, isUpdating, handleUpdate } =
@@ -64,14 +64,14 @@ export function UpdateServiceHistory(props: UpdateServiceHistoryProps) {
 		console.log(serviceHistory.customer_id)
 		form.reset({
 			charged_amount: serviceHistory.charged_amount
-				? currencyMask(serviceHistory.charged_amount)
+				? applyCurrencyMask(serviceHistory.charged_amount)
 				: '',
 			customer_id: serviceHistory.customer_id,
 			service_id: serviceHistory.service_id,
 			done_at: serviceHistory.done_at,
 			was_paid: serviceHistory.was_paid ? 'true' : 'false',
 		})
-	}, [serviceHistory, form])
+	}, [serviceHistory, form, applyCurrencyMask])
 
 	return (
 		<Sheet open={isOpenUpdateServiceHistory} onOpenChange={handleOpenChange}>
@@ -198,7 +198,7 @@ export function UpdateServiceHistory(props: UpdateServiceHistoryProps) {
 													<RequiredIndicator />
 												</FormLabel>
 												<FormControl>
-													<Inputs.Default {...field} mask={currencyMask} />
+													<Inputs.Currency {...field} />
 												</FormControl>
 												<FormMessage />
 											</FormItem>

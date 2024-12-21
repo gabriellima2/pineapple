@@ -1,6 +1,8 @@
-import { LOCALES } from '@/constants/general'
 import { format } from 'date-fns'
 import { enUS, ptBR } from 'date-fns/locale'
+
+import { currencyBRLMask, currencyUSDMask } from '@/helpers/masks'
+import { LOCALES } from '@/constants/general'
 
 type DefaultOptions = { locale: string }
 
@@ -46,4 +48,19 @@ export function formatDate(date: string | Date, options: FormatDateOptions) {
 
 	const formatter = formatters[locale]
 	return formatter?.()
+}
+
+export function applyCurrencyMask(
+	value: string | number,
+	options: DefaultOptions
+) {
+	const { locale } = options
+
+	const formatters: Record<string, (value: string | number) => string> = {
+		[LOCALES.en]: currencyUSDMask,
+		[LOCALES.pt]: currencyBRLMask,
+	}
+
+	const formatter = formatters?.[locale]
+	return formatter?.(value)
 }

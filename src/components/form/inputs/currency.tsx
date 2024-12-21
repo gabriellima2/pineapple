@@ -3,19 +3,19 @@ import { useLocale } from 'next-intl'
 
 import { Input } from '@/components/ui/input'
 
-import { cellPhoneBRMask, cellPhoneUSMask } from '@/helpers/masks'
+import { currencyBRLMask, currencyUSDMask } from '@/helpers/masks'
 import { LOCALES } from '@/constants/general'
 
-type CellPhoneProps = Omit<Parameters<typeof Input>[0], 'type' | 'mask'>
+type CurrencyProps = Omit<Parameters<typeof Input>[0], 'type' | 'mask'>
 
-export const CellPhone = forwardRef<HTMLInputElement, CellPhoneProps>(
+export const Currency = forwardRef<HTMLInputElement, CurrencyProps>(
 	(props, ref) => {
 		const locale = useLocale()
 
 		const mask = useMemo(() => {
 			const masks = {
-				[LOCALES.pt]: cellPhoneBRMask,
-				[LOCALES.en]: cellPhoneUSMask,
+				[LOCALES.pt]: currencyBRLMask,
+				[LOCALES.en]: currencyUSDMask,
 			}
 			return masks[locale]
 		}, [locale])
@@ -24,4 +24,4 @@ export const CellPhone = forwardRef<HTMLInputElement, CellPhoneProps>(
 	}
 )
 
-CellPhone.displayName = 'Inputs.CellPhone'
+Currency.displayName = 'Inputs.Currency'

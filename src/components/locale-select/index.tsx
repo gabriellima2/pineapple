@@ -2,6 +2,7 @@ import { Select, SelectContent, SelectTrigger, SelectValue } from '../ui/select'
 import { Option } from './components/option'
 
 import { getLocaleCookie, setLocaleCookie } from '@/actions/cookies.actions'
+import { LOCALES } from '@/constants/general'
 
 export async function LocaleSelect() {
 	const locale = await getLocaleCookie()
@@ -14,8 +15,8 @@ export async function LocaleSelect() {
 				<SelectValue>{locale}</SelectValue>
 			</SelectTrigger>
 			<SelectContent>
-				<Option value="en" />
-				<Option value="pt" />
+				<Option value={LOCALES.en} />
+				<Option value={LOCALES.pt} />
 			</SelectContent>
 		</Select>
 	)

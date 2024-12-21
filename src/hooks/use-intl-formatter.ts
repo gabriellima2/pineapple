@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import { useLocale } from 'next-intl'
 
-import { formatCurrency, formatDate } from '@/utils/intl'
+import { applyCurrencyMask, formatCurrency, formatDate } from '@/helpers/intl'
 
 export function useIntlFormatter() {
 	const locale = useLocale()
@@ -20,8 +20,16 @@ export function useIntlFormatter() {
 		[locale]
 	)
 
+	const handleApplyCurrencyMask = useCallback(
+		(value: string | number) => {
+			return applyCurrencyMask(value, { locale })
+		},
+		[locale]
+	)
+
 	return {
 		formatCurrency: handleFormatCurrency,
 		formatDate: handleFormatDate,
+		applyCurrencyMask: handleApplyCurrencyMask,
 	}
 }

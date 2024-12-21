@@ -29,7 +29,6 @@ import { DatePickers } from '@/components/form/date-pickers'
 import { Inputs } from '@/components/form/inputs'
 import { Button } from '@/components/ui/button'
 
-import { currencyMask } from '@/helpers/masks'
 import type { CreateServiceHistoryFields } from '../../../_hooks/schemas/use-get-create-service-history-intl-schema'
 
 export function Services() {
@@ -160,7 +159,7 @@ export function Services() {
 									render={({ field }) => (
 										<FormItem className="w-full min-w-[200px]">
 											<FormControl>
-												<Inputs.Default {...field} mask={currencyMask} />
+												<Inputs.Currency {...field} />
 											</FormControl>
 											<FormMessage />
 										</FormItem>
