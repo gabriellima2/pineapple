@@ -112,9 +112,14 @@ const getColumns: (t: Translations) => ColumnDef<TableData>[] = (
 		},
 		{
 			accessorKey: 'base_price',
-			header: () => (
-				<div>{t('dashboard.services.list.columns.base_price')}</div>
-			),
+			header: ({ column }) => {
+				return (
+					<DataTable.SortableHead
+						label={t('dashboard.services.list.columns.base_price')}
+						column={column}
+					/>
+				)
+			},
 			cell: ({ row }) => <Currency value={row.getValue('base_price')} />,
 		},
 		{

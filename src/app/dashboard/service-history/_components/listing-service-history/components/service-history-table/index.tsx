@@ -109,17 +109,27 @@ const getColumns: (t: Translations) => ColumnDef<TableData>[] = (
 		{
 			id: 'service.name',
 			accessorKey: 'service.name',
-			header: () => (
-				<div>{t('dashboard.service-history.list.columns.service_id')}</div>
-			),
+			header: ({ column }) => {
+				return (
+					<DataTable.SortableHead
+						label={t('dashboard.service-history.list.columns.service_id')}
+						column={column}
+					/>
+				)
+			},
 			cell: ({ row }) => row.getValue('service.name'),
 		},
 		{
 			id: 'customer.name',
 			accessorKey: 'customer.name',
-			header: () => (
-				<div>{t('dashboard.service-history.list.columns.customer_id')}</div>
-			),
+			header: ({ column }) => {
+				return (
+					<DataTable.SortableHead
+						label={t('dashboard.service-history.list.columns.customer_id')}
+						column={column}
+					/>
+				)
+			},
 			cell: ({ row }) => row.getValue('customer.name'),
 		},
 		{
@@ -134,16 +144,26 @@ const getColumns: (t: Translations) => ColumnDef<TableData>[] = (
 		},
 		{
 			accessorKey: 'charged_amount',
-			header: () => (
-				<div>{t('dashboard.service-history.list.columns.charged_amount')}</div>
-			),
+			header: ({ column }) => {
+				return (
+					<DataTable.SortableHead
+						label={t('dashboard.service-history.list.columns.charged_amount')}
+						column={column}
+					/>
+				)
+			},
 			cell: ({ row }) => <Currency value={row.getValue('charged_amount')} />,
 		},
 		{
 			accessorKey: 'done_at',
-			header: () => (
-				<div>{t('dashboard.service-history.list.columns.done_at')}</div>
-			),
+			header: ({ column }) => {
+				return (
+					<DataTable.SortableHead
+						label={t('dashboard.service-history.list.columns.done_at')}
+						column={column}
+					/>
+				)
+			},
 			cell: ({ row }) => <ShowDate date={row.getValue('done_at')} />,
 		},
 		{

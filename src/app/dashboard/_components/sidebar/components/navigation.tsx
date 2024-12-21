@@ -3,7 +3,12 @@
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { usePathname } from 'next/navigation'
-import { BriefcaseBusiness, LayoutDashboard, User2 } from 'lucide-react'
+import {
+	BriefcaseBusiness,
+	History,
+	LayoutDashboard,
+	User2,
+} from 'lucide-react'
 
 import {
 	SidebarGroup,
@@ -39,7 +44,7 @@ export function Navigation() {
 				</SidebarMenuButton>
 				<SidebarMenuButton asChild active={pathname === routes.serviceHistory}>
 					<Link href={routes.serviceHistory}>
-						<User2 />
+						<History />
 						<span>{t('dashboard.sidebar.service-history')}</span>
 					</Link>
 				</SidebarMenuButton>
