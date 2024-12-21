@@ -3,12 +3,7 @@
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { usePathname } from 'next/navigation'
-import {
-	BriefcaseBusiness,
-	History,
-	LayoutDashboard,
-	User2,
-} from 'lucide-react'
+import { BriefcaseBusiness, History, User2 } from 'lucide-react'
 
 import {
 	SidebarGroup,
@@ -24,12 +19,6 @@ export function Navigation() {
 	return (
 		<SidebarGroup>
 			<SidebarMenu>
-				<SidebarMenuButton asChild active={pathname === routes.home}>
-					<Link href={routes.home}>
-						<LayoutDashboard />
-						<span>{t('dashboard.sidebar.home')}</span>
-					</Link>
-				</SidebarMenuButton>
 				<SidebarMenuButton asChild active={pathname === routes.services}>
 					<Link href={routes.services}>
 						<BriefcaseBusiness />
@@ -54,7 +43,6 @@ export function Navigation() {
 }
 
 const routes = {
-	home: ROUTES.DASHBOARD.HOME(),
 	services: ROUTES.DASHBOARD.SERVICES(),
 	customers: ROUTES.DASHBOARD.CUSTOMERS(),
 	serviceHistory: ROUTES.DASHBOARD.SERVICE_HISTORY(),

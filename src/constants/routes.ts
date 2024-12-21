@@ -4,7 +4,6 @@ export const ROUTES = {
 		SIGN_UP: () => '/sign-up',
 	},
 	DASHBOARD: {
-		HOME: () => '/dashboard',
 		SERVICES: () => '/dashboard/services',
 		CUSTOMERS: () => '/dashboard/customers',
 		SERVICE_HISTORY: () => '/dashboard/service-history',
